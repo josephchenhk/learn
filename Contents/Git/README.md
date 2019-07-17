@@ -62,3 +62,32 @@ f3a6683 test3 // 上一个提交的记录
 git rebase -i master
 ```
 ![alt text](git_rebase.png "Git rebase")
+
+* stash
+
+查看现有的储藏，
+```shell
+$ git stash list
+stash@{0}: WIP on master: 049d078 added the index file
+stash@{1}: WIP on master: c264051 Revert "added file_size"
+stash@{2}: WIP on master: 21d80a5 added number to log
+```
+
+应用储藏，
+
+```shell
+$ git stash apply              # 等价于 git stash apply stash@{0}
+$ git stash apply stash@{2}    # 应用stash@{2}
+```
+
+以上命令只恢复工作区，如果想连暂存区也恢复，需要加上--index参数
+
+```shell
+$ git stash apply --index
+```
+
+移除stash，用drop：
+
+```shell
+$ git stash drop stash@{0}
+```
