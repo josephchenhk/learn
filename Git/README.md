@@ -14,7 +14,7 @@ git config --global user.email "josephchenhk@gmail.com"
 
 假如你在dev分支开发，与此同时master分支也有了更新：
 
-![alt text](git_diverge.png "Git diverge")
+![alt text](../Contents/Git/git_diverge.png "Git diverge")
 
 你可以选择将master分支合并到dev：
 ```shell
@@ -22,7 +22,7 @@ git checkout dev
 git merge master
 ```
 
-![alt text](git_merge.png "Git merge")
+![alt text](../Contents/Git/git_merge.png "Git merge")
 
 * log
 
@@ -35,13 +35,15 @@ git merge master
 git revert HEAD -m 1
 ```
 对于merge的revert，需要提供-m参数，1/2分别对应dev和master分支. revert后如下：
-![alt text](git_revert.png "Git revert")
+![alt text](../Contents/Git/git_revert.png "Git revert")
 
 * reset
+
+主要用于撤销git add（撤销提交至缓存区的提交）
 ```shell
 git reset <commit-id>
 ```
-![alt text](git_reset.png "Git reset")
+![alt text](../Contents/Git/git_reset.png "Git reset")
 
 假如提交记录如下：
 ```
@@ -61,7 +63,7 @@ f3a6683 test3 // 上一个提交的记录
 ```shell
 git rebase -i master
 ```
-![alt text](git_rebase.png "Git rebase")
+![alt text](../Contents/Git/git_rebase.png "Git rebase")
 
 * stash
 
