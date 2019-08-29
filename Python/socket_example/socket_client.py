@@ -10,10 +10,13 @@ import threading
 import socket
 import time
 import ast
+import uuid
 from functools import partial
+import requests
 
 HOST = '192.168.8.17'
 PORT = 15566
+API_PORT = 15565
 
 class SocketClient():
     """
@@ -133,8 +136,11 @@ class SocketClient():
         while True:
             streamBytes = self.s.recv(1024)
             data += streamBytes.decode()
+            #TODO: change to while loop in order to consume the meassage immediately
             if '\n' in streamBytes.decode():
                 # print(n, repr(data))
+                data, *tmp = data.split("\n")
+                data += "\n"
                 data_dict = ast.literal_eval(data)
                 if data_dict.get('quoteId'):
                     iuid = data_dict.get('iuid').replace("_", ".")
@@ -150,7 +156,7 @@ class SocketClient():
                     elif data_dict.get('extOrderId'):
                         Method = type('Method', (object,), dict(routing_key=f"order.{broker_id}.{broker_account}"))
                         self.callback(method=Method(), body=data, message_type='order')
-                data = ''
+                data = "\n".join(tmp)
                 n += 1
 
     def _callback(self, ch, method, properties, body, message_type=None):
@@ -166,8 +172,16 @@ class SocketClient():
     def update_subscribe_list(self, iuid_list):
         """subscribe the needed info (i.e., orderbook, tick, trades) from data vendors (i.e., futu, Bloomberg) before using them by `self.callback` function.
         """
-        for iuid in iuid_list:
-            self.s.sendall(f'{iuid}\n'.encode())
+        url = f"http://{HOST}:{API_PORT}/api/v3/market/subscribe"
+        params = {'iuids': ",".join(iuid_list)}
+        req_id = uuid.uuid4().hex
+        headers = {'Content-Type': 'application/json', 'x-request-id': req_id}
+        with requests.Session() as sess:
+            print(f"If you find the subscription is not successful, please send the following string to the person in charge: {req_id}")
+            resp = sess.post(url, params=params, headers=headers).json()
+            print(resp)
+            for iuid in iuid_list:
+                self.s.sendall(f'{iuid}\n'.encode())
 
     def disconnect_client(self):
         close_res = self.s.close()
@@ -189,4 +203,14 @@ class SocketClient():
     def execution_data(self):
         return self.data['execution']
 
+
+if __name__ == "__main__":
+    c = SocketClient(iuid_list=['CN_10_000007', 'CN_10_159901', 'CN_10_600009', 'CN_10_600028', 'CN_10_000002', 'CN_10_600006', 'CN_10_600007', 'CN_10_510050'], # ['CN_10_000001', 'CN_10_600000'],
+                     broker_id='101',
+                     account_id='1888000385',
+                     tick_callback=lambda x: print(f"I receive tick: {x}"),
+                     orderbook_callback=lambda x: print(f"I receive orderbook: {x}"),
+                     order_callback=lambda x: print(f"I receive order: {x}"),
+                     execution_callback=lambda x: print(f"I receive execution: {x}"), )
+    time.sleep(60)
 

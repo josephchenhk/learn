@@ -2,13 +2,14 @@
 
 import socket
 
-HOST = '192.168.10.123'  # The server's hostname or IP address
-PORT = 15566        # The port used by the server
+HOST = '192.168.9.83'  # The server's hostname or IP address
+PORT = 5566        # The port used by the server
 end = '\n'
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))            # connect 以后连接成功
 
-    s.sendall(b'CN_10_600000\n')
+    s.sendall(b'CN_60_MA1909\n')
+    s.sendall(b'CN_60_a1909\n')
     n = 0
     data = ''
     print("Connected.")

@@ -93,3 +93,11 @@ $ git stash apply --index
 ```shell
 $ git stash drop stash@{0}
 ```
+
+* push
+
+推到远程同名分支（如果远程不存在该分支则创建一个）：
+
+```shell
+$ git push origin HEAD
+```
