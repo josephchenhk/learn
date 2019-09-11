@@ -27,3 +27,12 @@ class Profiled:
             return self
         else:
             return types.MethodType(self, instance)
+
+
+class T(object):
+    name = 'name'
+    def hello(self):
+        print('hello')
+t = T()
+
+print()
