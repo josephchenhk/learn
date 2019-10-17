@@ -101,3 +101,38 @@ $ git stash drop stash@{0}
 ```shell
 $ git push origin HEAD
 ```
+
+* submodule
+
+添加submodule，如果不指定名称，就会默认同名
+
+```shell
+$ git submodule add https://github.com/josephchenhk/quantkits.git
+```
+
+用`git submodule init`去初始化本地配置，用`git submodule update`去fetch远端的数据并且checkout到相应的commit
+
+```shell
+$ git submodule init
+$ git submodule update
+```
+
+如果有nested submodules，可以用recursive参数：
+
+```shell
+$ git submodule update --init --recursive
+```
+
+当远端有更新，则需要用remote参数去更新git submodule，
+
+```shell
+$ git submodule update --remote
+```
+
+默认是追踪master分支，如果需要追踪其他分支，则需要在.gitmodules里面指定
+
+```shell
+$ git config -f .gitmodules submodule.quantkits.branch dev
+```
+
+如果没有`-f .gitmodules`的话，则只会改变你本地的track branch；如果希望其他人也能更新track branch的话，则需要加上这个参数
