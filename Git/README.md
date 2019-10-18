@@ -136,3 +136,43 @@ $ git config -f .gitmodules submodule.quantkits.branch dev
 ```
 
 如果没有`-f .gitmodules`的话，则只会改变你本地的track branch；如果希望其他人也能更新track branch的话，则需要加上这个参数
+
+
+* How to init git and push to remote ([Ref](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line))
+
+如果已经有一个项目，则只需要在github上面新建一个空目录（注意不要初始化，不要添加README, gitignore等任何文件，就一个空目录）
+
+然后运行
+
+```shell
+$ git init
+```
+
+初始化项目，然后执行
+
+```shell
+$ git add .
+$ git commit -m "first commit"
+```
+
+之后设定刚才在github上面创建的目录为远程目录，并指定名字为origin
+
+```shell
+$ git remote add origin https://github.com/josephchenhk/trading.git
+$ git remote -v # 确认目录是否设置正确
+```
+
+将项目推上github：
+
+```shell
+$ git push origin master
+```
+
+便可以在github上面看到整个项目。如果想要pull，则需要设置upstream
+
+```shell
+$ git branch --set-upstream-to=origin/master
+```
+
+之后便可以正常pull和push至master了。
+
