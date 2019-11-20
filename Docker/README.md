@@ -112,3 +112,7 @@ docker-compose up # 启动
 docker-compose stop # 停止
 ```
 
+* Docker 修改image
+
+![alt text](../Contents/Docker/docker修改image_1.png "修改docker image.1")
+![alt text](../Contents/Docker/docker修改image_2.png "修改docker image.2")
