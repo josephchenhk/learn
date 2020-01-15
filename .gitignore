@@ -1,2 +1,6 @@
 # Idea
 .idea/
+
+# python
+.ipynb_checkpoints
+Python/.ipynb_checkpoints
