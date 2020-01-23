@@ -24,7 +24,7 @@ print(re.sub(r'(\d+)/(\d+)/(\d+)', r'\3-\1-\2', text2))  # Today is 2012-11-27. 
 pattern = re.compile(r'(\d+)/(\d+)/(\d+)')
 print(pattern.sub(r'\3-\1-\2', text2))  # Today is 2012-11-27. Tomorrow is 2012-11-28.
 
-"""对于更复杂的替换，可以自定义函数"""
+"""对于更复杂的替换，可以自定义函数，即sub接受一个函数作为参数"""
 from calendar import month_abbr
 def change_date(m):  # m 是一个 re.match 对象
     mon_name = month_abbr[int(m.group(1))]
