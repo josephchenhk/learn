@@ -116,3 +116,8 @@ docker-compose stop # 停止
 
 ![alt text](../Contents/Docker/docker修改image_1.png "修改docker image.1")
 ![alt text](../Contents/Docker/docker修改image_2.png "修改docker image.2")
+
+* Docker Selenium
+```angular2
+docker run -d -p 4444:4444 -p 5900:5900 --shm-size 2g selenium/standalone-firefox-debug:latest
+```
