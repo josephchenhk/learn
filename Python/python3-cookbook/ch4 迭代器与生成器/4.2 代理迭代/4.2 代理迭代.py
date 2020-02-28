@@ -1,3 +1,17 @@
+# -*- coding: utf-8 -*-
+# @Time    : 28/2/2020 3:38 PM
+# @Author  : Joseph Chen
+# @Email   : josephchenhk@gmail.com
+# @FileName: 4.2 代理迭代.py
+# @Software: PyCharm
+
+"""
+4.2 代理迭代
+
+Python的迭代器协议需要 __iter__() 方法返回一个实现了 __next__() 方法的迭代器对象。
+"""
+
+
 class Node:
     def __init__(self, value):
         self._value = value
