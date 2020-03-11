@@ -176,3 +176,20 @@ $ git branch --set-upstream-to=origin/master
 
 之后便可以正常pull和push至master了。
 
+### 取消已经push至Github的commit
+
+Ref：https://stackoverflow.com/questions/448919/how-can-i-remove-a-commit-on-github
+
+```
+>> git status
+>> git stash
+>> git reset --soft HEAD^
+>> git stash list
+>> git stash apply
+>> git add Python/smtp_example/auto_send_email.py
+>> git add .gitignore
+>> git commit -m "update cred"
+>> git status
+>> git push origin +master --force
+```
+
