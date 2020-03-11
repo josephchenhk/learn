@@ -118,10 +118,12 @@ docker-compose stop # 停止
 ![alt text](../Contents/Docker/docker修改image_2.png "修改docker image.2")
 
 * Docker Selenium
+
+Ref: https://github.com/SeleniumHQ/docker-selenium
 ```angular2
 docker run -d -p 4444:4444 -p 5900:5900 --shm-size 2g selenium/standalone-firefox-debug:latest
 ```
 
 访问docker-selenium后台：http://127.0.0.1:4444/wd/hub/static/resource/hub.html
 
-访问docker-selenium浏览器（VNC）：127.0.0.1:5900
+访问docker-selenium浏览器（VNC）：127.0.0.1:5900 (password: secret)
