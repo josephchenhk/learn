@@ -7,7 +7,7 @@
 
 
 """
-    邮件doctest部分，选择"Run Doctest in temp"
+    右键doctest部分，选择"Run Doctest in temp"
 
     >>> print(3.14)
     3.14
