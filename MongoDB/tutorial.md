@@ -37,6 +37,20 @@ $ docker exec -it mongo mongo admin
 | table joins  |      /              | 表连接,MongoDB不支持               |
 | primary key  |  primary key        | 主键,MongoDB自动将_id字段设置为主键  |
 
+## MongoDB 连接数据库
+
+```angularjs
+# 查看数据库
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> 
+```
+
+数据库不要特别创建，直接写入就可以（如没有该数据库，便会自动创建）
+
+
 
 
 
