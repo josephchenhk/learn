@@ -189,6 +189,36 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 ```
 
+### 删除文档
+
+如果你的 MongoDB 是 2.6 版本以后的，语法格式如下：
+
+```
+db.collection.remove(
+   &lt;query>,
+   {
+     justOne: &lt;boolean>,
+     writeConcern: &lt;document>
+   }
+)
+```
+
+参数说明：
+
+*query* :（可选）删除的文档的条件。
+
+*justOne* : （可选）如果设为 true 或 1，则只删除一个文档，如果不设置该参数，或使用默认值 false，则删除所有匹配条件的文档。
+
+*writeConcern* :（可选）抛出异常的级别。
+
+```
+> db.runoob_table.find()
+{ "_id" : ObjectId("5e829a6adeaa3694d37f9e2e"), "title" : "MongoDB 教程标题修改第二次了" }
+> db.runoob_table.remove({"title" : "MongoDB 教程标题修改第二次了"})
+WriteResult({ "nRemoved" : 1 })
+> db.runoob_table.find()
+> 
+```
 
 
 
