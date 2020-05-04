@@ -2,7 +2,7 @@
 # @Time    : 27/4/2020 8:51 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: sample.py
+# @FileName: scipy_stats_sample.py
 # @Software: PyCharm
 
 class Descriptor(object):
