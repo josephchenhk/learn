@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 7:15 PM
 # @Author  : Joseph Chen
 # @Email   : joseph.chen@magnumwm.com
-# @FileName: 7.1.py
+# @FileName: 7.1 可接受任意数量参数的函数.py
 # @Software: PyCharm
 """
 7.1 可接受任意数量参数的函数
@@ -20,3 +20,6 @@ def a(x, *args, y):
 
 def b(x, *args, y, **kwargs):
     pass
+
+if __name__=="__main__":
+    b(1, "arg 1", "arg2", y=2) # y是强制关键字参数
