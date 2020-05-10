@@ -2,11 +2,13 @@
 # @Time    : 7/24/2019 2:30 PM
 # @Author  : Joseph Chen
 # @Email   : joseph.chen@magnumwm.com
-# @FileName: 7.9.py
+# @FileName: 7.9 将单方法的类转换为函数.py
 # @Software: PyCharm
 """
 7.9 将单方法的类转换为函数
 
+
+** 一个除了 __init__ 之外，只包含一个方法的类，等价于一个闭包函数 **
 """
 
 from urllib.request import urlopen
