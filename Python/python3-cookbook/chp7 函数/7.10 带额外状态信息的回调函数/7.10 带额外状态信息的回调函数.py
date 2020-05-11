@@ -2,7 +2,7 @@
 # @Time    : 7/24/2019 2:55 PM
 # @Author  : Joseph Chen
 # @Email   : joseph.chen@magnumwm.com
-# @FileName: 7.10.py
+# @FileName: 7.10 带额外状态信息的回调函数.py
 # @Software: PyCharm
 """
 7.10 带额外状态信息的回调函数
@@ -83,7 +83,7 @@ apply_async(add, ('hello', 'world'), callback=m)   # [2] Got: helloworld
 def make_handler():
     sequence = 0
     while True:
-        result = yield
+        result = yield sequence
         sequence += 1
         print('[{}] Got: {}'.format(sequence, result))
 
