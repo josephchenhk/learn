@@ -2,7 +2,7 @@
 # @Time    : 7/24/2019 4:11 PM
 # @Author  : Joseph Chen
 # @Email   : joseph.chen@magnumwm.com
-# @FileName: 7.11.py
+# @FileName: 7.11 内联回调函数.py
 # @Software: PyCharm
 """
 7.11 内联回调函数
@@ -54,7 +54,16 @@ def test():
         print(r)
     print('Goodbye')
 
-test()
+# test()
+
+if __name__ == '__main__':
+    import multiprocessing
+    pool = multiprocessing.Pool()
+    apply_async = pool.apply_async
+
+    # Run the test function
+    test()
+
 """
 解释：
 test() = inlined_async(test)() --> wrapper(): f = func(*args) -->test() --> Async(add, (2, 3))
