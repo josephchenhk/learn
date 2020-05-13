@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/18/2019 4:23 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
-# @FileName: 8.8.py
+# @Email   : josephchenhk@gmail.com
+# @FileName: 8.8 子类中扩展property.py
 # @Software: PyCharm
 """
 # 8.8 子类中扩展property

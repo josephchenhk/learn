@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 9/9/2019 5:29 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: asyncio_sample.py
 # @Software: PyCharm
 

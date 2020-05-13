@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/18/2019 3:46 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
-# @FileName: 8.1.py
+# @Email   : josephchenhk@gmail.com
+# @FileName: 8.2 自定义字符串的格式化.py
 # @Software: PyCharm
 
 """

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/24/2019 5:35 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 9.2.py
 # @Software: PyCharm
 """

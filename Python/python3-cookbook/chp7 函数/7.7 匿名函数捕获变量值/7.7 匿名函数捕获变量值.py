@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/24/2019 11:41 AM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 7.7 匿名函数捕获变量值.py
 # @Software: PyCharm
 """

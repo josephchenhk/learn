@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/23/2019 8:10 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 7.4 返回多个值的函数.py
 # @Software: PyCharm
 """

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/24/2019 11:37 AM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 7.6 定义匿名或内联函数.py
 # @Software: PyCharm
 """

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/18/2019 3:46 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
-# @FileName: 8.1.py
+# @Email   : josephchenhk@gmail.com
+# @FileName: 8.5 在类中封装属性名.py
 # @Software: PyCharm
 """
 8.5 在类中封装属性名

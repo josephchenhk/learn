@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/24/2019 5:14 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 7.12 访问闭包中定义的变量.py
 # @Software: PyCharm
 """

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 9/10/2019 10:22 AM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: asyncio_await.py
 # @Software: PyCharm
 

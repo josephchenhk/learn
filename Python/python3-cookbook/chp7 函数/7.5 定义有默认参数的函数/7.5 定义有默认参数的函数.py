@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/24/2019 11:34 AM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 7.5 定义有默认参数的函数.py
 # @Software: PyCharm
 """

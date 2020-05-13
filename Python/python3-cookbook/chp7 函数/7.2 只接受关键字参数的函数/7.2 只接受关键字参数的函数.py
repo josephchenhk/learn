@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/23/2019 7:18 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: 7.2 只接受关键字参数的函数.py
 # @Software: PyCharm
 """

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 8/5/2019 9:05 AM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: socket_client.py
 # @Software: PyCharm
 

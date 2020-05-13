@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 9/10/2019 9:44 AM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: asyncio_callback.py
 # @Software: PyCharm
 

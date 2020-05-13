@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/18/2019 3:46 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
-# @FileName: 8.1.py
+# @Email   : josephchenhk@gmail.com
+# @FileName: 8.3 让对象支持上下文管理协议.py
 # @Software: PyCharm
 """
 8.3 让对象支持上下文管理协议
@@ -28,6 +28,8 @@ class LazyConnetion:
 
     def __str__(self):
         return "{} | {} | {}".format(self.address, self.port, self.sock)
+
+    __repr__=__str__
 
 conn = LazyConnetion("www.aqumon.com", 80)
 print(conn)

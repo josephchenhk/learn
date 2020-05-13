@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 7/23/2019 4:43 PM
 # @Author  : Joseph Chen
-# @Email   : joseph.chen@magnumwm.com
+# @Email   : josephchenhk@gmail.com
 # @FileName: yield_and_send.py
 # @Software: PyCharm
 """
