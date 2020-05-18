@@ -69,8 +69,16 @@ print(sp.name)
 
 找到第一个参数(即cls)的__mro__列表中的下一个直接定义了该方法的类, 并实例化出一个对象
 然后将这个对象的self变量绑定到第二个参数上, 返回这个对象
+
+super(SubPerson, type(self))的mro为 [__main__.SubPerson, __main__.Person, object]，所以第一个定义了name.__set__
+方法的类为__main__.Person（在line 41进行了定义），实例化一个对象得到 person()，将person()实例的name变量绑定到type(self)
+上，这里type(self)实际上即为SubPerson。
+
+在python 3里，一个常见的例子是super().__init__()，事实上，super():=super(cls, self)，所以，super().__init__()等价于
+cls.__init__() --> self  (-->表示将属性绑定至）
+
 """
-print(SubPerson.mro())
+print(SubPerson.mro())   # [<class '__main__.SubPerson'>, <class '__main__.Person'>, <class 'object'>]
 print(super(SubPerson))  # 省略第二个参数的时候返回的是未绑定的super对象
 print(super(SubPerson, sp))
 print(super(SubPerson, SubPerson))

@@ -1,5 +1,6 @@
 # Idea
 .idea/
+.DS_Store
 
 # python
 .ipynb_checkpoints
@@ -7,4 +8,6 @@ Python/.ipynb_checkpoints
 
 # Credentials
 Python/smtp_example/credentials.py
+
+
 
