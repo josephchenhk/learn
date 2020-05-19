@@ -2,7 +2,7 @@
 # @Time    : 7/19/2019 9:30 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.11.py
+# @FileName: 8.11 简化数据结构的初始化.py
 # @Software: PyCharm
 """
 8.11 简化数据结构的初始化
