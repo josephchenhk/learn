@@ -2,14 +2,18 @@
 # @Time    : 6/24/2019 12:10 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.15.py
+# @FileName: 8.15 属性的代理访问.py
 # @Software: PyCharm
 
+"""
+8.15 属性的代理访问
+
+"""
 # A proxy class that wraps around another object, but
 # exposes its public attributes
 class Proxy:
     def __init__(self, obj):
-        self._obj = obj
+        self._obj = obj  # 用self._obj去代理所有在Proxy中没有被定义的属性
 
     # Delegate attribute lookup to internal obj
     def __getattr__(self, name):
