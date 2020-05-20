@@ -2,7 +2,7 @@
 # @Time    : 7/19/2019 10:29 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.14.py
+# @FileName: 8.14 实现自定义容器.py
 # @Software: PyCharm
 """
 8.14 实现自定义容器
@@ -15,7 +15,7 @@ collections.Iterable (同时还要实现__iter__() 方法，否则实例化的�
 import collections
 import bisect
 
-class SortedItems(collections.Sequence):
+class SortedItems(collections.abc.Sequence):
     def __init__(self, initial=None):
         self._items = sorted(initial) if initial is not None else []
 
@@ -41,7 +41,7 @@ items.add(2)
 print(items)  # [1,2,3,5]
 
 
-class Items(collections.MutableSequence):
+class Items(collections.abc.MutableSequence):
     def __init__(self, initial=None):
         self._items = list(initial) if initial is not None else []
 
