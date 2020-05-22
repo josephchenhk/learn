@@ -2,7 +2,7 @@
 # @Time    : 7/19/2019 6:20 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.16.py
+# @FileName: 8.16 在类中定义多个构造器.py
 # @Software: PyCharm
 """
 8.16 在类中定义多个构造器
