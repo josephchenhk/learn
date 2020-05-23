@@ -2,7 +2,7 @@
 # @Time    : 6/24/2019 2:16 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.17.py
+# @FileName: 8.17 创建不调用init方法的实例.py
 # @Software: PyCharm
 """
 8.17 创建不调用init方法的实例
