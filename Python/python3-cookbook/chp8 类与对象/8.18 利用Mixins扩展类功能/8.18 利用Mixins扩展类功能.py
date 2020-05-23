@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 8:59 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.18.py
+# @FileName: 8.18 利用Mixins扩展类功能.py
 # @Software: PyCharm
 """
 8.18 利用Mixins扩展类功能
