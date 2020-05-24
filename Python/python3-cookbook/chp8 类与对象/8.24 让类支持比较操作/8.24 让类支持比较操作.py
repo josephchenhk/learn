@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 6:40 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.24.py
+# @FileName: 8.24 让类支持比较操作.py
 # @Software: PyCharm
 """
 8.24 让类支持比较操作
