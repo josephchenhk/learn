@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 9:34 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.21.py
+# @FileName: 8.21 实现访问者模式.py
 # @Software: PyCharm
 """
 8.21 实现访问者模式
