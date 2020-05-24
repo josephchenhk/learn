@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 3:57 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.22.py
+# @FileName: 8.22 不用递归实现访问者模式.py
 # @Software: PyCharm
 """
 8.22 不用递归实现访问者模式
@@ -55,7 +55,7 @@ class NodeVisitor:
 
     def _visit(self, node):
         methname = 'visit_' + type(node).__name__   # visit_Add, visit_Sub, visit_Number ...
-        meth = getattr(self, methname, None)
+        meth = getattr(self, methname, None) # self.__class__=__main__.Evaluator, 这里的self其实是Evaluator的实例，而不仅仅是NodeVisitor的实例
         if meth is None:
             meth = self.generic_visit
         return meth(node)
