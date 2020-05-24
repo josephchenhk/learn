@@ -2,20 +2,25 @@
 # @Time    : 7/23/2019 5:41 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.23.py
+# @FileName: 8.23 循环引用数据结构的内存管理.py
 # @Software: PyCharm
 """
 8.23 循环引用数据结构的内存管理
 
-import weakref
-
-import gc
->>> gc.collect() # force collection
+# import weakref
+#
+# import gc
+# >>> gc.collect() # force collection
 """
 
 class Data:
     def __del__(self):
         print('Data.__del__')
+
+    def __str__(self):
+        return "Data"
+
+    __repr__=__str__
 
 # Node class involving a cycle
 class Node:
@@ -47,7 +52,7 @@ class Node2(Node):
         super().__init__()
 
     def __repr__(self):
-        return 'Node({!r:})'.format(self.value)
+        return 'Node({})'.format(self.data)
 
     # property that manages the parent as a weak-reference
     @property
@@ -59,8 +64,7 @@ class Node2(Node):
         self._parent = weakref.ref(node)
 
 
-print("---------------------start--------------------\n")
+print("-"*40+"\n")
 d = Node2()
 d.add_child(Node2())  # d加了一个子节点之后，但由于是弱引用，不会影响删除 [oh no! not correct??]
 del d                 # immediately delete [No message?? why???]
-print("----------------------end---------------------\n")
