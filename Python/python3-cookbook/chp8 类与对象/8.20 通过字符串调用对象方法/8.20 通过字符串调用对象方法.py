@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 9:29 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.20.py
+# @FileName: 8.20 通过字符串调用对象方法.py
 # @Software: PyCharm
 """
 8.20 通过字符串调用对象方法
