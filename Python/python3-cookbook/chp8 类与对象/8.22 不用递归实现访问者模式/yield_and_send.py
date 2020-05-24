@@ -9,41 +9,43 @@ python的yield与send实例详解
 """
 def gener(num):
     while True:
-        print("0:before yield num is: %d" % num)
+        print("Before yield num is: %d" % num)
         num = yield
-        print("1:after yield num is %d" % num)
+        print("After yield num is %d" % num)
     print("exc end")
 
 g = gener(1)          # 什么也不会输出
-g.send(None)          # 会输出  0:before yield num is: 1
-print("goto loop")
+g.send(None)          # 会输出  Before yield num is: 1
+print("goto loop:\n")
 for i in range(5):
-    print("---loop---")
-    print(">>>>send back:" + str(g.send(i)))  # 再次send, 会接着yield之后的语句执行, 即会输出  1:after yield num is 0
+    print(f">>> g.send({i}) ")  # 再次send(i), 会接着yield之后的语句执行, 即会输出  After yield num is i
+    print(g.send(i))  # None, None, None, None, None
+    print("\n")
 
 """
-0:before yield num is: 1
-goto loop
----loop---
-1:after yield num is 0
-0:before yield num is: 0
->>>>send back:None
----loop---
-1:after yield num is 1
-0:before yield num is: 1
->>>>send back:None
----loop---
-1:after yield num is 2
-0:before yield num is: 2
->>>>send back:None
----loop---
-1:after yield num is 3
-0:before yield num is: 3
->>>>send back:None
----loop---
-1:after yield num is 4
-0:before yield num is: 4
->>>>send back:None
+>>> g.send(0) 
+After yield num is 0
+Before yield num is: 0
+
+
+>>> g.send(1) 
+After yield num is 1
+Before yield num is: 1
+
+
+>>> g.send(2) 
+After yield num is 2
+Before yield num is: 2
+
+
+>>> g.send(3) 
+After yield num is 3
+Before yield num is: 3
+
+
+>>> g.send(4) 
+After yield num is 4
+Before yield num is: 4
 """
 
 """
@@ -55,12 +57,16 @@ generator函数调用后，第一次send(None)，generator执行到yield之前�
 """
 def gener2(num):
     while True:
-        print("0:before yield num is: %d" % num)
+        print("Before yield num is: %d" % num)
         num = yield num**2 # 代码唯一有变化的地方
-        print("1:after yield num  is %d" % num)
+        print("After yield num  is %d" % num)
     print("exc end")
 
 print("--------------------------------------\n")
-g2 = gener2(2)
-print(">>>>send back:" + str(g2.send(None)))
-print(">>>>send back:" + str(g2.send(3)))
+g = gener2(1)          # 什么也不会输出
+g.send(None)          # 会输出  Before yield num is: 1
+print("goto loop:\n")
+for i in range(5):
+    print(f">>> g.send({i}) ")  # 再次send(i), 会接着yield之后的语句执行, 即会输出  After yield num is i
+    print(g.send(i))  # 0,1,4,9,16
+    print("\n")
