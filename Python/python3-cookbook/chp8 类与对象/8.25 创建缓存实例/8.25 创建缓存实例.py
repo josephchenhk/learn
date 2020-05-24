@@ -51,7 +51,37 @@ class Spam:
         print('Initializing Spam')
         self.name = name
 
-print("-----------我是分割线--------------\n")
+print("-----------我是分割线 1--------------\n")
 s = Spam('Dave')  # 会调用__init__，打印出 Initializing Spam
 t = Spam('Dave')  # 会调用__init__，打印出 Initializing Spam
+print("s is t: ", s is t)
+
+"""以上方法暴露了 __init__ 给用户，可以禁用这个方法，而将实例化交给另外一个函数 _new"""
+
+class SpamManager:
+    _spam_cache = weakref.WeakValueDictionary()
+
+    @staticmethod
+    def get_spam(name):
+        if name in _spam_cache:
+            return _spam_cache[name]
+        else:
+            spam = Spam2._new(name)
+            _spam_cache[name] = spam
+            return spam
+
+class Spam2:
+    def __init__(self, *args, **kwargs):
+        raise RuntimeError("Can't instantiate directly")
+
+    # Alternate constructor
+    @classmethod
+    def _new(cls, name):
+        self = cls.__new__(cls)
+        self.name = name
+        return self
+
+print("-----------我是分割线 2--------------\n")
+s = SpamManager.get_spam('Dave')  # 会调用__init__，打印出 Initializing Spam
+t = SpamManager.get_spam('Dave')  # 会调用__init__，打印出 Initializing Spam
 print("s is t: ", s is t)
