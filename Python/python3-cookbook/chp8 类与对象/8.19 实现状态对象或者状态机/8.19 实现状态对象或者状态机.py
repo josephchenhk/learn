@@ -2,7 +2,7 @@
 # @Time    : 7/23/2019 9:12 AM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 8.19.py
+# @FileName: 8.19 实现状态对象或者状态机.py
 # @Software: PyCharm
 """
 8.19 实现状态对象或者状态机
@@ -89,7 +89,7 @@ class OpenConnectionState(ConnectionState):
         conn.new_state(ClosedConnectionState)
 
 c = Connection1()
-print(c._state)
+print(c._state.__name__) # c._state is class ClosedConnectionState
 try:
     c.read()
 except RuntimeError as e:
@@ -97,5 +97,6 @@ except RuntimeError as e:
 c.open()
 c.write("Hello Joseph")
 c.read()
+print(c._state.__name__) # c._state is class OpenConnectionState
 c.close()
-print(c._state)
+print(c._state.__name__) # c._state is class ClosedConnectionState
