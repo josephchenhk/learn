@@ -2,7 +2,7 @@
 # @Time    : 7/24/2019 5:54 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: 9.4.py
+# @FileName: 9.4 定义一个带参数的装饰器.py
 # @Software: PyCharm
 """
 9.4 定义一个带参数的装饰器
@@ -44,3 +44,17 @@ def spam():
 logging.basicConfig(level=logging.DEBUG)
 print(add(2,3))
 spam()
+
+"""
+定义一个接受参数的包装器看上去比较复杂主要是因为底层的调用序列。特别的，如果你有下面这个代码：
+
+@decorator(x, y, z)
+def func(a, b):
+    pass
+装饰器处理过程跟下面的调用是等效的;
+
+def func(a, b):
+    pass
+func = decorator(x, y, z)(func)
+decorator(x, y, z) 的返回结果必须是一个可调用对象，它接受一个函数作为参数并包装它， 可以参考9.7小节中另外一个可接受参数的包装器例子。
+"""
