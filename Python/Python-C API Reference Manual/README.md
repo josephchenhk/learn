@@ -33,6 +33,100 @@ Objects, Types and Reference Counts
 
 在 Python/C API 里，所有的python对象，都是 PyObject*；注意只能用指针类型的PyObject，你不应该定义一个automatically或者static的PyObject，因为所有的python对象都是在堆（heap）里面的。**但有一个例外**，类型的对象一般定义为 static PyTypeObject。
 
-所有python对象，均有type和reference count属性，即便是简单的int也不例外。对于常见的python类型，有相应的Macro去检查是否属于某一类型，如PyList_Check(a)会返回true，如果指向a的object是一个python list。
+所有python对象，均有type和reference count属性，即便是简单的int也不例外。
+
+### 类型
+对于常见的python类型，有相应的Macro去检查是否属于某一类型，如PyList_Check(a)会返回true，如果指向a的object是一个python list。
+
+### 引用计数
+引用计数：counts how many different places there are that have a reference to an object. Such a place could be another object, or a global (or static) C variable, or a local variable in some C function.
+
+如果引用计数变成零，该object就会被deallocate；如果还有其他对象引用该对象，删除其他对象时，引用计数就会递减，直至变成零。
+
+手动操作引用计数：递增Py_INCREF()，和递减Py_DECREF()。
+
+理论上，当一个变量指向一个对象时，对象的引用计数就应该 +1；当该变量goes out of scope的时候，引用计数就应该 -1。这样一进一出，刚好抵消，所以一般我们并不需要手动地去更新引用计数。然后，对于提取list元素出来的操作，要特别小心 （a common pitfall is to extract an object from a list and hold on to it for a while without incrementing its reference count. ）
+
+最好的方式是使用默认的操作，即以Py开头的一些macro去处理对象（A safe approach is to always use the generic operations (functions whose name begins with PyObject_, PyNumber_, PySequence_ or PyMapping_). These operations always increment the reference count of the object they return. This leaves the caller with the responsibility to call Py_DECREF() when they are done with the result; this soon becomes second nature.）
+
+### 创建一个tuple，list
+
+方法一：
+```
+PyObject *t;
+
+t = PyTuple_New(3);
+PyTuple_SetItem(t, 0, PyLong_FromLong(1L));
+PyTuple_SetItem(t, 1, PyLong_FromLong(2L));
+PyTuple_SetItem(t, 2, PyUnicode_FromString("three"));
+```
+
+方法二：
+```
+PyObject *tuple, *list;
+
+tuple = Py_BuildValue("(iis)", 1, 2, "three");
+list = Py_BuildValue("[iis]", 1, 2, "three");
+```
+
+# PyObject
+
+The PyObject struct is defined as
+
+```
+typedef struct {
+    Py_ssize_t ob_refcnt;  /* object reference count */
+    PyTyoeObject* ob_type; /* object type */
+};
+```
+
+# Raise Exceptions
+
+Python exceptions are very different from C++ exceptions. If you want to raise Python exceptions from your C extension module, then you can use the Python API to do so. Some of the functions provided by the Python API for exception raising are as follows:
 
 
+|                   Function                          |                          Description                                                                                                                           |
+|:---------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|PyErr_SetString(PyObject *type, const char *message) |	Takes two arguments: a PyObject * type argument specifying the type of exception, and a custom message to display to the user                                  |
+|PyErr_Format(PyObject *type, const char *format)     |	Takes two arguments: a PyObject * type argument specifying the type of exception, and a formatted custom message to display to the user                        |
+|PyErr_SetObject(PyObject *type, PyObject *value)	  | Takes two arguments, both of type PyObject *: the first specifies the type of exception, and the second sets an arbitrary Python object as the exception value |
+
+## 定制化Exception
+
+```angularjs
+static PyObject *StringTooShortError = NULL;
+
+PyMODINIT_FUNC PyInit_fputs(void) {
+    /* Assign module value */
+    PyObject *module = PyModule_Create(&fputsmodule);
+
+    /* Initialize new exception object */
+    StringTooShortError = PyErr_NewException("fputs.StringTooShortError", NULL, NULL);
+
+    /* Add exception object to your module */
+    PyModule_AddObject(module, "StringTooShortError", StringTooShortError);
+
+    return module;
+}
+```
+
+# 定义常量
+
+两种方式：（1）通过PyModule_AddIntConstant去定义；（2）通过PyModule_AddIntMacro去定义。
+```angularjs
+PyMODINIT_FUNC PyInit_fputs(void) {
+    /* Assign module value */
+    PyObject *module = PyModule_Create(&fputsmodule);
+
+    /* Add int constant by name */
+    PyModule_AddIntConstant(module, "FPUTS_FLAG", 64);
+
+    /* Define int macro */
+    #define FPUTS_MACRO 256
+
+    /* Add macro to module */
+    PyModule_AddIntMacro(module, FPUTS_MACRO);
+
+    return module;
+}
+```
