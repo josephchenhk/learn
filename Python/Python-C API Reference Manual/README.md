@@ -130,3 +130,8 @@ PyMODINIT_FUNC PyInit_fputs(void) {
     return module;
 }
 ```
+
+
+# Ref
+
+1. [Extending and Embedding the Python Interpreter](https://docs.python.org/3/extending/index.html)
