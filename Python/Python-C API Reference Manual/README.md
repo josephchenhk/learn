@@ -135,3 +135,5 @@ PyMODINIT_FUNC PyInit_fputs(void) {
 # Ref
 
 1. [Extending and Embedding the Python Interpreter](https://docs.python.org/3/extending/index.html)
+
+2. [How to Write and Debug C Extension Module](https://llllllllll.github.io/c-extension-tutorial/)
