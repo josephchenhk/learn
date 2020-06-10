@@ -131,6 +131,18 @@ PyMODINIT_FUNC PyInit_fputs(void) {
 }
 ```
 
+## C Level Representation of Python Structures
+
+The PyObject struct is defined as:
+
+```angularjs
+typedef struct {
+     Py_ssize_t ob_refcnt;   /* object reference count */
+     PyTypeObject* ob_type;  /* object type */
+};
+```
+
+For example: if a given PyObject* points to a unicode object, then the ob_type field will be set to &PyUnicode_Type where PyUnicode_Type is the Python unicode type. This should be accessed through Py_TYPE().
 
 # Ref
 
