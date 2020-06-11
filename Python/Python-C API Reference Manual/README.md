@@ -144,6 +144,27 @@ typedef struct {
 
 For example: if a given PyObject* points to a unicode object, then the ob_type field will be set to &PyUnicode_Type where PyUnicode_Type is the Python unicode type. This should be accessed through Py_TYPE().
 
+## Abstract Object API
+
+### Generic Object Functions
+Most of the builtin Python functions have an Abstract Object API equivalent. Generally the name is the same except it is PyObject_ClassCase instead of alllowercase. For instance,
+
+```
+PyObject_GetAttr()
+PyObject_SetAttr()
+PyObject_Repr()
+```
+
+### Number Protocol
+Unlike comparisons, there are different functions for all of the numeric operators. These are mostly named PyNumber_{Operator}, for example:
+
+```
+PyNumber_Add()
+PyNumber_Subtract()
+PyNumber_Multiply()
+```
+
+
 # Ref
 
 1. [Extending and Embedding the Python Interpreter](https://docs.python.org/3/extending/index.html)
