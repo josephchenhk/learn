@@ -201,6 +201,32 @@ PyMethodDef methods[] = {
 };
 ```
 
+### Type Conversion & Naming our Function
+One nice feature of PyArg_ParseTupleAndKeywords() is that it can convert PyObject*s into C types for us.
+
+```
+static PyObject*
+add(PyObject* self, PyObject* args, PyObject* kwargs)
+{
+    static char* keywords[] = {"a", "b", NULL};
+
+    int a;
+    int b;
+
+    if (!PyArg_ParseTupleAndKeywords(args,
+                                     kwargs,
+                                     "ii:add",  // 解析成两个整数，报错时标明函数名称：TypeError: add() takes at most 2 arguments (3 given)
+                                     keywords,
+                                     &a,
+                                     &b)) {
+        return NULL;
+    }
+
+    return PyLong_FromLong(a + b);
+}
+```
+
+
 
 # Ref
 
