@@ -164,6 +164,43 @@ PyNumber_Subtract()
 PyNumber_Multiply()
 ```
 
+## Fancy Argument Parsing
+As a first pass, we could replace the METH_O in our PyMethodDef structure with METH_VARARGS | METH_KEYWORDS. This tell CPython to pass us three arguments:
+
+```
+PyObject* self: The module or instance.
+PyObject* args: A tuple of positional arguments.
+PyObject* kwargs: A dictionary of keyword arguments or NULL if no keyword arguments are provided. The dict can also be empty.
+```
+Now we can parse the arguments as below:
+
+```
+static PyObject*
+pyfib(PyObject* self, PyObject* args, PyObject* kwargs) {
+    /* the names of the arguments as a static array */
+    static char* keywords[] = {"n", NULL};
+
+    PyObject* n;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O", keywords, &n)) {
+        /* the arguments passed don't correspond to the signature
+           described */
+        return NULL;
+    }
+
+    /* ... */
+}
+```
+
+We also need to update our PyMethodDef to look like (replace METH_O with METH_VARARGS | METH_KEYWORDS):
+
+```
+PyMethodDef methods[] = {
+    {"fib", (PyCFunction) pyfib, METH_VARARGS | METH_KEYWORDS, fib_doc},
+    {NULL},
+};
+```
+
 
 # Ref
 
