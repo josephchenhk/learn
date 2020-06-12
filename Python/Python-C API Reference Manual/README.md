@@ -277,6 +277,58 @@ add(PyObject* self, PyObject* args, PyObject* kwargs)
 }
 ```
 
+## Writing a New Class in C
+对于built-in方法和自定义方法，处理的方式各不相同：built-in方法可以通过相应的接口去转换：
+
+```
+__getattr__: PyTypeObject.tp_getattro
+__setattr__: PyTypeObject.tp_setattro
+__call__: PyTypeObject.tp_call
+...
+```
+
+对于非built-in方法，通过字典PyTypeObject.tp_dict 去管理。
+
+### Instance Data
+
+通常，我们通过定义一个struct去定义一个新的类（class）：
+
+```
+typedef struct {
+    PyObject base;             /* the base object values */
+    PyObject* list_field;      /* a pointer to our list member */
+    Py_ssize_t ssize_t_field;  /* our Py_ssize_t member */
+    const char* string_field;  /* our const char* member */
+} myobject;
+```
+
+### Slots Without a Python Equivalent
+
+#### Allocation and Deallocation
+
+在python，我们在内存建立一个实例，是通过调用 `object.__new__()`；如前所述，对应的CPython API是调用`PyTypeObject.tp_new`，这背后其实是调用`PyTypeObject.tp_alloc`去内存开辟一个地方储存self。
+
+其实，我们除了`PyTypeObject.tp_new`之外，可以用如下两个更灵活的方法去操控内存的分配：
+
+```
+PyTypeObject.tp_alloc 
+PyTypeObject.tp_free
+```
+
+#### Garbage Collection
+当发生循环引用，导致引用计数永远无法清零时，CPython API提供以下两个方法去处理：
+
+1. `PyTypeObject.tp_traverse`：用于探测循环引用
+
+2. `PyTypeObject.tp_clear`：用于解除循环引用，并清空该object的所有引用（从而可被回收）
+
+#### Flags
+
+`PyTypeObject.tp_flags`对type进行侦测（a bitmask of boolean values），比较常见的bits有 `Py_TPFLAGS_HAVE_GC`（该对象有垃圾回收机制，即遵循通常的引用计数），`Py_TPFLAGS_LONG_SUBCLASS`（该对象是`PyLongObject`的子对象）
+
+当定义一个新的type的时候，一般总是先指明tpflags（通常是`Py_TPFLAGS_DEFAULT`）
+
+### Defining a `PyTypeObject`
 
 
 
