@@ -226,6 +226,58 @@ add(PyObject* self, PyObject* args, PyObject* kwargs)
 }
 ```
 
+### Optional Arguments
+PyArg_ParseTupleAndKeywords() also supports optional arguments with the | special character.
+
+```
+static PyObject*
+add(PyObject* self, PyObject* args, PyObject* kwargs)
+{
+    static char* keywords[] = {"a", "b", NULL};
+
+    int a;
+    int b = 1;
+
+    if (!PyArg_ParseTupleAndKeywords(args,
+                                     kwargs,
+                                     "i|i", // 意味这第二个param是optional的
+                                     keywords,
+                                     &a,
+                                     &b)) {
+        return NULL;
+    }
+
+    return PyLong_FromLong(a + b);
+}
+```
+
+### Keyword Only Arguments
+
+PyArg_ParseTupleAndKeywords() supports keyword only arguments with the $ special character.
+
+```
+static PyObject*
+add(PyObject* self, PyObject* args, PyObject* kwargs)
+{
+    static char* keywords[] = {"a", "b", NULL};
+
+    int a;
+    int b = 1;
+
+    if (!PyArg_ParseTupleAndKeywords(args,
+                                     kwargs,
+                                     "i$i", // 意味这第二个param一定要是keyword argument
+                                     keywords,
+                                     &a,
+                                     &b)) {
+        return NULL;
+    }
+
+    return PyLong_FromLong(a + b);
+}
+```
+
+
 
 
 # Ref
