@@ -330,7 +330,58 @@ PyTypeObject.tp_free
 
 ### Defining a `PyTypeObject`
 
+```
+// 这里定义了Queue类的实例数据
+typedef struct {
+     PyObject q_base;       /* 或者可以PyObject_HEAD（表示该类型占用内存大小是固定的如int，float），或者可以PyObject_VAR_HEAD（表示该类型占用的内存是可变的如list，dict），storage for our type and reference count */
+     Py_ssize_t q_maxsize;  /* the maximum number of elements in q_elements */
+     PyObject* q_elements;  /* the elements in the queue as a Python list */
+ } queue;
 
+
+//这是一个Queue类，保存了该类的元信息
+static PyTypeObject queue_type = {
+     PyVarObject_HEAD_INIT(&PyType_Type, 0)
+     "queue.Queue",                              /* tp_name */
+     sizeof(queue),                              /* tp_basicsize */
+     0,                                          /* tp_itemsize */
+     (destructor) queue_dealloc,                 /* tp_dealloc */
+     0,                                          /* tp_print */
+     0,                                          /* tp_getattr */
+     0,                                          /* tp_setattr */
+     0,                                          /* tp_reserved */
+     (reprfunc) queue_repr,                      /* tp_repr */
+     0,                                          /* tp_as_number */
+     0,                                          /* tp_as_sequence */
+     0,                                          /* tp_as_mapping */
+     0,                                          /* tp_hash */
+     0,                                          /* tp_call */
+     0,                                          /* tp_str */
+     0,                                          /* tp_getattro */
+     0,                                          /* tp_setattro */
+     0,                                          /* tp_as_buffer */
+     Py_TPFLAGS_DEFAULT |
+     Py_TPFLAGS_HAVE_GC,                         /* tp_flags */
+     queue_doc,                                  /* tp_doc */
+     (traverseproc) queue_traverse,              /* tp_traverse */
+     (inquiry) queue_clear,                      /* tp_clear */
+     0,                                          /* tp_richcompare */
+     0,                                          /* tp_weaklistoffset */
+     0,                                          /* tp_iter */
+     0,                                          /* tp_iternext */
+     queue_methods,                              /* tp_methods */
+     0,                                          /* tp_members */
+     0,                                          /* tp_getset */
+     0,                                          /* tp_base */
+     0,                                          /* tp_dict */
+     0,                                          /* tp_descr_get */
+     0,                                          /* tp_descr_set */
+     0,                                          /* tp_dictoffset */
+     0,                                          /* tp_init */
+     0,                                          /* tp_alloc */
+     (newfunc) queue_new,                        /* tp_new */
+};
+```
 
 # Ref
 
