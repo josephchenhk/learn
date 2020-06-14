@@ -13,7 +13,7 @@ static PyObject * spam_system(PyObject *self, PyObject *args)
     return PyLong_FromLong(sts); // 经过PyLong_FromLong处理，c type的int类型被转换成PyObject *类型了
 }
 
-// 打印
+// 打印函数
 static PyObject * print_function(PyObject *self)
 {
     PyObject_Print(self, stdout, 0);
@@ -21,6 +21,19 @@ static PyObject * print_function(PyObject *self)
     PyObject *b = Py_True;
     Py_INCREF(b);
     return b;
+}
+
+// 加法函数
+static PyObject * add_function(PyObject *self, PyObject *args)
+{
+    int num1, num2;
+    PyObject * result = NULL;
+    if (!PyArg_ParseTuple(args, "nn:add_function_name", &num1, &num2)) {
+       printf("传入参数错误！\n");
+       return NULL;
+    }
+    result = PyLong_FromLong(num1+num2);
+    return result;
 }
 
 
@@ -31,6 +44,7 @@ static PyObject * print_function(PyObject *self)
 static PyMethodDef SampleMethods[] = {
     {"spam_system", (PyCFunction)spam_system, METH_VARARGS, "Revoke linux command"},
     {"print_function", (PyCFunction)print_function, METH_NOARGS, "Print something"},
+    {"add_function", (PyCFunction)add_function, METH_VARARGS, "Add two integers"},
     { NULL, NULL, 0, NULL}
 };
 

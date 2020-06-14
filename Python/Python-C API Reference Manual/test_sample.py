@@ -5,7 +5,8 @@
 # @FileName: test_sample.py
 # @Software: PyCharm
 
-from sample import spam_system, print_function
+from sample import spam_system, print_function, add_function
 
 # print(spam_system("ls -l"))
-print(print_function())
+# print(print_function())
+print(add_function(2, 4))
