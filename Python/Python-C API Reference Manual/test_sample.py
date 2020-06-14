@@ -2,9 +2,9 @@
 # @Time    : 3/6/2020 5:53 PM
 # @Author  : Joseph Chen
 # @Email   : josephchenhk@gmail.com
-# @FileName: sample.py
+# @FileName: test_sample.py
 # @Software: PyCharm
 
-import sys
+from sample import spam_system
 
-print(sys.version_info[:2])
+print(spam_system("ls -l"))
