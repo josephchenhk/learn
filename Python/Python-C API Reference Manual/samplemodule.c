@@ -20,7 +20,7 @@ static PyObject * print_function(PyObject *self)
     printf("sample module print function\n");
     PyObject *b = Py_True;
     Py_INCREF(b);
-    return b;
+    return b; // return True; if want to return None: Py_BuildValue("");
 }
 
 // 加法函数
@@ -30,7 +30,7 @@ static PyObject * add_function(PyObject *self, PyObject *args)
     PyObject * result = NULL;
     if (!PyArg_ParseTuple(args, "nn:add_function_name", &num1, &num2)) {
        printf("传入参数错误！\n");
-       return NULL;
+       return NULL; // invoke an error in Python
     }
     result = PyLong_FromLong(num1+num2);
     return result;
