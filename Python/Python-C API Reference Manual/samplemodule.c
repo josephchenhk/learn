@@ -13,10 +13,24 @@ static PyObject * spam_system(PyObject *self, PyObject *args)
     return PyLong_FromLong(sts); // 经过PyLong_FromLong处理，c type的int类型被转换成PyObject *类型了
 }
 
+// 打印
+static PyObject * print_function(PyObject *self)
+{
+    PyObject_Print(self, stdout, 0);
+    printf("sample module print function\n");
+    PyObject *b = Py_True;
+    Py_INCREF(b);
+    return b;
+}
+
+
+
+
 
 /* Module method table */
 static PyMethodDef SampleMethods[] = {
     {"spam_system", (PyCFunction)spam_system, METH_VARARGS, "Revoke linux command"},
+    {"print_function", (PyCFunction)print_function, METH_NOARGS, "Print something"},
     { NULL, NULL, 0, NULL}
 };
 
@@ -34,5 +48,6 @@ static struct PyModuleDef samplemodule = {
 /* Module initialization function */
 /* 在解释器中注册模块对象 */
 PyMODINIT_FUNC PyInit_sample(void) {
+    printf("init sample module\n");
     return PyModule_Create(&samplemodule);
 }

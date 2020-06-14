@@ -383,6 +383,20 @@ static PyTypeObject queue_type = {
 };
 ```
 
+你有三种方式处理掉一个引用：
+1. 将引用传递给别人
+2. 将引用存储起来
+3. 调用 Py_DECREF()
+
+
+```
+// 编译方式1：
+>>> python setup.py build_ext --inplace
+
+// 编译方式2：
+>>> python setup.py build
+```
+
 # Ref
 
 1. [Extending and Embedding the Python Interpreter](https://docs.python.org/3/extending/index.html)

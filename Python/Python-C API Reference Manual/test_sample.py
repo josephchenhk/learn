@@ -5,6 +5,7 @@
 # @FileName: test_sample.py
 # @Software: PyCharm
 
-from sample import spam_system
+from sample import spam_system, print_function
 
-print(spam_system("ls -l"))
+# print(spam_system("ls -l"))
+print(print_function())
