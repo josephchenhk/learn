@@ -36,6 +36,29 @@ static PyObject * add_function(PyObject *self, PyObject *args)
     return result;
 }
 
+// 传入参数，解释成一个Python字典
+static PyObject* func1_function(PyObject *self, PyObject *args)
+{
+    int num, i, j;
+    long lnum=0;   // 可选参数，如果不传入，就默认值是0
+    const char* s1 = NULL;
+    PyObject *obj = NULL;
+    if (!PyArg_ParseTuple(args, "is(ii)|l",
+                          &num, &s1, &i, &j, &lnum)) {
+        printf("传入参数错误！\n");
+        return NULL;
+    }
+    printf("num: %d\tstr1: %s\n"
+           "i: %d\tj: %d\tlnum: %ld\n",
+           num, s1, i, j, lnum);
+
+    obj = Py_BuildValue("{sisisislss}",
+                        "num", num, "i", i, "j", j, "lnum", lnum, "s1", s1);
+    return obj;
+}
+
+
+
 
 
 
@@ -45,6 +68,7 @@ static PyMethodDef SampleMethods[] = {
     {"spam_system", (PyCFunction)spam_system, METH_VARARGS, "Revoke linux command"},
     {"print_function", (PyCFunction)print_function, METH_NOARGS, "Print something"},
     {"add_function", (PyCFunction)add_function, METH_VARARGS, "Add two integers"},
+    {"func1_function", (PyCFunction)func1_function, METH_VARARGS, "Pass in params and return a dict"},
     { NULL, NULL, 0, NULL}
 };
 
