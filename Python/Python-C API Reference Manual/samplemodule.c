@@ -45,7 +45,7 @@ static PyObject* func1_function(PyObject *self, PyObject *args)
     PyObject *obj = NULL;
     if (!PyArg_ParseTuple(args, "is(ii)|l",
                           &num, &s1, &i, &j, &lnum)) {
-        printf("传入参数错误！\n");
+        printf("func1_function:传入参数错误！\n");
         return NULL;
     }
     printf("num: %d\tstr1: %s\n"
@@ -56,6 +56,54 @@ static PyObject* func1_function(PyObject *self, PyObject *args)
                         "num", num, "i", i, "j", j, "lnum", lnum, "s1", s1);
     return obj;
 }
+
+// 传入列表参数和关键字参数（可选）
+static PyObject* func2_function(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    int voltage;
+    char *state = "a stiff";
+    char *action = "voom";
+    char *type = "Norwegian Blue";
+
+    static char *kwlist[] = {"voltage", "state", "action", "type", NULL}; // NULL作为结束标志
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "i|sss", kwlist,
+                                     &voltage, &state, &action, &type)){
+        printf("func2_function:传入参数错误！\n");
+        return NULL;
+    }
+
+    printf("-- This parrot wouldn't %s if you put %i Volts through it.\n",
+           action, voltage);
+    printf("-- Lovely plumage, the %s -- It's %s!\n", type, state);
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+// 在扩展模块中调用Python方法
+static PyObject* func3_function(PyObject *self, PyObject *args)
+{
+    PyObject *my_callback = NULL;
+    PyObject *result = NULL;
+    PyObject *arg = NULL;
+    if (!PyArg_ParseTuple(args, "OO:set_callback;argument;", &my_callback, &arg)) {
+        printf("传入参数错误！\n");
+        return NULL;
+    }
+    if (!PyCallable_Check(my_callback)) {
+        PyErr_SetString(PyExc_TypeError, "parameter must be callable");
+        return NULL;
+    }
+    result = PyObject_CallObject(my_callback, arg);
+    if (!result) {
+        Py_INCREF(Py_None);
+        result = Py_None;
+    }
+    return result;
+}
+
+
+
 
 
 
@@ -69,6 +117,8 @@ static PyMethodDef SampleMethods[] = {
     {"print_function", (PyCFunction)print_function, METH_NOARGS, "Print something"},
     {"add_function", (PyCFunction)add_function, METH_VARARGS, "Add two integers"},
     {"func1_function", (PyCFunction)func1_function, METH_VARARGS, "Pass in params and return a dict"},
+    {"func2_function", (PyCFunction)func2_function, METH_VARARGS | METH_KEYWORDS, "Pass in args and kwargs params"},
+    {"func3", (PyCFunction)func3_function, METH_VARARGS, NULL},
     { NULL, NULL, 0, NULL}
 };
 
