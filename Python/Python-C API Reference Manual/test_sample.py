@@ -5,8 +5,10 @@
 # @FileName: test_sample.py
 # @Software: PyCharm
 
-from sample import *
+# from sample import *
 # spam_system, print_function, add_function, func1_function, func2_function, func3
+
+from sampleclass import SampleClassName
 
 def test_type():
     class A(object):
@@ -30,7 +32,7 @@ def test_type():
     print(type(type))                # <class 'type'> 类型对象type的类型也是<class 'type'>
     print(isinstance(type, object))  # True           类型对象type也是object的实例（蛋生鸡）
 
-print(test_type())
+# print(test_type())
 
 # print(spam_system("ls -l"))
 # print(print_function())
@@ -41,3 +43,14 @@ print(test_type())
 # print(func2_function(3, state="happy", action="sing", type="red bird"))
 # print(func3(int, (1.234, )))
 # print(func3(eval, ("2+3.1", )))
+
+s = SampleClassName()
+print(s)
+print(type(s), type(SampleClassName))
+
+# 这个会报错，noddy.Noddy 类不能被继承
+try:
+    class A(SampleClassName):
+        pass
+except Exception as e:
+    print(e)

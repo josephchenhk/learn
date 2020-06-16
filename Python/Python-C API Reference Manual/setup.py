@@ -7,5 +7,8 @@
 
 from setuptools import setup, Extension
 
-my_sample = Extension('sample', sources=["samplemodule.c"])
+# my_sample = Extension('sample', sources=["samplemodule.c"])
+
+my_sample = Extension('sampleclass', sources=["sampleclassmodule.c"])
+
 setup(ext_modules=[my_sample])
