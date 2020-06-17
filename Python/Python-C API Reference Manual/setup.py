@@ -9,6 +9,7 @@ from setuptools import setup, Extension
 
 # my_sample = Extension('sample', sources=["samplemodule.c"])
 
-my_sample = Extension('sampleclass', sources=["sampleclassmodule.c"])
+my_sample1 = Extension('sampleclass', sources=["sampleclassmodule.c"])
+my_sample2 = Extension('sampleclass2', sources=["sampleclass2module.c"])
 
-setup(ext_modules=[my_sample])
+setup(ext_modules=[my_sample1, my_sample2])

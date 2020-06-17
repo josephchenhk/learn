@@ -9,6 +9,7 @@
 # spam_system, print_function, add_function, func1_function, func2_function, func3
 
 from sampleclass import SampleClassName
+from sampleclass2 import SampleClass2Name
 
 def test_type():
     class A(object):
@@ -44,13 +45,27 @@ def test_type():
 # print(func3(int, (1.234, )))
 # print(func3(eval, ("2+3.1", )))
 
-s = SampleClassName()
-print(s)
-print(type(s), type(SampleClassName))
+# s = SampleClassName()
+# print(s)
+# print(type(s), type(SampleClassName))
+#
+# # 这个会报错，noddy.Noddy 类不能被继承
+# try:
+#     class A(SampleClassName):
+#         pass
+# except Exception as e:
+#     print(e)
 
-# 这个会报错，noddy.Noddy 类不能被继承
+
+
+
+s = SampleClass2Name("abc", "def", 12)
+print(s, s.name())
+print(type(s), type(SampleClass2Name))
+print(s.number, s.first, s.last)
+
 try:
-    class A(SampleClassName):
+    class A(SampleClass2Name):
         pass
 except Exception as e:
     print(e)
