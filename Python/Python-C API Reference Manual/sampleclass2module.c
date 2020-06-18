@@ -104,6 +104,65 @@ static PyObject * Noddy_name(noddy_NoddyObject * self)
 }
 
 
+//
+static PyObject * Noddy_getfirst(noddy_NoddyObject *self, void *closure)
+{
+    Py_INCREF(self->first);
+    return self->first;
+}
+
+static int Noddy_setfirst(noddy_NoddyObject *self, PyObject *value, void *closure)
+{
+    if (value == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Cannot delete the first attribute");
+        return -1;
+    }
+
+    if (! PyUnicode_Check(value)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "The first attribute value must be a string");
+        return -1;
+    }
+
+    Py_DECREF(self->first);
+    Py_INCREF(value);
+    self->first = value;
+
+    return 0;
+}
+
+static PyObject * Noddy_getlast(noddy_NoddyObject *self, void *closure)
+{
+    Py_INCREF(self->last);
+    return self->last;
+}
+
+static int Noddy_setlast(noddy_NoddyObject *self, PyObject *value, void *closure)
+{
+    if (value == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Cannot delete the last attribute");
+        return -1;
+    }
+
+    if (! PyUnicode_Check(value)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "The last attribute value must be a string");
+        return -1;
+    }
+
+    Py_DECREF(self->last);
+    Py_INCREF(value);
+    self->last = value;
+
+    return 0;
+}
+
+static PyGetSetDef Noddy_getseters[] = {
+    {"first", (getter)Noddy_getfirst, (setter)Noddy_setfirst, "first name", NULL},
+    {"last", (getter)Noddy_getlast, (setter)Noddy_setlast, "last name", NULL},
+    {NULL}  /* Sentinel */
+};
+
 // 定义好方法，在后面定义类的时候调用
 static PyMethodDef Noddy_methods[] = {
     {"name", (PyCFunction)Noddy_name, METH_NOARGS, "Return the name, combining the first and last name"},
@@ -155,7 +214,7 @@ static PyTypeObject noddy_NoddyType = {
     0,                         /*tp_iternext */
     Noddy_methods,             /*tp_methods */
     Noddy_members,             /*tp_members */
-    0,                         /*tp_getset */
+    Noddy_getseters,           /* tp_getset */
     0,                         /*tp_base */
     0,                         /*tp_dict */
     0,                         /*tp_descr_get */

@@ -69,3 +69,6 @@ try:
         pass
 except Exception as e:
     print(e)
+
+s.first = "hello"
+print(s.name())
