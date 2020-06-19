@@ -36,3 +36,12 @@ python setup.py build_ext --inplace
 其中，--inplace表示在源码处生成pyd文件。执行上面命令后，会得到如下文件。
 
 demo.cp36-win_amd64.pyd
+
+
+# 编译libsample动态库
+
+```
+>>> gcc -Wall -c sample.c -o sample.o 
+>>> gcc -shared -fPIC sample.o -o libsample.so
+```
+

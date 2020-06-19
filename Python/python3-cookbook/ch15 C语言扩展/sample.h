@@ -14,7 +14,9 @@ int divide(int a, int b, int *remainder);
 double avg(double *a, int n);
 
 /* A C data structure */
-typedef struct Point;
+typedef struct Point {
+    double x,y;
+} Point;
 
 /* Function involving a C data structure */
 double distance(Point *p1, Point *p2);

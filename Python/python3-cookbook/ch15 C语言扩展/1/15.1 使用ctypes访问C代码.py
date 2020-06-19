@@ -5,7 +5,7 @@
 # @FileName: 15.1 使用ctypes访问C代码.py
 # @Software: PyCharm
 
-# sample.py
+# test_sample.py
 import ctypes
 import os
 

@@ -49,5 +49,6 @@ typedef struct Point {
 
 /* Function involving a C data structure */
 double distance(Point *p1, Point *p2) {
-    return hypot(p1->x - p2->x, p1->y - p2->y);
+//    return hypot(p1->x - p2->x, p1->y - p2->y);
+    return pow(p1->x - p2->x, .0)+pow(p1->y - p2->y, 2.0);
 }
