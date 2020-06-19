@@ -59,16 +59,29 @@ def test_type():
 
 
 
-s = SampleClass2Name("abc", "def", 12)
-print(s, s.name())
-print(type(s), type(SampleClass2Name))
-print(s.number, s.first, s.last)
+# s = SampleClass2Name("abc", "def", 12)
+# print(s, s.name())
+# print(type(s), type(SampleClass2Name))
+# print(s.number, s.first, s.last)
+#
+# try:
+#     class A(SampleClass2Name):
+#         pass
+# except Exception as e:
+#     print(e)
+#
+# s.first = "hello"
+# print(s.name())
 
-try:
-    class A(SampleClass2Name):
-        pass
-except Exception as e:
-    print(e)
 
-s.first = "hello"
-print(s.name())
+import gc
+
+gc.set_debug(gc.DEBUG_STATS | gc.DEBUG_LEAK)
+
+o = SampleClass2Name("abc", "def", 12)
+l = [o]
+o.first = l
+del l
+del o
+
+gc.collect()
