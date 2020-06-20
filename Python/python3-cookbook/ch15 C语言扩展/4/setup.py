@@ -12,10 +12,10 @@ setup(name='sample',
       ext_modules=[
         Extension('sample',
                   ['pysample.c'],
-                  include_dirs = ['/some/dir'],
+                  include_dirs = ['.'],
                   define_macros = [('FOO','1')],
                   undef_macros = ['BAR'],
-                  # library_dirs = ['.'], # libsample.so在同目录下
+                  library_dirs = ['.'], # libsample.so在同目录下
                   # libraries = ['sample']
                   )
         ]

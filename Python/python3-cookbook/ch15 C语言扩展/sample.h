@@ -2,16 +2,16 @@
 #include <math.h>
 
 /* Compute the greatest common divisor */
-int gcd(int x, int y);
+extern int gcd(int, int);
 
 /* Test if (x0,y0) is in the Mandelbrot set or not */
-int in_mandel(double x0, double y0, int n);
+extern int in_mandel(double x0, double y0, int n);
 
 /* Divide two numbers */
-int divide(int a, int b, int *remainder);
+extern int divide(int a, int b, int *remainder);
 
 /* Average values in an array */
-double avg(double *a, int n);
+extern double avg(double *a, int n);
 
 /* A C data structure */
 typedef struct Point {
@@ -19,4 +19,4 @@ typedef struct Point {
 } Point;
 
 /* Function involving a C data structure */
-double distance(Point *p1, Point *p2);
+extern double mydistance(Point *p1, Point *p2);

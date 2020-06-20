@@ -72,7 +72,7 @@ static PyObject *py_Point(PyObject *self, PyObject *args) {
     return PyPoint_FromPoint(p, 1);
 }
 
-static PyObject *py_distance(PyObject *self, PyObject *args) {
+static PyObject *py_mydistance(PyObject *self, PyObject *args) {
     Point *p1, *p2;
     PyObject *py_p1, *py_p2;
     double result;
@@ -86,7 +86,7 @@ static PyObject *py_distance(PyObject *self, PyObject *args) {
     if (!(p2 = PyPoint_AsPoint(py_p2))) {
     return NULL;
     }
-    result = distance(p1,p2);
+    result = mydistance(p1,p2);
     return Py_BuildValue("d", result);
 }
 
@@ -99,7 +99,7 @@ static PyObject *py_distance(PyObject *self, PyObject *args) {
 /* Module method table */
 static PyMethodDef SampleMethods[] = {
     {"consume_iterable",  py_consume_iterable, METH_VARARGS, "Print Python iterable"},
-    {"distance",  py_distance, METH_VARARGS, "Distance"},
+    {"mydistance",  py_mydistance, METH_VARARGS, "Distance"},
     {"Point",  py_Point, METH_VARARGS, "Point"},
     { NULL, NULL, 0, NULL}
 };
