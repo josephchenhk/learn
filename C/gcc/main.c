@@ -26,5 +26,12 @@ int main()
     weekend = ( enum DAY ) a;
     printf("weekday=%d \n", weekend);
 
+    // 指针取地址
+    int  var1;
+    char var2[10];
+
+    printf("var1 变量的地址： %p\n", &var1  );
+    printf("var2 变量的地址： %p\n", &var2  );
+
     return 0;
 }
