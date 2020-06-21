@@ -29,9 +29,13 @@ int main()
     // 指针取地址
     int  var1;
     char var2[10];
-
     printf("var1 变量的地址： %p\n", &var1  );
     printf("var2 变量的地址： %p\n", &var2  );
+
+    // 指针变量的声明
+    int  *ip;
+    ip = &var1;
+    printf("var1 变量的地址： %p\n", ip  );
 
     return 0;
 }
