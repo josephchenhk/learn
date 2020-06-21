@@ -50,5 +50,13 @@ int main()
     d = p(p(a1, b), c);
     printf("最大的数字是: %d\n", d);
 
+
+    // 回调函数指针
+    int myarray[10];
+    populate_array(myarray, 10, getNextRandomValue);
+    for(int i = 0; i < 10; i++) {
+        printf("%d ", myarray[i]);
+    }
+
     return 0;
 }
