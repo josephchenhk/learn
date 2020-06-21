@@ -37,5 +37,18 @@ int main()
     ip = &var1;
     printf("var1 变量的地址： %p\n", ip  );
 
+
+    /* p 是函数指针 */
+    int (* p)(int, int) = & max; // &可以省略
+    int a1, b, c, d;
+    printf("请输入三个数字:");
+//    scanf("%d %d %d", & a, & b, & c);
+    a1 = 1;
+    b = 2;
+    c = 6;
+    /* 与直接调用函数等价，d = max(max(a, b), c) */
+    d = p(p(a1, b), c);
+    printf("最大的数字是: %d\n", d);
+
     return 0;
 }
