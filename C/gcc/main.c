@@ -57,6 +57,29 @@ int main()
     for(int i = 0; i < 10; i++) {
         printf("%d ", myarray[i]);
     }
+    printf("\n");
+
+
+    // 字符串终止（ null 字符 '\0' 终止的一维字符数组）
+    char greeting1[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
+    char greeting2[] = "World"; // 您不需要把 null 字符放在字符串常量的末尾。C 编译器会在初始化数组时，自动把 '\0' 放在字符串的末尾
+    printf("Greeting message: %s %s\n", greeting1, greeting2 );
+
+    /*
+    序号	函数 & 目的
+    1	strcpy(s1, s2);
+    复制字符串 s2 到字符串 s1。
+    2	strcat(s1, s2);
+    连接字符串 s2 到字符串 s1 的末尾。
+    3	strlen(s1);
+    返回字符串 s1 的长度。
+    4	strcmp(s1, s2);
+    如果 s1 和 s2 是相同的，则返回 0；如果 s1<s2 则返回小于 0；如果 s1>s2 则返回大于 0。
+    5	strchr(s1, ch);
+    返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。
+    6	strstr(s1, s2);
+    返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。
+    */
 
     return 0;
 }

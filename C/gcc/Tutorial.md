@@ -107,3 +107,63 @@ ar表示 archive，是gun归档工具，rcs表示 replace and create，如果lib
 
 库的搜索路径遵循几个搜索原则：从左到右搜索-I -l指定的目录，如果在这些目录中找不到，那么gcc会从由环境 变量指定的目录进行查找。
 头文件的环境变量是C_INCLUDE_PATH,库的环境变量是LIBRARY_PATH.如果还是找不到，那么会从系统指定指定的目录进行搜索。
+
+
+# struct的使用
+分别定义两个结构体变量var1、与var2，两个变量的构造方式相同。但是，这种定义方式有着很大的不变，因为反复重写相同的东西
+```
+/* 方法1：*/
+#include "stdio.h"
+
+struct {
+char a;
+short b;
+int c;
+} var1;
+
+struct {
+char a;
+short b;
+int c;
+} var2;
+```
+
+方法2少写了一次结构体，同时还能够实现两个变量的定义。不过，如果定义的结构体变量过多的时候代码就会有可读性以及维护性上的问题
+
+```
+/* 方法2：*/
+#include "stdio.h"
+
+struct {
+char a;
+short b;
+int c;
+} var1,var2;
+```
+
+方法3使用了结构体标签（可以认为一个tag就是一个结构体 {...}的别名），比方法2更方便，但这种定义方式每次需要写struct关键字
+```
+/* 方法3：*/
+#include "stdio.h"
+
+struct demo_tag {
+char a;
+short b;
+int c;
+} var1;
+
+struct demo_tag var2;
+```
+方法4代码中的结构体标签（demo_tag）其实是没有用了的，可以去掉，是最简省的一种方式
+```
+方法4：
+#include "stdio.h"
+
+typedef struct demo_tag {
+char a;
+short b;
+int c;
+} demo_t;
+
+demo_t var1,var2;
+```
