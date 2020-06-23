@@ -7,6 +7,8 @@
 #define  message_for(a, b)  \
     printf(#a " and " #b ": We love you!\n")
 
+#define tokenpaster(n) printf("token" #n " = %d", token##n)  //一个#号将变量变成字符串；两个#号将粘贴成新变量
+
 
 int main()
 {
@@ -91,8 +93,10 @@ int main()
     printf("ANSI :%d\n", __STDC__ );
 
 
-    // 字符串常量化运算符（#）
+    // 字符串常量化运算符（#）一个#号将参数变成字符串
     message_for(Carole, Debra);
+    int token34 = 119;
+    tokenpaster(34);
 
     return 0;
 }
