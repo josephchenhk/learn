@@ -11,3 +11,5 @@ enum DAY
 void populate_array(int *array, size_t arraySize, int (*getNextValue)(void));
 
 int getNextRandomValue(void);
+
+double average(int num,...);

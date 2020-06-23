@@ -119,5 +119,11 @@ int main()
         fclose (pf);
     }
 
+
+    // 可变数量的参数
+    printf("\n");
+    printf("Average of 2, 3, 4, 5 = %f\n", average(4, 2,3,4,5)); // 第一个参数是变量个数，4个变量
+    printf("Average of 5, 10, 15 = %f\n", average(3, 5,10,15));  // 第一个参数是变量个数，3个变量
+
     return 0;
 }
