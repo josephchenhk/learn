@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include <errno.h>
+#include <string.h>
 #include <limits.h>
 #include <math.h>
 #include "add.h"
@@ -9,6 +11,8 @@
 
 #define tokenpaster(n) printf("token" #n " = %d", token##n)  //一个#号将变量变成字符串；两个#号将粘贴成新变量
 
+
+extern int errno;
 
 int main()
 {
@@ -97,6 +101,23 @@ int main()
     message_for(Carole, Debra);
     int token34 = 119;
     tokenpaster(34);
+
+
+    // 错误处理
+    FILE * pf;
+    int errnum;
+    pf = fopen ("unexist.txt", "rb");
+    if (pf == NULL)
+    {
+        errnum = errno;
+        fprintf(stderr, "错误号: %d\n", errno);
+        perror("通过 perror 输出错误");
+        fprintf(stderr, "打开文件错误: %s\n", strerror( errnum ));
+    }
+    else
+    {
+        fclose (pf);
+    }
 
     return 0;
 }
