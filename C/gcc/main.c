@@ -4,7 +4,8 @@
 #include "add.h"
 
 
-
+#define  message_for(a, b)  \
+    printf(#a " and " #b ": We love you!\n")
 
 
 int main()
@@ -88,6 +89,10 @@ int main()
     printf("Time :%s\n", __TIME__ );
     printf("Line :%d\n", __LINE__ );
     printf("ANSI :%d\n", __STDC__ );
+
+
+    // 字符串常量化运算符（#）
+    message_for(Carole, Debra);
 
     return 0;
 }
