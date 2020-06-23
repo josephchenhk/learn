@@ -3,6 +3,7 @@
 #include <string.h>
 #include <limits.h>
 #include <math.h>
+#include <stdlib.h>
 #include "add.h"
 
 
@@ -18,8 +19,12 @@ int main()
 {
     printf("%d\n", add(1,2));
 
+
+
     // 用sizeof函数获取字节数
     printf("int 存储大小 : %lu (2^(4*8)=2^32=%f)\n", sizeof(int), pow(2, sizeof(int)*8));
+
+
 
 
     // 遍历枚举元素
@@ -27,11 +32,15 @@ int main()
         printf("枚举元素：%d \n", day);
     }
 
+
+
     // 类型转换
     int a = 1;
     enum DAY weekend;
     weekend = ( enum DAY ) a;
     printf("weekday=%d \n", weekend);
+
+
 
     // 指针取地址
     int  var1;
@@ -43,7 +52,6 @@ int main()
     int  *ip;
     ip = &var1;
     printf("var1 变量的地址： %p\n", ip  );
-
 
     /* p 是函数指针 */
     int (* p)(int, int) = & max; // &可以省略
@@ -58,6 +66,7 @@ int main()
     printf("最大的数字是: %d\n", d);
 
 
+
     // 回调函数指针
     int myarray[10];
     populate_array(myarray, 10, getNextRandomValue);
@@ -65,6 +74,7 @@ int main()
         printf("%d ", myarray[i]);
     }
     printf("\n");
+
 
 
     // 字符串终止（ null 字符 '\0' 终止的一维字符数组）
@@ -89,6 +99,7 @@ int main()
     */
 
 
+
     // 预定义宏
     printf("File :%s\n", __FILE__ );
     printf("Date :%s\n", __DATE__ );
@@ -97,10 +108,12 @@ int main()
     printf("ANSI :%d\n", __STDC__ );
 
 
+
     // 字符串常量化运算符（#）一个#号将参数变成字符串
     message_for(Carole, Debra);
     int token34 = 119;
     tokenpaster(34);
+
 
 
     // 错误处理
@@ -120,10 +133,48 @@ int main()
     }
 
 
+
     // 可变数量的参数
     printf("\n");
     printf("Average of 2, 3, 4, 5 = %f\n", average(4, 2,3,4,5)); // 第一个参数是变量个数，4个变量
     printf("Average of 5, 10, 15 = %f\n", average(3, 5,10,15));  // 第一个参数是变量个数，3个变量
+
+
+
+
+    // 内存分配
+    char name[100];
+    char *description;
+
+    strcpy(name, "Zara Ali");
+
+    /* 动态分配内存 */
+    printf("sizeof(char)=%lu\n", sizeof(char));
+    description = (char *)malloc( 30 * sizeof(char) );
+    if( description == NULL )
+    {
+        fprintf(stderr, "Error - unable to allocate required memory\n");
+    }
+    else
+    {
+        strcpy( description, "Zara ali a DPS student.");
+    }
+    /* 假设您想要存储更大的描述信息 */
+    description = (char *) realloc( description, 100 * sizeof(char) );
+    if( description == NULL )
+    {
+        fprintf(stderr, "Error - unable to allocate required memory\n");
+    }
+    else
+    {
+        strcat( description, "She is in class 10th");
+    }
+
+    printf("Name = %s\n", name );
+    printf("Description: %s\n", description );
+
+    /* 使用 free() 函数释放内存 */
+    free(description);
 
     return 0;
 }
