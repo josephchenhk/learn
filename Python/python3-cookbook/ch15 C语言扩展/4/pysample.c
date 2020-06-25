@@ -86,7 +86,7 @@ static PyObject *py_mydistance(PyObject *self, PyObject *args) {
     if (!(p2 = PyPoint_AsPoint(py_p2))) {
     return NULL;
     }
-    result = mydistance(p1,p2);
+    result = mydistance(p1, p2);
     return Py_BuildValue("d", result);
 }
 
