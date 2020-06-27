@@ -43,3 +43,29 @@ print([byte for byte in c.co_code]) # in Py2, [ord(byte) for byte in c.co_code]
 
 python -m dis test.py
 ```
+
+用dis模块去disemble python byte code
+
+```
+joseph@Josephs-MBP Python-3.8.3-Explain % python
+Python 3.7.1 (default, Dec 14 2018, 13:28:58) 
+[Clang 4.0.1 (tags/RELEASE_401/final)] :: Anaconda, Inc. on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import dis
+>>> import test1
+>>> test1.foo
+<function foo at 0x104598c80>
+>>> test1.bar
+<function bar at 0x104598d08>
+>>> dis.dis(test1.foo)
+  4           0 LOAD_FAST                0 (x)
+              2 LOAD_CONST               1 (2)
+              4 BINARY_MULTIPLY
+              6 STORE_FAST               1 (y)
+
+  5           8 LOAD_GLOBAL              0 (bar)
+             10 LOAD_FAST                1 (y)
+             12 CALL_FUNCTION            1
+             14 RETURN_VALUE
+>>> 
+```
