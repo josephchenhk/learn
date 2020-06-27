@@ -1,6 +1,6 @@
 python的源代码可以在python的官网www.python.org中下载
 
-重新编译
+#重新编译
 
 ```
 tar Jxvf  Python-3.8.3.tar.xz
@@ -10,7 +10,7 @@ make
 make install
 ```
 
-使用新编译的python编译器
+#### 使用新编译的python编译器
 
 ```
 cd /Users/joseph/miniconda3/envs/python383/bin
@@ -31,4 +31,15 @@ Type "help", "copyright", "credits" or "license" for more information.
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 IndexError: 哈哈哈，我被修改了！list index out of range
+```
+
+# Cython internals
+Cython internals: interpreter and source code overview: Philip Guo
+```
+c = compile(open('test.py').read(), 'test.py', 'exec')
+dir(c)
+print(c.co_code)
+print([byte for byte in c.co_code]) # in Py2, [ord(byte) for byte in c.co_code]
+
+python -m dis test.py
 ```
