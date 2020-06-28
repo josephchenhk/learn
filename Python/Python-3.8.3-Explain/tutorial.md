@@ -69,3 +69,7 @@ Type "help", "copyright", "credits" or "license" for more information.
              14 RETURN_VALUE
 >>> 
 ```
+
+# Visualize Python Execution
+
+http://pythontutor.com/visualize.html
