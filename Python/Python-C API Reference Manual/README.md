@@ -133,7 +133,7 @@ PyMODINIT_FUNC PyInit_fputs(void) {
 
 ## C Level Representation of Python Structures
 
-The PyObject struct is defined as:
+一个 PyObject 结构体的定义如下（非常简单，仅包含一个refcount，和一个PyTypeObject指针）:
 
 ```angularjs
 typedef struct {
