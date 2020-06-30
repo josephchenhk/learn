@@ -9,7 +9,10 @@ from setuptools import setup, Extension
 
 # my_sample = Extension('sample', sources=["samplemodule.c"])
 
-my_sample1 = Extension('sampleclass', sources=["sampleclassmodule.c"])
-my_sample2 = Extension('sampleclass2', sources=["sampleclass2module.c"])
+# my_sample1 = Extension('sampleclass', sources=["sampleclassmodule.c"])
+# my_sample2 = Extension('sampleclass2', sources=["sampleclass2module.c"])
+# setup(ext_modules=[my_sample1, my_sample2])
 
-setup(ext_modules=[my_sample1, my_sample2])
+my_sample_func_fib = Extension('fib', sources=["sample_func_fib.c"]) # `fib` is module name
+
+setup(ext_modules=[my_sample_func_fib])

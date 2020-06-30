@@ -152,20 +152,92 @@ PyObject* is an abstract reference that can point to any type; however, we event
 
 In C, a pointer to a struct is equivalent to a pointer to its first member, this makes it safe to cast from a type defined this way to and from PyObject*.
 
-For example, a sub-type of PyObject (PyIntObject):
+For example, a sub-type of PyObject (PyLongObject):
 ```
 typedef struct {
      Py_ssize_t ob_refcnt;   /* object reference count */
      PyTypeObject* ob_type;  /* object type */
      
      XXX                     /* some values */
-}PyIntObject;
+}PyLongObject;
 ```
 
 ## Writing a New Function in C
 
 It is important to declare all functions as static. This is normally good practice in C but it is especially important when linking with CPython which is a very large project. We don’t want to pollute the namespace. (refer [here](https://blog.csdn.net/guotianqing/article/details/79828100) for static in C)
 
+```
+/* sample_func_fib.c file */
+
+#include "Python.h"
+
+static unsigned long
+cfib(unsigned long n)
+{
+    unsigned long a = 1;
+    unsigned long b = 1;
+    unsigned long c;
+
+    if (n <= 1) {
+        return 1;
+    }
+
+    while (--n > 1) {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+
+    return b;
+}
+
+static PyObject*
+pyfib(PyObject* self, PyObject* n)
+{
+    unsigned long as_unsigned_long = PyLong_AsUnsignedLong(n);
+    PyObject *result = PyLong_FromUnsignedLong(cfib(as_unsigned_long));
+    return result;
+}
+
+PyDoc_STRVAR(fib_doc, "computes the nth Fibonacci number");
+PyMethodDef methods[] = {
+    {
+        "fib",                /* The name as a C string. */
+        (PyCFunction) pyfib,  /* The C function to invoke. */
+        METH_O,               /* Flags telling Python how to invoke ``pyfib`` */
+        fib_doc,              /* The docstring as a C string. */
+    },
+    {
+        NULL,
+        NULL,
+        0,
+        NULL
+    }  /* sentinel */
+};
+
+PyDoc_STRVAR(fib_module_doc, "provides a Fibonacci function");
+PyModuleDef module = {
+    PyModuleDef_HEAD_INIT,
+    "fib",
+    fib_module_doc,
+    -1,
+    methods,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+PyMODINIT_FUNC
+PyInit_fib(void)
+{
+    return PyModule_Create(&module);
+}
+```
+
+For our function we only accept a single argument as a PyObject* so we can use the METH_O flag. For a list of the available flags see: [PyMethodDef.ml_flags](https://llllllllll.github.io/c-extension-tutorial/appendix.html#c.PyMethodDef.ml_flags).
+
+With our function and module defined, we need to tell CPython how to import our module. To do that we need to define a single function with type PyMODINIT_FUNC named PyInit_{name} where name is the name of our module.
 ## Abstract Object API
 
 ### Generic Object Functions
