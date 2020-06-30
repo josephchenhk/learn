@@ -162,6 +162,10 @@ typedef struct {
 }PyIntObject;
 ```
 
+## Writing a New Function in C
+
+It is important to declare all functions as static. This is normally good practice in C but it is especially important when linking with CPython which is a very large project. We don’t want to pollute the namespace. (refer [here](https://blog.csdn.net/guotianqing/article/details/79828100) for static in C)
+
 ## Abstract Object API
 
 ### Generic Object Functions
