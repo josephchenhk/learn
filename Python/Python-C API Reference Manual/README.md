@@ -144,6 +144,8 @@ typedef struct {
 
 For example: if a given PyObject* points to a unicode object, then the ob_type field will be set to &PyUnicode_Type where PyUnicode_Type is the Python unicode type. This should be accessed through Py_TYPE().
 
+The ob_refcnt is the reference count of the object. This is the number of places where this object is being used. This should be accessed through Py_REFCNT(). The reference count can be increased with Py_INCREF() or decreased with Py_DECREF(). As soon as the reference count reaches zero, the object is no longer needed and it will be deallocated.
+
 ## Abstract Object API
 
 ### Generic Object Functions
