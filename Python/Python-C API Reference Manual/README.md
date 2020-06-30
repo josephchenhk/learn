@@ -142,9 +142,25 @@ typedef struct {
 };
 ```
 
-For example: if a given PyObject* points to a unicode object, then the ob_type field will be set to &PyUnicode_Type where PyUnicode_Type is the Python unicode type. This should be accessed through Py_TYPE().
+ob_type指向PyTypeObject指针。For example: if a given PyObject* points to a unicode object, then the ob_type field will be set to &PyUnicode_Type where PyUnicode_Type is the Python unicode type. This should be accessed through Py_TYPE().
 
-The ob_refcnt is the reference count of the object. This is the number of places where this object is being used. This should be accessed through Py_REFCNT(). The reference count can be increased with Py_INCREF() or decreased with Py_DECREF(). As soon as the reference count reaches zero, the object is no longer needed and it will be deallocated.
+ob_refcnt类似一个整数，计算该object被引用的次数。The ob_refcnt is the reference count of the object. This is the number of places where this object is being used. This should be accessed through Py_REFCNT(). The reference count can be increased with Py_INCREF() or decreased with Py_DECREF(). As soon as the reference count reaches zero, the object is no longer needed and it will be deallocated.
+
+
+### Concrete types
+PyObject* is an abstract reference that can point to any type; however, we eventually need to actually store information on an object. Subtypes of object are represented by structs whose first member is a PyObject followed by any instance data needed.
+
+In C, a pointer to a struct is equivalent to a pointer to its first member, this makes it safe to cast from a type defined this way to and from PyObject*.
+
+For example, a sub-type of PyObject (PyIntObject):
+```
+typedef struct {
+     Py_ssize_t ob_refcnt;   /* object reference count */
+     PyTypeObject* ob_type;  /* object type */
+     
+     XXX                     /* some values */
+}PyIntObject;
+```
 
 ## Abstract Object API
 
