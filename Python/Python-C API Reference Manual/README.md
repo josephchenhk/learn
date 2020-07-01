@@ -238,6 +238,52 @@ PyInit_fib(void)
 For our function we only accept a single argument as a PyObject* so we can use the METH_O flag. For a list of the available flags see: [PyMethodDef.ml_flags](https://llllllllll.github.io/c-extension-tutorial/appendix.html#c.PyMethodDef.ml_flags).
 
 With our function and module defined, we need to tell CPython how to import our module. To do that we need to define a single function with type PyMODINIT_FUNC named PyInit_{name} where name is the name of our module.
+
+
+## Building and Importing
+
+编写setup文件 (与sample_func_fib.c 放在同目录下)
+```
+# setup.py file
+from setuptools import setup, find_packages, Extension
+
+setup(
+    name='fib',
+    version='0.1.0',
+    packages=find_packages(),
+    license='GPL-2',
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'Natural Language :: English',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: Implementation :: CPython',
+    ],
+    ext_modules=[
+        Extension(
+            # the qualified name of the extension module to build
+            'fib',
+            # the files to compile into our module relative to ``setup.py``
+            ['sample_func_fib.c'],
+        ),
+    ],
+)
+```
+
+在命令行下编译：
+```commandline
+$ python setup.py build_ext --inplace
+```
+
+导入使用
+```
+# test_sample_func_fib.py file
+from fib import fib
+
+print(fib(4))
+```
+
+
 ## Abstract Object API
 
 ### Generic Object Functions
