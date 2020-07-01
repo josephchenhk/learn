@@ -17,6 +17,7 @@ cfib(unsigned long n)
         c = a + b;
         a = b;
         b = c;
+//        printf("b=%lu\n", b);
     }
 
     return b;
@@ -41,11 +42,66 @@ pyfib(PyObject* self, PyObject* n)
     return result;
 }
 
+/* 完全用PyObject去implement fib函数 */
+static PyObject *
+pyfib_pyobj(PyObject* self, PyObject *n)
+{
+    PyObject *a;
+    PyObject *b;
+    PyObject *c;
+    PyObject *one;
+
+//    printf("n is long: %d\n", PyLong_Check(n));
+
+    a = PyLong_FromLong(1L);
+    b = PyLong_FromLong(1L);
+    one = PyLong_FromLong(1L);
+
+    PyObject* result = PyObject_RichCompare(n, one, Py_LE);
+
+    if (!result) {
+        /* error handling */
+        PyErr_SetString(PyExc_ValueError, "Can not compare!");
+        return NULL;
+    }
+    /* do stuff with ``result`` */
+//    printf("%d", PyObject_IsTrue(result));
+    if(PyObject_IsTrue(result)){
+        return one;
+    }
+
+    /* dereference */
+    Py_DECREF(result);
+
+//    printf("OK\n");
+    n = PyNumber_Subtract(n, one);
+    while (PyObject_IsTrue(PyObject_RichCompare(n, one, Py_GT))) {
+        c = PyNumber_Add(a, b);
+        a = b;
+        b = c;
+//        printf("b=%ld\n", PyLong_AsLong(b));
+        n = PyNumber_Subtract(n, one);
+    }
+
+    Py_DECREF(a);
+    Py_DECREF(b);
+    Py_DECREF(one);
+
+    return b;
+}
+
+
 PyDoc_STRVAR(fib_doc, "computes the nth Fibonacci number");
 PyMethodDef methods[] = {
     {
         "fib",                /* The name as a C string. */
         (PyCFunction) pyfib,  /* The C function to invoke. */
+        METH_O,               /* Flags telling Python how to invoke ``pyfib`` */
+        fib_doc,              /* The docstring as a C string. */
+    },
+    {
+        "fib_pyobj",                /* The name as a C string. */
+        (PyCFunction) pyfib_pyobj,  /* The C function to invoke. */
         METH_O,               /* Flags telling Python how to invoke ``pyfib`` */
         fib_doc,              /* The docstring as a C string. */
     },

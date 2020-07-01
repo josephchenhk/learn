@@ -322,6 +322,33 @@ PyObject_SetAttr()
 PyObject_Repr()
 ```
 
+A weird quirk of the CPython API is that all of the comparison operators (>, >=, ==, etc...) are grouped into a single function called PyObject_RichCompare() instead of different functions like in Python. This is probably done to save space in the PyTypeObject struct.
+
+PyObject_RichCompare() can invoke arbitrary Python code so we need to check for errors. This will also raise an error if a and b cannot be compared because they are incompatible types. Another one is PyObject_RichCompareBool() which returns a C int instead of a PyObject*. This saves us the hassle of worrying about cleaning up the reference to result. For example:
+```
+/ * 需要记得derefcount */
+PyObject* a;  /* ... */
+PyObject* b;  /* ... */
+
+PyObject* result = PyObject_RichCompare(a, b, Py_LE);
+if (!result) {
+    /* error handling */
+}
+/* do stuff with ``result`` */
+Py_DECREF(result);
+
+
+
+/ * 不需要考虑derefcount */
+PyObject* a;  /* ... */
+PyObject* b;  /* ... */
+
+int result = PyObject_RichCompareBool(a, b, Py_LE);
+if (result < 0) {
+    /* error handling */
+}
+```
+
 ### Number Protocol
 Unlike comparisons, there are different functions for all of the numeric operators. These are mostly named PyNumber_{Operator}, for example:
 
@@ -330,6 +357,8 @@ PyNumber_Add()
 PyNumber_Subtract()
 PyNumber_Multiply()
 ```
+
+One nice thing about Python int objects is that they can hold arbitrarily large integers. This is not true for unsigned long values which can store at most 2 ** 64 - 1. The Fibonacci sequence grows quickly and we will run out of room to store the results if we represent it as an unsigned long.
 
 ## Fancy Argument Parsing
 As a first pass, we could replace the METH_O in our PyMethodDef structure with METH_VARARGS | METH_KEYWORDS. This tell CPython to pass us three arguments:
