@@ -283,6 +283,33 @@ from fib import fib
 print(fib(4))
 ```
 
+## Error Handling
+
+C不像Python一样有Error的处理。
+
+### Global Exception Indicator
+
+CPython uses three variables to store the state of the current exception. These hold the type of the current exception, the value of the current exception, and the Python traceback of the current exception. This is like an enhanced errno.
+
+These values can be set or queried with the PyErr_* family of functions.
+
+### Propagating Errors
+In the CPython API, a NULL value is never valid for a PyObject* so it is used to signal that an error has occurred. For example: PyLong_FromUnsignedLong() returns a PyObject*; however, when memory cannot be allocated a PyExc_MemoryError is set and NULL is returned.
+
+This is the most common error sentinel and is used for PyCFunctions.
+
+### Raising Exceptions
+
+To explicitly set the error indicator we can use one of PyErr_SetString() or PyErr_Format(). These functions take an exception type and either a message or a message format string and raise the given Python exception. After setting the exception, we need to clean up our references and then return NULL or some other sentinel to indicate that our function failed.
+
+There are also helpers for raising common exceptions like: PyErr_NoMemory().
+
+### Standard Exceptions
+All of the builtin exceptions are accessible in C with a naming scheme of PyExc_{Name} where Name is the name as it appears in Python. For example:
+
+PyExc_IndexError is the same as IndexError from within Python.
+
+A full list of exceptions can be found here: https://docs.python.org/3.6/c-api/exceptions.html#standard-exception
 
 ## Abstract Object API
 
