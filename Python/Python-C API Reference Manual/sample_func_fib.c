@@ -1,5 +1,5 @@
 /* sample_func_fib.c file */
-
+#include <stdarg.h>
 #include "Python.h"
 
 static unsigned long
@@ -8,6 +8,33 @@ cfib(unsigned long n)
     unsigned long a = 1;
     unsigned long b = 1;
     unsigned long c;
+
+    if (n <= 1) {
+        return 1;
+    }
+
+    while (--n > 1) {
+        c = a + b;
+        a = b;
+        b = c;
+//        printf("b=%lu\n", b);
+    }
+
+    return b;
+}
+
+static unsigned long
+cfib_var(unsigned long n, int num, ...)
+{
+    va_list valist;
+    va_start(valist, num);
+    unsigned long a = va_arg(valist, unsigned long);
+    unsigned long b = va_arg(valist, unsigned long);
+    unsigned long c;
+    va_end(valist);
+
+    printf("a=%lu, b=%lu\n", a, b);
+
 
     if (n <= 1) {
         return 1;
@@ -120,6 +147,35 @@ pyfib_parsearg(PyObject* self, PyObject* args, PyObject* kwargs)
     return result;
 }
 
+
+static PyObject*
+pyfib_optionalarg(PyObject* self, PyObject* args, PyObject* kwargs)
+{
+    /* the names of the arguments as a static array */
+    static char* keywords[] = {"n", "a", "b", NULL};  /* 这个顺序一定要与后面 PyArg_ParseTupleAndKeywords 传参顺序一致 */
+
+    unsigned long n;
+    unsigned long a = 1;
+    unsigned long b = 1;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "k|kk:my_fib_optionalarg", keywords, &n, &a, &b)) {
+        /* the arguments passed don't correspond to the signature
+           described */
+        return NULL;
+    }
+
+    if(PyErr_Occurred()){
+        PyErr_Format(PyExc_ValueError, "Parameter %ld passed in is not a valid integer!", n);
+        return NULL;
+    }
+
+    printf("a=%lu, b=%lu, n=%lu\n", a, b, n);
+
+    PyObject *result = PyLong_FromUnsignedLong(cfib_var(n, 2, a, b));
+    return result;
+}
+
+
 PyDoc_STRVAR(fib_doc, "computes the nth Fibonacci number");
 PyMethodDef methods[] = {
     {
@@ -139,6 +195,12 @@ PyMethodDef methods[] = {
         (PyCFunction) pyfib_parsearg,  /* The C function to invoke. */
         METH_VARARGS | METH_KEYWORDS,  /* Flags telling Python how to invoke ``pyfib`` */
         fib_doc,                       /* The docstring as a C string. */
+    },
+    {
+        "fib_optionalarg",                /* The name as a C string. */
+        (PyCFunction) pyfib_optionalarg,  /* The C function to invoke. */
+        METH_VARARGS | METH_KEYWORDS,     /* Flags telling Python how to invoke ``pyfib`` */
+        fib_doc,                          /* The docstring as a C string. */
     },
     {
         NULL,

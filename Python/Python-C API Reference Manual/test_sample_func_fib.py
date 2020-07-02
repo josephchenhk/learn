@@ -5,7 +5,7 @@
 # @FileName: test_sample_func_fib.py
 # @Software: PyCharm
 
-from fib import fib, fib_pyobj, fib_parsearg
+from fib import fib, fib_pyobj, fib_parsearg, fib_optionalarg
 
 """
 When n is not an integer object, PyLong_AsUnsignedLong() raises an exception and returns (unsigned long) -1 which is 
@@ -23,3 +23,6 @@ UNSIGNED_LONG_MAX. We ignore the error and enter the Fibonacci function’s loop
 print(fib(41)==fib_pyobj(41))
 
 print(fib_parsearg(n=41), fib(41))
+
+print(fib_optionalarg(a=1, n=7, b=1))
+print(fib_optionalarg(n=7, b=2))
