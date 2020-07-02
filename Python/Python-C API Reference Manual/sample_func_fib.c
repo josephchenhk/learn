@@ -91,6 +91,35 @@ pyfib_pyobj(PyObject* self, PyObject *n)
 }
 
 
+static PyObject*
+pyfib_parsearg(PyObject* self, PyObject* args, PyObject* kwargs)
+{
+    /* the names of the arguments as a static array */
+    static char* keywords[] = {"n", NULL};
+
+    PyObject* n;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O", keywords, &n)) {
+        /* the arguments passed don't correspond to the signature
+           described */
+        return NULL;
+    }
+
+    unsigned long as_unsigned_long = PyLong_AsUnsignedLong(n);
+    if(PyErr_Occurred()){
+//        PyErr_SetString(PyExc_ValueError, "Parameter passed in is not a valid integer!");
+        PyObject* repr = PyObject_Repr(n);
+        PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
+        const char *bytes = PyBytes_AS_STRING(str);
+        Py_XDECREF(repr);
+        Py_XDECREF(str);
+        PyErr_Format(PyExc_ValueError, "Parameter %s passed in is not a valid integer!", bytes);
+        return NULL;
+    }
+    PyObject *result = PyLong_FromUnsignedLong(cfib(as_unsigned_long));
+    return result;
+}
+
 PyDoc_STRVAR(fib_doc, "computes the nth Fibonacci number");
 PyMethodDef methods[] = {
     {
@@ -102,8 +131,14 @@ PyMethodDef methods[] = {
     {
         "fib_pyobj",                /* The name as a C string. */
         (PyCFunction) pyfib_pyobj,  /* The C function to invoke. */
-        METH_O,               /* Flags telling Python how to invoke ``pyfib`` */
-        fib_doc,              /* The docstring as a C string. */
+        METH_O,                     /* Flags telling Python how to invoke ``pyfib`` */
+        fib_doc,                    /* The docstring as a C string. */
+    },
+    {
+        "fib_parsearg",                /* The name as a C string. */
+        (PyCFunction) pyfib_parsearg,  /* The C function to invoke. */
+        METH_VARARGS | METH_KEYWORDS,  /* Flags telling Python how to invoke ``pyfib`` */
+        fib_doc,                       /* The docstring as a C string. */
     },
     {
         NULL,
