@@ -360,6 +360,58 @@ PyNumber_Multiply()
 
 One nice thing about Python int objects is that they can hold arbitrarily large integers. This is not true for unsigned long values which can store at most 2 ** 64 - 1. The Fibonacci sequence grows quickly and we will run out of room to store the results if we represent it as an unsigned long.
 
+Our fib function can be rewritten as below:
+
+```
+/* 完全用PyObject去implement fib函数 */
+static PyObject *
+pyfib_pyobj(PyObject* self, PyObject *n)
+{
+    PyObject *a;
+    PyObject *b;
+    PyObject *c;
+    PyObject *one;
+
+//    printf("n is long: %d\n", PyLong_Check(n));
+
+    a = PyLong_FromLong(1L);
+    b = PyLong_FromLong(1L);
+    one = PyLong_FromLong(1L);
+
+    PyObject* result = PyObject_RichCompare(n, one, Py_LE);
+
+    if (!result) {
+        /* error handling */
+        PyErr_SetString(PyExc_ValueError, "Can not compare!");
+        return NULL;
+    }
+    /* do stuff with ``result`` */
+//    printf("%d", PyObject_IsTrue(result));
+    if(PyObject_IsTrue(result)){
+        return one;
+    }
+
+    /* dereference */
+    Py_DECREF(result);
+
+//    printf("OK\n");
+    n = PyNumber_Subtract(n, one);
+    while (PyObject_IsTrue(PyObject_RichCompare(n, one, Py_GT))) {
+        c = PyNumber_Add(a, b);
+        a = b;
+        b = c;
+//        printf("b=%ld\n", PyLong_AsLong(b));
+        n = PyNumber_Subtract(n, one);
+    }
+
+    Py_DECREF(a);
+    Py_DECREF(b);
+    Py_DECREF(one);
+
+    return b;
+}
+```
+
 ## Fancy Argument Parsing
 As a first pass, we could replace the METH_O in our PyMethodDef structure with METH_VARARGS | METH_KEYWORDS. This tell CPython to pass us three arguments:
 
