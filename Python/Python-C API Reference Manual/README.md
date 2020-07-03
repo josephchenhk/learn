@@ -631,6 +631,26 @@ static PyTypeObject queue_type = {
 };
 ```
 
+PyType_Ready将方法load进来：
+```
+PyMODINIT_FUNC PyInit_sampleclass2(void)
+{
+    PyObject* m;
+
+    noddy_NoddyType.tp_new = Noddy_new;
+    if (PyType_Ready(&noddy_NoddyType) < 0)
+        return NULL;
+
+    m = PyModule_Create(&samplemodule);
+
+    Py_INCREF(&noddy_NoddyType);
+    PyModule_AddObject(m, "SampleClass2Name", (PyObject *)&noddy_NoddyType); // 在python中调用时，s = SampleClassName()
+
+    return m;
+}
+```
+
+
 你有三种方式处理掉一个引用：
 1. 将引用传递给别人
 2. 将引用存储起来
