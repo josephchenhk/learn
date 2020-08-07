@@ -80,4 +80,14 @@ $ ls -l *my_test            # they are of same size
 
 Same as command `cp`, but do not keep original copy anymore.
 
+# rm
+
+A good habbit is always using `-i` in rm, which will prevent you from mistakenly remove something.
+
+```shell
+$ rm -i my_test   # remove after confirmation
+remove my_test?   
+$ rm -f *test     # force to remove (careful!)
+```
+
 
