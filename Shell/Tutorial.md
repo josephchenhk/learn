@@ -49,3 +49,29 @@ overwrite my_test2? (y/n [n])y
 $ cp -i /aaa/bbb/ccccc/ddddd . # copy a deep file to current directory
 $ cp -R Scripts/ new_scripts   # recursively copy whole directory and sub folders
 ```
+
+# ln
+
+Create a soft/hard link to a certain file.
+
+## soft link
+
+```shell
+$ ln -s my_test sl_my_test  # soft link
+$ ls -i *my_test            # verify they are two different files
+8678429 my_test    8681318 sl_my_test
+$ ls -l *my_test            # they are with different sizes
+-rw-r--r--  1 joseph  staff  *0* Aug  7 14:36 my_test
+rwxr-xr-x  1 joseph  staff  *7* Aug  7 15:10 sl_my_test -> my_test
+```
+
+## hard link
+
+```shell
+$ ln my_test hl_my_test     # without -s, means hard link
+$ ls -i *my_test            # they refer to the same inode number
+8678429 hl_my_test 8678429 my_test
+$ ls -l *my_test            # they are of same size
+-rw-r--r--  2 joseph  staff  0 Aug  *7* 14:36 hl_my_test
+-rw-r--r--  2 joseph  staff  0 Aug  *7* 14:36 my_test
+```
