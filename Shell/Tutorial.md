@@ -75,3 +75,9 @@ $ ls -l *my_test            # they are of same size
 -rw-r--r--  2 joseph  staff  0 Aug  *7* 14:36 hl_my_test
 -rw-r--r--  2 joseph  staff  0 Aug  *7* 14:36 my_test
 ```
+
+# mv
+
+Same as command `cp`, but do not keep original copy anymore.
+
+
