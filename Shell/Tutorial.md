@@ -5,6 +5,7 @@ $ ls -F           # Show directory/ or file
 $ ls -a           # Show all including hidden
 $ ls -F -R        # Recursively, or ls -FR
 $ ls -l           # Show more information
+$ ls -d Scripts/  # Show only the information of the folder, but not its contents
 $ ls -l my_script # match only the file my_script
 $ ls -l my_scr?pt # match anything with pattern my_scr[1 char]pt
 -rw-rw-r-- ... my_scrapt
@@ -28,9 +29,23 @@ The first 'd' in 'drwxr-xr-x' means directory. If it is '-', it means an ordinar
 
 Use touch command to create a file or change its modification time:
 
+```shell
 $ touch my_test  # create a file named my_test
 $ ls -l my_test
 -rw-r--r--  1 joseph  staff  0 Aug  7 14:32 my_test
 $ touch my_test  # change modification time of my_test
 $ ls -l my_test
 -rw-r--r--  1 joseph  staff  0 Aug  7 14:36 my_test
+```
+
+# cp
+
+Basic usage is "cp source destination". But there are some additional parameters that should be useful.
+
+```shell
+$ cp my_test my_test2    # will override my_test2 without asking
+$ cp -i my_test my_test2 # will ask before overwriting
+overwrite my_test2? (y/n [n])y
+$ cp -i /aaa/bbb/ccccc/ddddd . # copy a deep file to current directory
+$ cp -R Scripts/ new_scripts   # recursively copy whole directory and sub folders
+```
