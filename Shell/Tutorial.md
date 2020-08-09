@@ -97,4 +97,15 @@ $ mkdir new_dir
 $ mkdir -p new_dir/sub_dir/sub_sub_dir # create folder structure with `-p` param 
 ```
 
+# `rmdir` & `rm -ri`
+
+```shell
+$ rmdir new_dir  # works only when new_dir is empty
+$ rm -ir new_dir # can recursively remove directories, and need confirmation
+$ rm -rf new_dir # [dangerous] force to remove the whole directory (and sub dirs)
+```
+
+
+
+
 
