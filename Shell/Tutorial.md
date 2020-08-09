@@ -90,4 +90,11 @@ remove my_test?
 $ rm -f *test     # force to remove (careful!)
 ```
 
+# mkdir
+
+```shell
+$ mkdir new_dir
+$ mkdir -p new_dir/sub_dir/sub_sub_dir # create folder structure with `-p` param 
+```
+
 
