@@ -126,6 +126,24 @@ $ cat -n my_test # line number for all lines
 $ cat -b my_test # line number for non-empty lines
 ```
 
+# `more` and `less`
+ 
+`cat` will show whole text immediately. `more` (and `less`) will show in pages. You can input `q` to exit.
+
+```shell
+$ more my_test
+hello
+world
+my_test (END)
+q # input q to exit
+
+$ less my_test # more flexible than command `more`
+hello
+world
+my_test (END)
+q # input q to exit
+```
+
 
 
 
