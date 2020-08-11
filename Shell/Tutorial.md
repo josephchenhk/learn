@@ -105,6 +105,15 @@ $ rm -ir new_dir # can recursively remove directories, and need confirmation
 $ rm -rf new_dir # [dangerous] force to remove the whole directory (and sub dirs)
 ```
 
+# file
+
+```shell
+$ file my_test
+my_test: empty
+$ file New_Dir
+New_Dir: directory
+```
+
 
 
 
