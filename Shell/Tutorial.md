@@ -114,6 +114,19 @@ $ file New_Dir
 New_Dir: directory
 ```
 
+# cat
+
+```shell
+$ cat my_test
+hello
+world
+$ cat -n my_test # line number for all lines
+1 hello
+2 world
+$ cat -b my_test # line number for non-empty lines
+```
+
+
 
 
 
