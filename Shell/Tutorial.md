@@ -144,6 +144,14 @@ my_test (END)
 q # input q to exit
 ```
 
+# tail
+
+```shell
+$ tail log_file       # show last 10 (default) lines
+$ tail -n 2 log_file  # show last 2 lines
+$ tail -f log_file    # show in flush mode
+```
+
 
 
 
