@@ -152,6 +152,10 @@ $ tail -n 2 log_file  # show last 2 lines
 $ tail -f log_file    # show in flush mode
 ```
 
+# head
+
+`head` is almost same as `tail` command, but there is no `-f` param for it, as we do not expect the headers of a file 
+should change frequently.
 
 
 
