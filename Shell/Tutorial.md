@@ -1,4 +1,6 @@
-# ls
+# Basic bash shell commands
+
+## ls
 
 ```shell
 $ ls -F           # Show directory/ or file
@@ -25,7 +27,7 @@ my_script
 
 The first 'd' in 'drwxr-xr-x' means directory. If it is '-', it means an ordinary file.
 
-# touch
+## touch
 
 Use touch command to create a file or change its modification time:
 
@@ -38,7 +40,7 @@ $ ls -l my_test
 -rw-r--r--  1 joseph  staff  0 Aug  7 14:36 my_test
 ```
 
-# cp
+## cp
 
 Basic usage is "cp source destination". But there are some additional parameters that should be useful.
 
@@ -50,11 +52,11 @@ $ cp -i /aaa/bbb/ccccc/ddddd . # copy a deep file to current directory
 $ cp -R Scripts/ new_scripts   # recursively copy whole directory and sub folders
 ```
 
-# ln
+## ln
 
 Create a soft/hard link to a certain file.
 
-## soft link
+### soft link
 
 ```shell
 $ ln -s my_test sl_my_test  # soft link
@@ -65,7 +67,7 @@ $ ls -l *my_test            # they are with different sizes
 rwxr-xr-x  1 joseph  staff  *7* Aug  7 15:10 sl_my_test -> my_test
 ```
 
-## hard link
+### hard link
 
 ```shell
 $ ln my_test hl_my_test     # without -s, means hard link
@@ -76,11 +78,11 @@ $ ls -l *my_test            # they are of same size
 -rw-r--r--  2 joseph  staff  0 Aug  *7* 14:36 my_test
 ```
 
-# mv
+## mv
 
 Same as command `cp`, but do not keep original copy anymore.
 
-# rm
+## rm
 
 A good habbit is always using `-i` in rm, which will prevent you from mistakenly remove something.
 
@@ -90,14 +92,14 @@ remove my_test?
 $ rm -f *test     # force to remove (careful!)
 ```
 
-# mkdir
+## mkdir
 
 ```shell
 $ mkdir new_dir
 $ mkdir -p new_dir/sub_dir/sub_sub_dir # create folder structure with `-p` param 
 ```
 
-# `rmdir` & `rm -ri`
+## `rmdir` & `rm -ri`
 
 ```shell
 $ rmdir new_dir  # works only when new_dir is empty
@@ -105,7 +107,7 @@ $ rm -ir new_dir # can recursively remove directories, and need confirmation
 $ rm -rf new_dir # [dangerous] force to remove the whole directory (and sub dirs)
 ```
 
-# file
+## file
 
 ```shell
 $ file my_test
@@ -114,7 +116,7 @@ $ file New_Dir
 New_Dir: directory
 ```
 
-# cat
+## cat
 
 ```shell
 $ cat my_test
@@ -126,7 +128,7 @@ $ cat -n my_test # line number for all lines
 $ cat -b my_test # line number for non-empty lines
 ```
 
-# `more` and `less`
+## `more` and `less`
  
 `cat` will show whole text immediately. `more` (and `less`) will show in pages. You can input `q` to exit.
 
@@ -144,7 +146,7 @@ my_test (END)
 q # input q to exit
 ```
 
-# tail
+## tail
 
 ```shell
 $ tail log_file       # show last 10 (default) lines
@@ -152,10 +154,22 @@ $ tail -n 2 log_file  # show last 2 lines
 $ tail -f log_file    # show in flush mode
 ```
 
-# head
+## head
 
 `head` is almost same as `tail` command, but there is no `-f` param for it, as we do not expect the headers of a file 
 should change frequently.
+
+
+# Advance bash shell commands
+
+## ps
+
+A snapshot of processes at the current moment.
+
+```shell
+$ ps -ef                     # `-e` show all processes; `-f` full output
+$ ps -ef | egrep "disk|PID"  # show headers as well
+```
 
 
 
