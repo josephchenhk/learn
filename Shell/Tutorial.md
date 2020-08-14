@@ -171,7 +171,20 @@ $ ps -ef                     # `-e` show all processes; `-f` full output
 $ ps -ef | egrep "disk|PID"  # show headers as well
 ```
 
+## top
 
+After entering `top`, use the following command to sort:
+1. Linux
+
+* Sorted by CPU: P
+* Sorted by Mem: M
+
+2. Mac 
+
+Input `o` first, then type the column names:
+
+* Sorted by CPU: `o` + `CPU`
+* Sorted by Mem: `o` + `MEM`
 
 
 
