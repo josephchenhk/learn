@@ -234,3 +234,21 @@ $ mount -t vfat /dev/sdb1 /media/disk # usage: `mount -t type device directory`
 ```shell
 $ umount /home/rich/mnt # if any app is using the mounted directory, you can't un-mount
 ```
+
+## df
+
+show disk-free.
+
+```shell
+$ df
+Filesystem    512-blocks      Used Available Capacity iused      ifree %iused  Mounted on
+/dev/disk1s1   976490576  21706480 596657360     4%  487653 4881965227    0%   /
+devfs                670       670         0   100%    1160          0  100%   /dev
+/dev/disk1s2   976490576 350326928 596657360    37% 1655757 4880797123    0%   /System/Volumes/Data
+
+$ df -h # human readable
+Filesystem      Size   Used  Avail Capacity iused      ifree %iused  Mounted on
+/dev/disk1s1   466Gi   10Gi  285Gi     4%  487653 4881965227    0%   /
+devfs          335Ki  335Ki    0Bi   100%    1160          0  100%   /dev
+/dev/disk1s2   466Gi  167Gi  285Gi    37% 1655827 4880797053    0%   /System/Volumes/Data
+```
