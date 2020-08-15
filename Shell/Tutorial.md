@@ -173,7 +173,7 @@ $ ps -ef | egrep "disk|PID"  # show headers as well
 
 ## top
 
-After entering `top`, use the following command to sort:
+`ps` shows only static snapshot of processes; while `top` can dynamically show processes. After entering `top`, use the following command to sort:
 1. Linux
 
 * Sorted by CPU: P
@@ -186,5 +186,23 @@ Input `o` first, then type the column names:
 * Sorted by CPU: `o` + `CPU`
 * Sorted by Mem: `o` + `MEM`
 
+## kill
 
+Process signals:
 
+| Signals        | Name          | Description  |
+| ------------- |:-------------:| -----:  |
+|       1       |   HUP         | Hang up 挂起 |
+|       2       |   INT         | Interupt 中断|
+|       3       |   QUIT        | Quit 结束运行|
+|       9       |   KILL        | Kill whatever 无条件终止|
+|       11      |   SEGV        | Segment err 段错误|
+|       15      |   TERM        | Kill if possible 尽可能终止|
+|       17      |   STOP        | Stop but not kill 无条件停止运行，但不终止|
+|       18      |   TSTP        | Stop but still in backoffice 停止或暂停，但继续在后台运行|
+|       19      |   CONT        | Continue after STOP/TSTP 在STOP或TSTP之后恢复执行|
+
+```shell
+$ kill 3940 (PID)
+$ kill -9 3940 # same as `kill -s KILL 3940`
+```
