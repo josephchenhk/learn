@@ -262,5 +262,27 @@ $ du -h | grep "^ *[0-9][0-9.]*G" # locate big files larger than 1GB
 $ du -ah | egrep "^ *([0-9][0-9][0-9][0-9.]*M)|([0-9][0-9.]*G)" # locate big directories/files larger than 100MB
 ```
 
+## sort
 
+```shell
+$ cat my_test                             ✔  5.99G RAM  1.73 L
+1
+2
+100
+3
+4
 
+$ sort my_test # sort as characters
+1
+100
+2
+3
+4
+
+$ sort -n my_test # sort as numbers                       ✔  5.75G RAM  1.67 L
+1
+2
+3
+4
+100
+```
