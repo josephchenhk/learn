@@ -229,4 +229,8 @@ devfs on /dev (devfs, local, nobrowse)
 $ mount -t vfat /dev/sdb1 /media/disk # usage: `mount -t type device directory`
 ```
 
+## umount
 
+```shell
+$ umount /home/rich/mnt # if any app is using the mounted directory, you can't un-mount
+```
