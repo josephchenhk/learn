@@ -216,3 +216,17 @@ $ killall http*
 ```
 
 **Be careful** since this operation might accidentally kill system process and make your system crashed.
+
+## mount
+
+```shell
+$ mount # show devices
+/dev/disk1s1 on / (apfs, local, read-only, journaled)
+devfs on /dev (devfs, local, nobrowse)
+/dev/disk1s2 on /System/Volumes/Data (apfs, local, journaled, nobrowse)
+/dev/disk1s5 on /private/var/vm (apfs, local, journaled, nobrowse) 
+
+$ mount -t vfat /dev/sdb1 /media/disk # usage: `mount -t type device directory`
+```
+
+
