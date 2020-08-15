@@ -252,3 +252,15 @@ Filesystem      Size   Used  Avail Capacity iused      ifree %iused  Mounted on
 devfs          335Ki  335Ki    0Bi   100%    1160          0  100%   /dev
 /dev/disk1s2   466Gi  167Gi  285Gi    37% 1655827 4880797053    0%   /System/Volumes/Data
 ```
+
+## du
+
+We can find big directories/files using du and (e)grep:
+
+```shell
+$ du -h | grep "^ *[0-9][0-9.]*G" # locate big files larger than 1GB
+$ du -ah | egrep "^ *([0-9][0-9][0-9][0-9.]*M)|([0-9][0-9.]*G)" # locate big directories/files larger than 100MB
+```
+
+
+
