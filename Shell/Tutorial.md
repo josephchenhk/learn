@@ -206,3 +206,13 @@ Process signals:
 $ kill 3940 (PID)
 $ kill -9 3940 # same as `kill -s KILL 3940`
 ```
+
+## killall
+
+This command is more powerful and more dangerous. It supports killing process by its name instead of its PID:
+
+```commandline
+$ killall http*
+```
+
+**Be careful** since this operation might accidentally kill system process and make your system crashed.
