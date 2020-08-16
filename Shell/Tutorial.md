@@ -286,3 +286,40 @@ $ sort -n my_test # sort as numbers                       ✔  5.75G RAM �
 4
 100
 ```
+
+## `grep` & `egrep`
+
+Please refer to [Linux grep基本用法与正则表达式](https://blog.csdn.net/xy010902100449/article/details/51426354).
+### Usages
+
+`grep [-acinv] [--color=auto] [-A n] [-B n] '搜寻字符串' 文件名`
+
+参数说明：
+
+- -a：将二进制文档以文本方式处理
+- -c：显示匹配次数
+- -i：忽略大小写差异
+- -n：在行首显示行号
+- -A：After的意思，显示匹配字符串后n行的数据
+- -B：before的意思，显示匹配字符串前n行的数据
+- -v：显示没有匹配行-A：After的意思，显示匹配部分之后n行-B：before的意思，显示匹配部分之前n行
+- --color：以特定颜色高亮显示匹配关键字
+
+### Regular expressions
+
+|元数据	| 意义和范例 |
+|:-----:|:--------:|
+|^word	|搜寻以word开头的行。 例如：搜寻以#开头的脚本注释行 grep –n ‘^#’ regular.txt|
+|word$	|搜寻以word结束的行 |
+|.	    |匹配任意一个字符。 例如：grep –n ‘e.e’ regular.txt 匹配e和e之间有任意一个字符，可以匹配eee，eae，eve，但是不匹配ee。|
+|\	    |转义字符。 例如：搜寻’，’是一个特殊字符，在正则表达式中有特殊含义。必须要先转义。grep –n ‘\,” regular.txt|
+|*	    |前面的字符重复0到多次。 例如匹配gle，gogle，google，gooogle等等 grep –n ‘go*gle’ regular.txt|
+|[list]	|匹配一系列字符中的一个。 例如：匹配gl，gf。grep –n ‘g[lf]’ regular.txt|
+|[n1-n2]|匹配一个字符范围中的一个字符。 例如：匹配数字字符 grep –n ‘[0-9]’ regular.txt|
+|[^list]|匹配字符集以外的字符 例如：grep –n ‘[^o]‘ regular.txt 匹配非o字符|
+|\<word	|单词是的开头。 例如：匹配以g开头的单词 grep –n ‘\<g’ regular.txt|
+|word\>	|前面的字符重复n1，n2次 例如：匹配google，gooogle。grep –n ‘go\{2,3\}gle’ regular.txt|
+|\<word	|匹配单词结尾 例如：匹配以tion结尾的单词 grep –n ‘tion\>’ regular.txt|
+|word\{n1\}	    |前面的字符重复n1 例如：匹配google。 grep –n ‘go\{2\}gle’ regular.txt|
+|word\{n1,\}	|前面的字符至少重复n1 例如：匹配google，gooogle。 grep –n ‘go\{2\}gle’ regular.txt|
+|word\{n1,n2\}	|前面的字符重复n1，n2次 例如：匹配google，gooogle。 grep –n ‘go\{2,3\}gle’ regular.txt|
