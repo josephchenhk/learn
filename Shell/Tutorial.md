@@ -323,3 +323,13 @@ Please refer to [Linux grep基本用法与正则表达式](https://blog.csdn.net
 |word\{n1\}	    |前面的字符重复n1 例如：匹配google。 grep –n ‘go\{2\}gle’ regular.txt|
 |word\{n1,\}	|前面的字符至少重复n1 例如：匹配google，gooogle。 grep –n ‘go\{2\}gle’ regular.txt|
 |word\{n1,n2\}	|前面的字符重复n1，n2次 例如：匹配google，gooogle。 grep –n ‘go\{2,3\}gle’ regular.txt|
+
+
+## gzip
+
+Compressor for `.gz` files.
+
+```shell
+$ gzip my_prog  # compress my_prog to my_prog.gz
+$ gzip my*      # compress all files match pattern my*
+```
