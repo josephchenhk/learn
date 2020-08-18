@@ -333,3 +333,21 @@ Compressor for `.gz` files.
 $ gzip my_prog  # compress my_prog to my_prog.gz
 $ gzip my*      # compress all files match pattern my*
 ```
+
+## tar
+
+Common parameters used in `tar`:
+
+|Param | Name | Description|
+|:----:|:----:|:----------:|
+|-c    |--create| compress file|
+|-x    |--extract| extract file|
+|-v    |--verbose| verbose     |
+|-z    | (zip)   | extract .tgz file|
+
+Example:
+
+```shell
+$ tar -zxvf filename.tgz
+```
+
