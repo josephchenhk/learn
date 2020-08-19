@@ -351,3 +351,22 @@ Example:
 $ tar -zxvf filename.tgz
 ```
 
+
+# 认识Shell
+
+## shell的版本
+
+```shell
+# 默认交互的shell是/bin/bash
+$ cat /etc/passwd   
+[...]
+christine:x:1000:1000:Christine,,,:/home/christine:/bin/bash
+
+# 默认系统shell是/bin/sh
+$ ls -l /bin/sh 12 lrwxrwxrwx 1 root root 4 Apr 22 12:33 /bin/sh -> dash
+
+# 启动非默认shell
+$ /bin/dash
+# 推出当前shell
+$ exit
+```
