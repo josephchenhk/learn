@@ -370,3 +370,17 @@ $ /bin/dash
 # 推出当前shell
 $ exit
 ```
+
+## 父子进程
+
+```shell
+$ ps -f # 通过PPID显示父进程
+UID PID PPID
+...
+
+$ ps --forest # 展示树状关系（父子进程关系）
+...
+```
+
+
+在Mac系统，需要安装`brew install pstree`，然后通过`pstree`命令去展示树状关系。
