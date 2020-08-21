@@ -384,3 +384,21 @@ $ ps --forest # 展示树状关系（父子进程关系）
 
 
 在Mac系统，需要安装`brew install pstree`，然后通过`pstree`命令去展示树状关系。
+
+## 进程列表
+
+依次运行一系列命令：
+
+```shell
+$ pwd; ls; cd /etc; pwd; ls
+```
+
+进程列表需要在上面的命令加上一对括号：
+
+```shell
+$ (pwd; ls; cd /etc; pwd; ls)
+```
+
+进程列表是一种命令分组（command grouping），会创建一个子shell来执行命令。另外一种命令分组方式为花括号`{ command;}`（命令结尾处要加上分号`;`）
+使用花括号进行命令分组则不会创建子shell。
+
