@@ -402,3 +402,17 @@ $ (pwd; ls; cd /etc; pwd; ls)
 进程列表是一种命令分组（command grouping），会创建一个子shell来执行命令。另外一种命令分组方式为花括号`{ command;}`（命令结尾处要加上分号`;`）
 使用花括号进行命令分组则不会创建子shell。
 
+## 后台模式
+
+在命令后面加上符号`&`:
+
+```shell
+$ sleep 10 &
+[1] 2396
+
+$ ps -f
+UID      PID  PPID  C STIME TTY TIME CMD
+Jospeh  2396  ...
+```
+
+
