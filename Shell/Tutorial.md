@@ -415,4 +415,20 @@ UID      PID  PPID  C STIME TTY TIME CMD
 Jospeh  2396  ...
 ```
 
+# 协程
+
+用`coproc`启动协程（创建一个子shell，并且将命令置入后台模式）
+
+```shell
+$ coproc sleep 10                           ✔  5.33G RAM  2.93 L
+[1] 17522
+
+$ jobs -l                               ✔  5.32G RAM  2.92 L  ⚙
+[1]  + 17522 running    sleep 10
+
+$ coproc My_Job { sleep 10; }  # 给协程一个名字（注意花括号前后要空格）
+[1] 17534
+```
+
+
 
