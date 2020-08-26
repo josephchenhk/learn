@@ -415,7 +415,7 @@ UID      PID  PPID  C STIME TTY TIME CMD
 Jospeh  2396  ...
 ```
 
-# 协程
+## 协程
 
 用`coproc`启动协程（创建一个子shell，并且将命令置入后台模式）
 
@@ -431,4 +431,32 @@ $ coproc My_Job { sleep 10; }  # 给协程一个名字（注意花括号前后�
 ```
 
 
+## 内建命令
 
+首先，外部命令是存在于bash shell之外的程序，并不是shell的一部分。例如，ps就是一个外部命令，你可以通过which和type命令找到它：
+
+```shell
+$ which ps
+/bin/ps
+
+$ type -a ps
+ps is /bin/ps
+```
+
+当外部命令执行时，会创建一个子进程，这种操作被称为**衍生**（forking）.
+
+相对地，内建命令不需要使用子进程来执行，内建命令与shell编译成了一体，作为shell工具的组成部分存在，不需要借助外部程序文件来运行。`cd`和`exit`都是内建
+于shell的命令：
+
+```shell
+$ type cd                                   ✔  5.53G RAM  2.65 L
+cd is a shell builtin
+
+$ type -a echo   # echo既有内建命令，也有外部命令                            ✔  5.44G RAM  2.73 L
+echo is a shell builtin
+echo is /bin/echo
+```
+
+
+
+ 
