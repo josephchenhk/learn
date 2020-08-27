@@ -449,7 +449,7 @@ ps is /bin/ps
 于shell的命令：
 
 ```shell
-$ type cd                                   ✔  5.53G RAM  2.65 L
+$ type cd                                 
 cd is a shell builtin
 
 $ type -a echo   # echo既有内建命令，也有外部命令                            ✔  5.44G RAM  2.73 L
@@ -457,6 +457,27 @@ echo is a shell builtin
 echo is /bin/echo
 ```
 
+## history
 
+history命令的默认记录数，可以通过 $HISTSIZE 查看：
+
+```shell
+$ echo $HISTSIZE                        
+50000
+
+# 输入`!!`可以唤回上一条执行的命令
+$ !!
+$ echo $HISTSIZE
+
+# 通过`history -a`命令，强制将命令历史记录写入 .bash_history文件（而不是等待退出shell之后再写入)
+$ history -a
+$ history
+
+# 通过`!`后面跟历史序号，可以唤起历史列表上任意一条命令：
+history | grep "HISTSIZE"                
+ 1168  echo $HISTSIZE
+$ !1168                                    
+$ echo $HISTSIZE
+```
 
  
