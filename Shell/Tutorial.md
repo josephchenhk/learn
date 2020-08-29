@@ -494,5 +494,22 @@ $ alias -p # 在mac上不需要加 -p                                  
 $ alias li='ls -li'
 ```
 
+# Linux环境变量
+
+## 全局环境变量
+
+```shell
+$ env # 通过env或者printenv查看全局环境变量
+ZSH=/Users/joseph/.oh-my-zsh
+...
+
+$ printenv HOME # 显示个别环境变量，用printenv，不要用env
+/Users/joseph
+$ echo $HOME # 等价于print HOME
+/Users/joseph
+```
+
+
+
 
  
