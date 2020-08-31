@@ -516,7 +516,41 @@ Linux系统并没有一个只显示局部环境变量的命令。`set`命令会�
 ```shell
 $ set
 [...] # 既包括env命令所显示的全局变量，也包括用户自定义的局部变量
+
+# 可以创建一个局部用户定义变量（注意=前后没有空格）
+$ my_variable=Hello 
+$ echo $my_variable
+Hello
+
+# 创建全局环境变量的方法，是先创建一个局部环境变量，然后再把它导出（export）到全局环境中
+$ my_variable="I am Global now"
+$ export my_variable
+$ exit
+$ echo $my_variable
+I am Global now
+``` 
+
+特别需要注意，子shell里面修改的全局变量，并不能影响父shell：
+
+```shell
+$ my_variable=Hello      # 父shell里面定义变量                 
+$ export my_variable     # 使之变成全局变量                 
+$ zsh                    # 进入子shell              
+$ echo $my_variable      # 显示全局变量（这时子shell和父shell的全局变量是一致的）                       
+Hello
+$ exit                   # 退出档期啊子shell                            
+$ echo $my_variable      # 在父shell里全局变量依然是Hello               
+Hello
+$ zsh                    # 进入另一个子shell                  
+$ my_variable="No Hello" # 将my_variable的值修改为"No Hello"                  
+$ echo $my_variable      # 查看一下my_variable的值，确实已经被修改为"No Hello"                  
+No Hello
+$ export my_variable     # 使这个修改变成全局变量（注意：仅在子shell有效）                   
+$ exit                   # 退出子shell                 
+$ echo $my_variable      # 在父shell里面全局变量依然是Hello                 
+Hello
 ```
+
 
 
 
