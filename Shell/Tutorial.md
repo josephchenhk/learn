@@ -585,3 +585,29 @@ $ export PATH
 
 注意：以上对PATH的修改只能持续到退出或重启系统，在下一节会学到如何永久保持环境变量的修改效果
 
+## 定位系统环境变量
+
+启动bash shell有3种方式：
+
+* 登录时作为默认登录shell
+* 作为非登录shell的交互式shell
+* 作为脚本运行的非交互式shell
+
+### 登录shell
+
+登录shell会从5个不同的启动文件里读取命令：
+
+- /etc/profile
+- $HOME/.bash_profile  
+- $HOME/.bash_login    
+- $HOME/.profile       
+- $HOME/.bashrc
+
+### 交互式shell
+
+交互式shell不会访问/etc/profile文件。交互式shell读取$HOME/.bashrc文件去获得环境变量。
+
+### 非交互式shell
+
+非交互式shell通常情况下是读取BASH_ENV去获得环境变量。
+
