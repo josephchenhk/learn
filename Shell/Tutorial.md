@@ -551,6 +551,18 @@ $ echo $my_variable      # 在父shell里面全局变量依然是Hello
 Hello
 ```
 
+删除环境变量用`unset`:
+
+```shell
+$ echo $my_variable
+Hello
+$ unset my_variable
+$ echo $my_variable
+
+$
+```
+
+一条简单规则：如果用到变量，使用$；如果操作变量，不使用$。
 
 
 
