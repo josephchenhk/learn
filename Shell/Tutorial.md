@@ -564,7 +564,24 @@ $
 
 一条简单规则：如果用到变量，使用$；如果操作变量，不使用$。
 
+## PATH环境变量
 
+PATH中的目录使用冒号分隔
 
-
+```shell
+$ echo  $PATH                          
+/Users/joseph/miniconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public
  
+# 如果希望临时添加新目录，以便在bash里直接唤起程序，可以如下修改PATH
+$ PATH=$PATH:/Users/joseph/my_program
+
+# 这样便可以直接唤起在`Users/joseph/my_program`目录里的程序myprog
+$ myprog
+
+# 如果想对子shell也生效，记得导出PATH环境变量
+$ export PATH
+```
+
+
+注意：以上对PATH的修改只能持续到退出或重启系统，在下一节会学到如何永久保持环境变量的修改效果
+
