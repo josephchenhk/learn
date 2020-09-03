@@ -3,9 +3,19 @@
 2. [twine](https://pypi.org/project/twine/)
 3. [Using TestPyPI](https://packaging.python.org/guides/using-testpypi/)
 
+打包到test.pypi:
+
 ```
 >>> python setup.py sdist bdist_wheel
 >>> twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 >>> pip install --index-url https://test.pypi.org/simple/ your-package
+```
+
+打包到pypi
+
+```
+>>> python setup.py sdist bdist_wheel
+>>> twine upload dist/*
+>>> pip install your-package
 ```
 
