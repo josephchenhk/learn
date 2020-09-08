@@ -611,3 +611,9 @@ $ export PATH
 
 非交互式shell通常情况下是读取BASH_ENV去获得环境变量。
 
+### 环境变量持久化
+
+在大多数发行版中，存储个人用户永久性bash shell变量的地方是$HOME/.bashrc文件，这一点适用于所有类型的shell进程。
+但如果设置了BASH_ENV变量，除非它指向的是$HOME/.bashrc，否则你应该将非交互式shell的用户变量放在别的地方。
+
+
