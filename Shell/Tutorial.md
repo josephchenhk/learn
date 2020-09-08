@@ -617,3 +617,15 @@ $ export PATH
 但如果设置了BASH_ENV变量，除非它指向的是$HOME/.bashrc，否则你应该将非交互式shell的用户变量放在别的地方。
 
 
+## 数组变量
+
+要给某个环境变量设置多个值，可以把值放在括号里，值与值之间用空格分隔
+
+```shell
+$ mytest=(one two three four five)
+$ echo ${mytest[*]}
+one two three four five
+$ echo ${mytest[2]}  # In Mac, count from 1; in Linux, count from 0
+two 
+$ unset mytest
+```
