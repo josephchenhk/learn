@@ -629,3 +629,24 @@ $ echo ${mytest[2]}  # In Mac, count from 1; in Linux, count from 0
 two 
 $ unset mytest
 ```
+
+# Linux文件权限
+
+## /etc/passwd文件
+
+/etc/passwd文件 的字段包含了如下信息:
+*  登录用户名
+*  用户密码
+*  用户账户的UID(数字形式)
+*  用户账户的组ID(GID)(数字形式) 
+*  用户账户的文本描述(称为备注字段) 
+*  用户HOME目录的位置
+*  用户的默认shell
+
+```shell
+$ cat /etc/passwd
+nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false
+root:*:0:0:System Administrator:/var/root:/bin/sh
+[...]
+```
+
