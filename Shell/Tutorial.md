@@ -649,4 +649,9 @@ nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false
 root:*:0:0:System Administrator:/var/root:/bin/sh
 [...]
 ```
+## /etc/shadow文件
+
+只有root用户才能访问/etc/shadow文件，它保存了每个用户关于密码的详细记录，包括加密后的密码、多少天后需要修改密码等等。
+
+
 
