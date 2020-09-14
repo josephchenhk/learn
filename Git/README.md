@@ -1,4 +1,5 @@
 # quantkits
+
 ## 简单的Git Tutorial
 
 配置用户名和邮箱
@@ -9,6 +10,21 @@ git config --global user.name "joseph"
 git config --global user.email "josephchenhk@gmail.com"
 ```
 如果没有--global参数，则表示local设置；如果没有后面的"XXX"，则查看config。
+
+* branch
+
+查看远程分支
+
+```shell
+git branch -a
+```
+
+查看本地分支
+
+```shell
+git branch
+```
+
 
 * merge
 
