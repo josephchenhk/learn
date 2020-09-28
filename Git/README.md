@@ -209,3 +209,14 @@ Ref：https://stackoverflow.com/questions/448919/how-can-i-remove-a-commit-on-gi
 >> git push origin +master --force
 ```
 
+### 用一个branch覆盖另外一个branch
+
+这里用staging branch去覆盖master branch（顺便将原来master branch打一个标签）
+
+```shell
+$ git checkout email
+$ git tag old-email-branch
+$ git reset --hard staging
+```
+
+
