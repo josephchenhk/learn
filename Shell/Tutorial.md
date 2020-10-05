@@ -653,5 +653,42 @@ root:*:0:0:System Administrator:/var/root:/bin/sh
 
 只有root用户才能访问/etc/shadow文件，它保存了每个用户关于密码的详细记录，包括加密后的密码、多少天后需要修改密码等等。
 
+## 管理Linux用户
 
+(1) 创建用户命令两条：
 
+```shell
+$ adduser # 会主动调用/etc/adduser.conf，默认创建/home/用户名
+$ useradd # 需要自己配置参数
+```
+
+为用户指定参数的useradd命令：
+
+常用命令行选项：
+
+* -d：指定用户的主目录
+* -m：如果存在不再创建，但是此目录并不属于新创建用户；如果主目录不存在，则强制创建； -m和-d一块使用。
+* -s：指定用户登录时的shell版本
+* -M：不创建主目录
+
+例子：
+
+```shell
+$ sudo  useradd  -d  "/home/tt"   -m   -s "/bin/bash"   tt
+```
+
+(2) 修改用户密码
+
+修改用户tt的密码：
+
+```shell
+$ sudo passwd tt
+$ sudo passwd -e tt # 强制下次登入时修改密码
+```
+
+(3) 用户删除命令：
+
+```shell
+$ sudo userdel 用户名
+$ sudo userdel -r 用户名 # 连同用户主目录一块删除
+```
