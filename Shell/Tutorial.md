@@ -707,3 +707,28 @@ $ usermod -G shared testuser # 添加一个用户testuser进shared用户组
 $ groupmod -n sharing shared # 把组名shared改为sharing
 $ 
 ```
+
+## 理解文件权限
+
+```shell
+$ ls -l
+-rw-rw-r-- 1 rich rich ...
+drw-rw-r-x 2 rich rich ...
+```
+
+输出结果第一个字段代表对象的类型：
+
+- -代表文件
+- d代表目录
+- l代表链接
+- c代表字符型设备
+- b代表块设备
+- n代表网络设备
+
+后面3组三字符的编码，分别代表读（r），写（w）和执行（x）。每3个字符段分别对应：
+
+- 文件属主（u，user）
+- 文件属组（g，group）
+- 其他（o，others）
+
+所有人（a，all）代表以上全部三类
