@@ -692,3 +692,18 @@ $ sudo passwd -e tt # 强制下次登入时修改密码
 $ sudo userdel 用户名
 $ sudo userdel -r 用户名 # 连同用户主目录一块删除
 ```
+
+## 管理Linux群组
+
+在 /etc/group 文件里存储了用户组的信息
+
+```shell
+$ cat /etc/group
+root:x:0:root
+...
+
+$ groupadd shared # 添加一个新的组shared
+$ usermod -G shared testuser # 添加一个用户testuser进shared用户组
+$ groupmod -n sharing shared # 把组名shared改为sharing
+$ 
+```
