@@ -772,3 +772,14 @@ $ chmod o+r newfile
 $ chmod 641 newfile
 ```
 
+## 改变所属关系
+
+chown命令用来改变文件的属主， chgrp命令用来改变文件的默认属组。
+
+```shell
+$ chown dan newfile        # 指定文件新属主
+$ chown dan.shared newfile # 指定属主和属组
+$ chown .shared newfile    # 只指定属组
+
+$ chgrp shared newfile     # 改变文件或目录的属组
+```
