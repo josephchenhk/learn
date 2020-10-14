@@ -783,3 +783,45 @@ $ chown .shared newfile    # 只指定属组
 
 $ chgrp shared newfile     # 改变文件或目录的属组
 ```
+
+# 管理文件系统
+
+找出物理分区。旧式IDE驱动器，Linux使用的是/dev/hdx，其中x表示一个字母，具体
+是什么要根据驱动器的检测顺序（第一个驱动器是a，第二个驱动器是b，依次类推）。对于
+新式的SATA驱动器和SCSI驱动器，Linux使用的是/dev/sdx。
+
+## 操作文件系统
+
+进入fdisk工具操作界面
+
+```shell
+$ sudo fdisk /dev/sda
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+
+Command (m for help): p # 将存储设备的详细信息显示出来
+Disk /dev/sda: 42.9 GB, 42949672960 bytes, 83886080 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000bcbfe
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048     2099199     1048576   83  Linux
+/dev/sda2         2099200    83886079    40893440   8e  Linux LVM
+
+Command (m for help): n # 创建新的分区
+Command action
+e extended
+p primary partition (1-4)
+p # 创建一个主分区
+Partition number (1-4): 1 # 给这个主分区的编号为1
+First cylinder (1-652, default 1): 1
+Last cylinder, +cylinders or +size{K,M,G} (1-652, default 652): +2G
+
+Command (m for help): w # 保存新的分区
+```
