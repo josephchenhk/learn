@@ -762,3 +762,13 @@ $ touch newfile & ls -l newfile
 $ mkdir newdir & ls -l 
 drwxr-x--x     # 目录默认权限777，减掉026等于751
 ```
+
+## 改变安全性设置
+
+`chmod`命令用来改变文件和目录的安全性设置
+
+```shell
+$ chmod o+r newfile
+$ chmod 641 newfile
+```
+
