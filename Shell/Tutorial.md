@@ -825,3 +825,27 @@ Last cylinder, +cylinders or +size{K,M,G} (1-652, default 652): +2G
 
 Command (m for help): w # 保存新的分区
 ```
+
+# 安装软件程序
+
+## 包管理基础
+
+Linux中广泛使用的两种主要的基础工具是dpkg和rpm，分别是Debian发行版（如Ubuntu和Mint）和Red Hat发行版（Fedora，openSUSE和CentOS）的包管理工具。
+
+```shell
+$ yum list installed                    # 列出所有安装的包
+$ yum list xterm                        # 查看xterm是否已经安装
+$ yum provides file_name                # 查看系统上某个文件属于哪个包
+$ yum install package_name              # 安装包package_name   
+$ yum localinstall package_name.rpm     # 本地通过rpm安装包package_name
+$ yum list updates                      # 显示所有有更新的包
+$ yum update package_name               # 更新包package_name
+$ yum update                            # 一次过更新所有的包
+$ yum remove package_name               # 删除包
+$ yum erase package_name                # 删除包及清除关联文件
+$ yum clean all                         # 清除broken dependency 
+$ yum deplist package_name              # 列出包package_name的所有依赖关系
+$ yum update --skip-broken              # 忽略掉broken的包，继续更新其他所有包
+$ yum repolist                          # 查看正从哪些仓库获取软件。yum的仓库定义文件位于 /etc/yum.repos.d
+```
+
