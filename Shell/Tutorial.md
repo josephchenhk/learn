@@ -865,3 +865,49 @@ $ ./configure                      # 检查依赖
 $ make                             # 编译成可执行文件
 $ make install                     # 将运行文件安装到系统的常用位置上
 ```
+
+# Shell脚本编程基础
+
+## 构建基础脚本
+
+### 使用多个命令
+
+用分号隔开：
+
+```shell
+$ date;who
+Mon Oct 19 19:03:56 HKT 2020
+joseph   console  Oct 19 09:17 
+joseph   ttys004  Oct 19 09:17 
+joseph   ttys005  Oct 19 09:17 
+```
+
+### 创建shell脚本文件
+
+创建一个如下文件 test
+
+```markdown
+#!/bin/bash
+# This script displays the date and who's logged on
+date
+who
+```
+
+第一行`#!/bin/bash`是必须的，指定要使用的shell. shell通过寻找$PATH里的路径去寻找可执行脚本，
+
+```shell
+echo $PATH 
+/Users/joseph/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
+
+要让shell找到test脚本，只需要采取以下两种方法之一：
+
+* 将shell脚本文件test所在的目录添加到
+PATH环境变量中
+
+* 在提示符中用绝对或者相对文件路径来引用shell脚本文件
+
+```shell
+$ chmod u+x test  # 添加执行权限
+$ ./test          # 告诉shell将当前目录作为引用路径
+```
