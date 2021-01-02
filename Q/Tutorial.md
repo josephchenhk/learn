@@ -335,3 +335,54 @@ q)sell&sums buys
 q)deltas sell&sums buys
 2 1 4 3 2 0
 ```
+
+## 10 Tables
+
+傳統編程語言（例如MySQL）裡，table是collection of rows；但在Q語言裡，table是collection of columns。columns即是Q裡面的list，所以對於table的
+操作，實際上是對table裡的list（即columns）進行操作，是一種vector operations，所以非常快。
+
+```shell
+# 創建table，由創建column開始。我們先創建一個10000000個屬於2018年1月份的random日期
+q)dates:2018.01.01+10000000?31
+q)count dates
+10000000
+
+# 同樣地，我們創建10000000個隨機的時間戳
+q)times:10000000?24:00:00.0000
+
+# 接著，我們創建10000000個在範圍100到10000以內的隨機數字，作為qty
+q)qtys:100*1+10000000?100
+q)qtys
+4300 4000 5700 9100 8000 2400 500 1900 2500 7300 2500 7200 1200 3700 5800 310..
+
+# 假設我們考慮3隻股票，我們先創建index
+q)ixs:10000000?3
+q)ixs
+2 0 1 2 2 1 0 2 0 1 1 0 0 2 1 2 0 2 1 0 2 2 1 2 0 1 0 2 1 1 1 2 0 2 2 1 2 2 1..
+
+# 然後將三隻股票名字影射到index裡
+q)syms:`appl`amzn`googl` ixs
+q)syms
+`googl`appl`amzn`googl`googl`amzn`appl`googl`appl`amzn`amzn`appl`appl`googl`a..
+
+# 給價格一個隨機浮動3%的幅度
+q)pxs:(1+10000000?.03)*172.0 1189.0 1073.0 ixs
+q)pxs
+1080.679 172.5521 1211.08 1104.971 1097.452 1193.656 175.9138 1087.95 172.029..
+
+# 現在我們可以創建我們的table了
+q)t:([] date:dates;time:times;sym:syms;qty:qtys;px:pxs)
+
+# 對table按日期和時間進行升序排序
+q)t:`date`time xasc t
+
+# 取出前5個row看一下
+q)5#t
+date       time         sym  qty  px
+------------------------------------------
+2018.01.01 00:00:01.129 appl 8800 174.7627
+2018.01.01 00:00:02.099 amzn 8000 1198.197
+2018.01.01 00:00:02.670 appl 1400 175.7161
+2018.01.01 00:00:02.885 amzn 9300 1223.15
+2018.01.01 00:00:03.396 appl 7600 175.518
+```
