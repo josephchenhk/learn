@@ -283,3 +283,55 @@ q){x,sum -2#x} 1 1
 q){x,sum -2#x}/[10;1 1]
 1 1 2 3 5 8 13 21 34 55 89 144
 ```
+
+## 9 Functions Examples: Variables
+
+### deltas
+
+deltas作用於一個列表上，將返回該列表元素的diff。注意第一個元素返回的是其本身：
+
+```shell
+q)deltas 10 20 30 40 50
+10 10 10 10 10
+
+# 注意返回的第一個元素是本身
+q)deltas 110 120 130 140 150
+110 10 10 10 10
+
+# 先返回一個累加的列表，再計算diff
+q)deltas sums 110 120 130 140 150
+110 120 130 140 150
+
+# 先計算diff，再返回累加的列表
+q)sums deltas 110 120 130 140 150
+110 120 130 140 150
+```
+
+留意上述操作，deltas實際上unwind了sums的操作。
+
+### variables
+
+用`:`來給variables賦值（assign values）：
+
+```shell
+q)a:42
+```
+
+在q語言裡，`:`用來賦值；`=`用來比較。與之對應，在傳統編程語言裡，通常`=`用來賦值；而`==`用來比較。
+
+### A sample: allocate buys
+
+以下例子展示如何根據給定的sell數量，分配buys：
+
+```shell
+q)buys: 2 1 4 3 5 4
+q)sell:12
+
+# sums對buys進行累加，然後用sell去取cap
+q)sell&sums buys
+2 3 7 10 12 12
+
+# 如果想獲得每筆交易的buy數目
+q)deltas sell&sums buys
+2 1 4 3 2 0
+```
