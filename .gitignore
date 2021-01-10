@@ -12,5 +12,12 @@ Python/smtp_example/credentials.py
 # Python Interpreter
 Python/Python-3.8.3
 
-
+# Esper related
+Esper/.idea/
+Esper/simple_sample/.idea/
+Esper/simple_sample/target/
+Esper/simple_sample/*.iml
+Esper/espertech_sample/.idea/
+Esper/espertech_sample/target/
+Esper/espertech_sample/*.iml
 
