@@ -7,6 +7,14 @@ docker start mysql
 docker stop mysql
 ```
 
+* 挂在目录
+
+以下命令运行apline镜像，且将host目录/tmp挂载到容器目录/container/tmp
+
+```shell
+docker run -v /tmp:/container/tmp apline
+```
+
 * 将docker里面的内容导出来
 
 ```angular2html
