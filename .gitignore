@@ -20,4 +20,9 @@ Esper/simple_sample/*.iml
 Esper/espertech_sample/.idea/
 Esper/espertech_sample/target/
 Esper/espertech_sample/*.iml
-
+Esper/trade_sample/.idea/
+Esper/trade_sample/target/
+Esper/trade_sample/*.iml
+Esper/bochk_sample/.idea/
+Esper/bochk_sample/target/
+Esper/bochk_sample/*.iml
