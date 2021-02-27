@@ -911,3 +911,16 @@ PATH环境变量中
 $ chmod u+x test  # 添加执行权限
 $ ./test          # 告诉shell将当前目录作为引用路径
 ```
+
+### shell脚本
+
+以下是一些常用的shell用法：
+
+
+#!/bin/bash 
+echo start a script
+var1=10
+var2=testing
+echo "var1=$var1, var2=$var2, var3=\$var2"
+date > test.txt
+who >> test.txt 

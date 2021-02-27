@@ -54,7 +54,7 @@ public class Engine {
             timeStr = rowData[0];
             company = rowData[1];
             px = Double.valueOf(rowData[2]);
-            ts = java.sql.Timestamp.valueOf("2021-01-19 "+timeStr) ;
+            ts = java.sql.Timestamp.valueOf("2021-01-28 "+timeStr) ;
             Event event = new Event(ts, company, px);
             //System.out.println("    " + i + " " + event);
             runtime.getEventService().sendEventBean(event, "Event");

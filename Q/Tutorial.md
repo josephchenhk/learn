@@ -1,5 +1,17 @@
 # Q Language
 
+在docker下启动Q console：
+
+```shell
+> docker pull aakashsinghishere/kdb_docker_centos:latest
+
+# 在5001端口启动一个q process（名字起作qserver）
+> docker run -it -v /Users/joseph/Dropbox/code/learn/Q:/tmp --name qserver aakashsinghishere/kdb_docker_centos:latest q -p 5001
+
+# 在5002端口启动一个q process（名字起作qclient）
+> docker run -it -v /Users/joseph/Dropbox/code/learn/Q:/tmp --name qclient --link qserver aakashsinghishere/kdb_docker_centos:latest q -p 5002
+```
+
 ## 1 Introduction
 
 與傳統編程語言不同，Q programming：
@@ -143,7 +155,7 @@ q))`date$3
 
 ## 6 Operations on Lists
 
-Generally speaking, ``|``符號表示iterate across整個List
+Generally speaking, ``/``符號表示iterate across整個List
 
 ### Cumulative
 
@@ -486,4 +498,237 @@ date      | px
 2018.01.19| 5.159972
 2018.01.20| 5.159882
 ..
+```
+
+## 13 Interprocess Communication
+
+`\p (port)`表示打開某個port
+
+在server端： 
+
+```shell
+# 打开一个端口4242
+q)\p 4242
+
+# 在server端，定义一个函数cub3
+q)cub3:{x*x*x}
+
+# 在前面加上0N!代表将后面的结果即时输出至当前console
+q)cub3:{0N!x*x*x}
+q)125
+```
+
+在client端：
+
+```shell
+# 通过hopen `:[server name]:[port]连接至进程4242
+q)h:hopen `:qserver:4242
+
+# 将运算6*8发送至server去进行计算，并收到运算结果
+q)h "6*8"
+48
+
+# 在client端，定义一个函数sq
+q)sq:{x*x}
+
+# 将client端定义的函数sq，带上参数4，传到server端进行运算，并收到运算结果
+# 注意：这样并不安全！
+q)h (sq;4)
+16
+
+# 调用server端定义的函数cub3，并传入参数5，传到server端进行运算，并收到运算结果
+# 注意：这是更推荐的一种做法（更安全）
+q)h (`cub3; 5)
+125
+q)h (`cub3; 5)
+125
+```
+
+## 14 Callbacks
+
+
+## 15 I/O
+
+### List of characters
+
+雙引號`""`表示a list of characters。而``` ` ```表示string
+
+```shell
+q) count "jab"
+3
+q) count `jab
+1
+```
+
+我們可以用括號`(string1, string2, ...)`來表示list of strings (而string本身又是list of characters，所以是一個nested list)
+
+```shell
+q)count ("So long"; "and thanks"; "for all the fish")
+3
+```
+
+### File Handles
+
+File Handler代表了一個路徑，我們用backtick+colon（``` `:[path]filename ```）去代表一個handler
+
+#### hsym
+
+`hsym`是一種創建file handler的方法。其語法結構是``hsym `$[path]filename``，先將一個代表路徑的string強制轉換成symbol，然後通過hsym命令將symbol轉換成合法的file symbol
+
+```shell
+q)hsym `$"/Users/joseph/Dropbox/code/learn/Q/table.csv"
+`:/Users/joseph/Dropbox/code/learn/Q/table.csv
+```
+
+### save
+
+保存一个名字叫table的表：
+
+```shell
+q)save `:/tmp/table.csv
+`:/tmp/table.csv
+```
+
+### hcount
+
+获得文件大小(in bytes):
+
+```shell
+q)hcount `:/tmp/table.csv
+85995
+```
+
+### hdel
+
+删除文件
+
+```shell
+# 删除一个存在的文件
+q)hdel `:/tmp/table.csv
+`:/tmp/table.csv
+
+删除一个不存在的文件
+q)hdel `:/tmp/table2.csv
+'/tmp/table2.csv. OS reports: No such file or directory
+  [0]  hdel `:/tmp/table2.csv
+```
+
+### serializing and deserializing q entities
+
+任何q entity都可以被序列化持久保存。用`set`命令进行持久化，用`get`命令进行读取：
+
+```shell
+q)l: 1 2 3 4 5
+q)l
+1 2 3 4 5
+
+# 保存
+q)`:/tmp/lData set l
+`:/tmp/lData
+
+# 读取
+q)l2:get `:/tmp/lData
+q)l2
+1 2 3 4 5
+```
+
+### hopen and hclose
+
+``hopen``可以用于修改已经持久化的q entities。Syntax `hopen fh`其中`fh`是一个有效的file handler（可以是hsym或形如`` `: ``的路径），命令将会返回一个整型（int）file handler
+
+```shell
+# 打开已存在的持久化q entity
+q)h:hopen `:/tmp/lData
+
+# 返回额一个整型的file handler
+q)h
+1025i
+
+# 在lData后面加上一个数字999
+q)h[999]
+1025i
+
+# 在lData后面再加上两个数字 12 44
+q)h 12 44
+1025i
+
+# 关闭（并自动保存修改）
+q)hclose h
+
+# 重新打开lData，看到新添加的数据已经在了
+q)get `:/tmp/lData
+1 2 3 4 5 999 12 44
+```
+
+### Writing and reading binary
+
+任何数据，都可以以list of bytes的形式被q读取
+
+在q里，`read0` 表示读取文本， `read1`则会读取一个文件as a list of bytes。用`fh 0: [list of strings]`去将数据写成binary保存下来；用`fh 1: [some bytes]`去将数据写成binary保存下来
+
+```shell
+# 读取文本
+q)read0 `:/tmp/lData
+"\376 \007\000\000\000\000\000\005\000\000\000\000\000\000\000\001\000\000\00..
+
+# 写入文本（写入需要是list of strings，中间以分号隔开）
+q)`:/tmp/txtData 0: ("hello\n"; "KDB")
+`:/tmp/txtData
+
+# 读取刚刚写入的文本text
+q)read0 `:/tmp/txtData
+"hello"
+""
+"KDB"
+
+# 读取binary
+q)read1 `:/tmp/lData
+0xfe2007000000000005000000000000000100000000000000020000000000000003000000000..
+
+# 写入binary
+q)`:/tmp/binData 1: 0x06072a
+`:/tmp/binData
+
+# 读取刚刚写入的binary
+q)read1 `:/tmp/binData
+0x06072a
+```
+
+# --------------------
+
+创建示例数据
+
+```shell
+q)N:3600
+q)times:09:30:00.0000+1000*til N
+q)idx:N?4
+q)syms:`A`B`C`D idx
+q)pxs:(1+N?0.1)*200 100 150 300 idx
+q)table:([] time:times;sym:syms;price:pxs)
+```
+
+也可以将上述语句写进一个脚本 createdata.q:
+
+```javascript
+N:3600;
+times:09:30:00.0000+1000*til N;
+idx:N?4;
+syms:`A`B`C`D idx;
+pxs:(1+N?0.1)*200 100 150 300 idx;
+table:([] time:times;sym:syms;price:pxs);
+```
+
+然后在q console里面执行该脚本：
+
+```javascript
+q)\l /tmp/createdata.q
+```
+
+1. 计算company A的30s移动窗口的平均价，每次遇到company A的Event都会触发Listener
+
+```shell
+lookback:1000*29;
+ctable:a#table;
+ctime:last ctable[`time];
+window:select avg price,sym from ctable where (sym=`A) & (time within (ctime-lookback;ctime));
 ```
