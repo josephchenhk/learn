@@ -26,3 +26,5 @@ Esper/trade_sample/*.iml
 Esper/bochk_sample/.idea/
 Esper/bochk_sample/target/
 Esper/bochk_sample/*.iml
+
+*.xlsx
