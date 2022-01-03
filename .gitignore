@@ -28,3 +28,5 @@ Esper/bochk_sample/target/
 Esper/bochk_sample/*.iml
 
 *.xlsx
+
+Credentials/
