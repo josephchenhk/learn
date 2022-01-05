@@ -29,4 +29,6 @@ Esper/bochk_sample/*.iml
 
 *.xlsx
 
+__pycache__/
+
 Credentials/
