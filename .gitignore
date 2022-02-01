@@ -32,3 +32,7 @@ Esper/bochk_sample/*.iml
 __pycache__/
 
 Credentials/
+
+# c/c++ CLion related
+cmake-build-debug
+CMakeLists.txt
