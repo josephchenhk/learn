@@ -35,7 +35,7 @@ void birthday(person * p);
 void birthday(person * p){
     // dereference
 //    p->age += 1;
-    
+
     // anotherway to dereference
     (*p).age += 1;
 }
