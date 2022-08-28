@@ -19,12 +19,37 @@ git config --global user.email "josephchenhk@gmail.com"
 git branch -a
 ```
 
+在本地更新远程分支的信息（To update the local list of remote branches）：
+
+```shell
+git remote update origin --prune
+```
+
 查看本地分支
 
 ```shell
 git branch
 ```
 
+删除本地分支
+
+```shell
+git branch -d <branchname>
+git branch -D <branchname>
+```
+Note: 
+
+1. The -d option is an alias for --delete, which only deletes the branch if it has already been fully merged in its upstream branch.
+
+2. The -D option is an alias for --delete --force, which deletes the branch "irrespective of its merged status." [Source: man git-branch]
+
+删除远程分支
+
+```shell
+$ git push -d <remote_name> <branchname>
+```
+
+Note: In most cases, <remote_name> will be origin.
 
 * merge
 

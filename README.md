@@ -1,5 +1,6 @@
-# Technology
-This is a gallery of technologies.
+# Technology Gallery
 
-Test.
+This is a collection of technologies.
+
+
 
