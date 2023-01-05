@@ -4,8 +4,9 @@
 # @Email   : josephchenhk@gmail.com
 # @FileName: test1.py
 # @Software: PyCharm
-
+from typing import Dict
 import pandas as pd
+from xlsxwriter.workbook import Workbook
 
 def bet_type(type_:str):
     if type(type_) != str:
@@ -36,9 +37,62 @@ def drop_unnamed_cols(df: pd.DataFrame) ->pd.DataFrame:
         return df.drop(columns=unnamed_cols)
     return df
 
+def format_sheet(
+        data: pd.DataFrame,
+        workbook: Workbook,
+        sheet_name: str,
+        format: Dict[str, str]
+):
+    # Adding formats for header row.
+    fmt_header = workbook.add_format(
+        {
+            'bold': True,
+            'text_wrap': True,
+            'valign': 'top',
+            'fg_color': '#5DADE2',
+            'font_color': '#FFFFFF',
+            'border': 1,
+        }
+    )
+    # Adding percentage format.
+    fmt_rate = workbook.add_format(
+        {
+            'num_format': '%0.00',
+            'bold': False
+        }
+    )
+    # Adding currency format
+    fmt_currency_cny = workbook.add_format(
+        {
+            'num_format': '¥#,##0.00',
+            'bold': False
+        }
+    )
+    # Adding float format
+    fmt_float = workbook.add_format(
+        {
+            'num_format': '0.000',
+            'bold': False
+        }
+    )
+    formats = {
+        'header': fmt_header,
+        'rate': fmt_rate,
+        'currency(¥)': fmt_currency_cny,
+        'float': fmt_float
+    }
+    worksheet = workbook.get_worksheet_by_name(sheet_name)
+    for col_name, format_name in format.items():
+        if col_name == '标题':
+            for col, value in enumerate(data.columns.values):
+                worksheet.write(0, col+1, value, formats[format_name])
+            continue
+        col_idx = list(data.columns).index(col_name) + 1
+        worksheet.set_column(col_idx, col_idx, 16, formats[format_name])
+
 df = None
 year = 2022
-for month in range(3, 5+1):
+for month in range(3, 12+1):
     sheet_name = f"{year}.{month:02d}"
     print(sheet_name)
 
@@ -61,7 +115,7 @@ df["信心指数"] = df["信心指数"].astype(float)
 df["期望回报"] = df["水位"] * df["信心指数"]
 
 path = f"{year}年微博比赛结果分析.xlsx"
-writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
+writer = pd.ExcelWriter(path, engine='xlsxwriter')
 df.to_excel(writer, sheet_name="汇总")
 
 res1 = df[["投入", "盈利", "联赛"]].groupby(['联赛']).sum()
@@ -72,6 +126,21 @@ res["盈利比例"] = res["盈利"] / res["投入"]
 res = drop_unnamed_cols(res)
 res.to_excel(writer, sheet_name="联赛")
 
+format_sheet(
+    data=res,
+    workbook=writer.book,
+    sheet_name='联赛',
+    format={
+        '标题': 'header',
+        '投入': 'currency(¥)',
+        '盈利': 'currency(¥)',
+        '盈利比例': 'rate',
+        '水位': 'float',
+        '信心指数': 'float',
+        '期望回报': 'float'
+    }
+)
+
 res1 = df[["投入", "盈利", "玩法分类"]].groupby(['玩法分类']).sum()
 res2 = df[["水位", "信心指数", "期望回报", "玩法分类"]].groupby(['玩法分类']).mean()
 res3 = df[["投入", "玩法分类"]].groupby(['玩法分类']).count().rename(columns={"投入": "次数"})
@@ -79,6 +148,22 @@ res = res1.join(res2).join(res3)
 res["盈利比例"] = res["盈利"] / res["投入"]
 res = drop_unnamed_cols(res)
 res.to_excel(writer, sheet_name="玩法分类")
+
+format_sheet(
+    data=res,
+    workbook=writer.book,
+    sheet_name='玩法分类',
+    format={
+        '标题': 'header',
+        '投入': 'currency(¥)',
+        '盈利': 'currency(¥)',
+        '盈利比例': 'rate',
+        '水位': 'float',
+        '信心指数': 'float',
+        '期望回报': 'float'
+    }
+)
+print()
 
 def over_under(x:str):
     if "进球大于" in x:
@@ -105,6 +190,21 @@ if not df1.empty:
     res = drop_unnamed_cols(res)
     res.to_excel(writer, sheet_name="大小球")
 
+    format_sheet(
+        data=res,
+        workbook=writer.book,
+        sheet_name='大小球',
+        format={
+            '标题': 'header',
+            '投入': 'currency(¥)',
+            '盈利': 'currency(¥)',
+            '盈利比例': 'rate',
+            '水位': 'float',
+            '信心指数': 'float',
+            '期望回报': 'float'
+        }
+    )
+
 def asian_handicap(x:str):
     if "-" in x:
         return "上盘"
@@ -125,6 +225,21 @@ if not res.empty:
     res = res.join(res_cnt)
     res = drop_unnamed_cols(res)
     res.to_excel(writer, sheet_name="让球")
+
+    format_sheet(
+        data=res,
+        workbook=writer.book,
+        sheet_name='让球',
+        format={
+            '标题': 'header',
+            '投入': 'currency(¥)',
+            '盈利': 'currency(¥)',
+            '盈利比例': 'rate',
+            '水位': 'float',
+            '信心指数': 'float',
+            '期望回报': 'float'
+        }
+    )
 
 writer.save()
 print("Well done!")
