@@ -244,4 +244,30 @@ $ git tag old-email-branch
 $ git reset --hard staging
 ```
 
+### 将在远程删除的分支在本地仓库也删除
+
+用命令 `git remote show origin` 查看分支的情况，可以看到 `origin/dev` 分支已经呈 `stale`
+状态，即已经在远程服务器被删除，但我们在本地仍然可以通过 `git branch -a`看到。
+```shell
+> git remote show origin                                                                           ✔  5.83G RAM  2.87 L
+* remote origin
+  Fetch URL: https://github.com/josephchenhk/xxx.git
+  Push  URL: https://github.com/josephchenhk/xxx.git
+  HEAD branch: main
+  Remote branches:
+    main                    tracked
+    refs/remotes/origin/dev stale (use 'git remote prune' to remove)
+  Local branch configured for 'git pull':
+    main merges with remote main
+  Local ref configured for 'git push':
+    main pushes to main (up to date)
+```
+
+在这种情况下，根据提示，可以通过 `git remote prune [origin]` 进行清理，将远程和本地的分支情况进行同步，
+这样再通过 `git branch -a` 来查看就会发现 `origin/dev` 分支已经不存在了。
+
+```shell
+> git remote prune origin
+```
+
 
