@@ -269,3 +269,51 @@ $ git reset --hard staging
 ```shell
 > git remote prune origin
 ```
+
+### 更新 Personal Access Token (PAT) - Mac
+重新在Github生成新的PAT：
+
+```
+Github console Settings -> Developer settings -> Personal access tokens.
+```
+
+删除本机的PAT：
+
+```shell
+$ git credential-osxkeychain erase
+```
+当再次执行`git pull/clone/push` 等命令的时候，你的token应该就可以自动读取储存在osxkeychain
+中了。如果Github仍然要求你提供credential信息，那就可能是credential.helper还没有设置好。
+
+```shell
+$ git pull
+
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/user/repo.git/'
+```
+
+先查一下当前的credential.helper：
+
+```shell
+$ git config --global credential.helper
+osxkeychain
+```
+
+如果你看到的不是`osxkeychain`而是其他值，或者是空的，就说明需要更新credential.helper
+
+```shell
+$ git config --global --unset credential.helper
+$ git config --global credential.helper osxkeychain
+```
+
+之后再执行git clone/push/pull等操作，应该就可以弹出登陆界面了：
+
+```shell
+$ git clone https://github.com/username/repo.git
+
+Cloning into 'repo'...
+Username for 'https://github.com': your_github_username
+Password for 'https://username@github.com': your_access_token (注意这里是PAT，不是github登陆密码)
+Ensure you provide your access token rather than password when prompted.
+
+```
