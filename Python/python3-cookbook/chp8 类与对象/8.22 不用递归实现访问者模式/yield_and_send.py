@@ -23,27 +23,27 @@ for i in range(5):
     print("\n")
 
 """
->>> g.send(0) 
+>>> g.send(0)
 After yield num is 0
 Before yield num is: 0
 
 
->>> g.send(1) 
+>>> g.send(1)
 After yield num is 1
 Before yield num is: 1
 
 
->>> g.send(2) 
+>>> g.send(2)
 After yield num is 2
 Before yield num is: 2
 
 
->>> g.send(3) 
+>>> g.send(3)
 After yield num is 3
 Before yield num is: 3
 
 
->>> g.send(4) 
+>>> g.send(4)
 After yield num is 4
 Before yield num is: 4
 """

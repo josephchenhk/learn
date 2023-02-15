@@ -21,7 +21,7 @@ cd /Users/joseph/miniconda3/envs/python383/bin
 
 ```
 joseph@Josephs-MacBook-Pro bin % ./python3
-Python 3.8.3 (default, Jun 25 2020, 13:45:23) 
+Python 3.8.3 (default, Jun 25 2020, 13:45:23)
 [Clang 11.0.0 (clang-1100.0.33.12)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> l = [1,2,3]
@@ -48,7 +48,7 @@ python -m dis test.py
 
 ```
 joseph@Josephs-MBP Python-3.8.3-Explain % python
-Python 3.7.1 (default, Dec 14 2018, 13:28:58) 
+Python 3.7.1 (default, Dec 14 2018, 13:28:58)
 [Clang 4.0.1 (tags/RELEASE_401/final)] :: Anaconda, Inc. on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import dis
@@ -67,7 +67,7 @@ Type "help", "copyright", "credits" or "license" for more information.
              10 LOAD_FAST                1 (y)
              12 CALL_FUNCTION            1
              14 RETURN_VALUE
->>> 
+>>>
 ```
 
 # Visualize Python Execution

@@ -18,9 +18,9 @@ docker run -v /tmp:/container/tmp apline
 * 将docker里面的内容导出来
 
 ```angular2html
-docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql 
+docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql
 # 例子：注意如果在powershell里面跑下面这句导出sql，搬到unix环境导入时会有问题（Windows系统应该在cmd环境下跑这句）
-docker exec mysql mysqldump -uroot -pAqumon2050@ test3 > test3.sql  
+docker exec mysql mysqldump -uroot -pAqumon2050@ test3 > test3.sql
 ```
 
 * 将test3.sql放在data文件夹里面 data/test3.sql，

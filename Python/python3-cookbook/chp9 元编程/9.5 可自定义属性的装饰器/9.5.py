@@ -70,9 +70,9 @@ add(2,3)
 
 add(2,3) = logged(logging.DEBUG)(add)(2,3) = decorate(add)(2,3) = wrapper(2,3)
          --> log.log(level, logmsg) --> func(*args, **kwargs), 这里func是add，即add(2,3) --> 5
-         
-add.set_message('Add called') = logged(logging.DEBUG)(add).set_message('Add called') 
-         --> decorate(add).set_message('Add called') --> 又遇到装饰器 @attach_wrapper(wrapper) 
+
+add.set_message('Add called') = logged(logging.DEBUG)(add).set_message('Add called')
+         --> decorate(add).set_message('Add called') --> 又遇到装饰器 @attach_wrapper(wrapper)
          --> attach_wrapper(wrapper)(set_message)('Add called')，进入attach_wrapper函数，obj=wrapper, func=None
          --> 所以return partial(attach_wrapper, obj)=attach_wrapper(func, obj=wrapper), 把set_message传进来
          --> attach_wrapper(func=set_message, obj=wrapper) --> setattr(obj, func.__name__, func)

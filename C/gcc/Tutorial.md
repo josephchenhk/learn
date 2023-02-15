@@ -22,7 +22,7 @@ gcc编译程序主要经过四个过程：
 ### 方法一
 一次过编译：
 ```
->>> gcc add.c main.c -o main 
+>>> gcc add.c main.c -o main
 ```
 
 ### 方法二

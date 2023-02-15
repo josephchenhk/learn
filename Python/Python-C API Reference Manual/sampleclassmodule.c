@@ -67,5 +67,3 @@ PyMODINIT_FUNC PyInit_sampleclass(void)
 
     return m;
 }
-
-

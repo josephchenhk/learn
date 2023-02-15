@@ -88,5 +88,3 @@ cat("I am cat!")
 
 >>> Hello: I am cat!
 """
-
-

@@ -41,7 +41,6 @@ demo.cp36-win_amd64.pyd
 # 编译libsample动态库
 
 ```
->>> gcc -Wall -c sample.c -o sample.o 
+>>> gcc -Wall -c sample.c -o sample.o
 >>> gcc -shared -fPIC sample.o -o libsample.so
 ```
-

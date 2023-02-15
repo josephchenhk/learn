@@ -56,4 +56,3 @@ print(get_month_range2())
 
 print("\n----------- days -------------\n")
 print(list(get_month_days()))
-

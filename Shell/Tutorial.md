@@ -18,9 +18,9 @@ $ ls -l my_scr*pt # match anything with pattern my_scr[0-many char]pt
 -rwxrwxrw- ... my_scroooopt
 -rwxrwxr-- ... my_scrpt
 $ ls my_scr[a-i]pt # any characters between a to i
-my_scrapt  my_script 
+my_scrapt  my_script
 $ ls my_scr[ai]pt # either a or i
-my_scrapt  my_script 
+my_scrapt  my_script
 $ ls my_scr[!a]pt # anything match pattern scr[1 char]pt but not a (Mac好像不支持？)
 my_script
 ```
@@ -88,7 +88,7 @@ A good habbit is always using `-i` in rm, which will prevent you from mistakenly
 
 ```shell
 $ rm -i my_test   # remove after confirmation
-remove my_test?   
+remove my_test?
 $ rm -f *test     # force to remove (careful!)
 ```
 
@@ -96,7 +96,7 @@ $ rm -f *test     # force to remove (careful!)
 
 ```shell
 $ mkdir new_dir
-$ mkdir -p new_dir/sub_dir/sub_sub_dir # create folder structure with `-p` param 
+$ mkdir -p new_dir/sub_dir/sub_sub_dir # create folder structure with `-p` param
 ```
 
 ## `rmdir` & `rm -ri`
@@ -129,7 +129,7 @@ $ cat -b my_test # line number for non-empty lines
 ```
 
 ## `more` and `less`
- 
+
 `cat` will show whole text immediately. `more` (and `less`) will show in pages. You can input `q` to exit.
 
 ```shell
@@ -156,7 +156,7 @@ $ tail -f log_file    # show in flush mode
 
 ## head
 
-`head` is almost same as `tail` command, but there is no `-f` param for it, as we do not expect the headers of a file 
+`head` is almost same as `tail` command, but there is no `-f` param for it, as we do not expect the headers of a file
 should change frequently.
 
 
@@ -179,7 +179,7 @@ $ ps -ef | egrep "disk|PID"  # show headers as well
 * Sorted by CPU: P
 * Sorted by Mem: M
 
-2. Mac 
+2. Mac
 
 Input `o` first, then type the column names:
 
@@ -224,7 +224,7 @@ $ mount # show devices
 /dev/disk1s1 on / (apfs, local, read-only, journaled)
 devfs on /dev (devfs, local, nobrowse)
 /dev/disk1s2 on /System/Volumes/Data (apfs, local, journaled, nobrowse)
-/dev/disk1s5 on /private/var/vm (apfs, local, journaled, nobrowse) 
+/dev/disk1s5 on /private/var/vm (apfs, local, journaled, nobrowse)
 
 $ mount -t vfat /dev/sdb1 /media/disk # usage: `mount -t type device directory`
 ```
@@ -358,7 +358,7 @@ $ tar -zxvf filename.tgz
 
 ```shell
 # 默认交互的shell是/bin/bash
-$ cat /etc/passwd   
+$ cat /etc/passwd
 [...]
 christine:x:1000:1000:Christine,,,:/home/christine:/bin/bash
 
@@ -449,7 +449,7 @@ ps is /bin/ps
 于shell的命令：
 
 ```shell
-$ type cd                                 
+$ type cd
 cd is a shell builtin
 
 $ type -a echo   # echo既有内建命令，也有外部命令                            ✔  5.44G RAM  2.73 L
@@ -462,7 +462,7 @@ echo is /bin/echo
 history命令的默认记录数，可以通过 $HISTSIZE 查看：
 
 ```shell
-$ echo $HISTSIZE                        
+$ echo $HISTSIZE
 50000
 
 # 输入`!!`可以唤回上一条执行的命令
@@ -474,9 +474,9 @@ $ history -a
 $ history
 
 # 通过`!`后面跟历史序号，可以唤起历史列表上任意一条命令：
-history | grep "HISTSIZE"                
+history | grep "HISTSIZE"
  1168  echo $HISTSIZE
-$ !1168                                    
+$ !1168
 $ echo $HISTSIZE
 ```
 
@@ -518,7 +518,7 @@ $ set
 [...] # 既包括env命令所显示的全局变量，也包括用户自定义的局部变量
 
 # 可以创建一个局部用户定义变量（注意=前后没有空格）
-$ my_variable=Hello 
+$ my_variable=Hello
 $ echo $my_variable
 Hello
 
@@ -528,26 +528,26 @@ $ export my_variable
 $ exit
 $ echo $my_variable
 I am Global now
-``` 
+```
 
 特别需要注意，子shell里面修改的全局变量，并不能影响父shell：
 
 ```shell
-$ my_variable=Hello      # 父shell里面定义变量                 
-$ export my_variable     # 使之变成全局变量                 
-$ zsh                    # 进入子shell              
-$ echo $my_variable      # 显示全局变量（这时子shell和父shell的全局变量是一致的）                       
+$ my_variable=Hello      # 父shell里面定义变量
+$ export my_variable     # 使之变成全局变量
+$ zsh                    # 进入子shell
+$ echo $my_variable      # 显示全局变量（这时子shell和父shell的全局变量是一致的）
 Hello
-$ exit                   # 退出档期啊子shell                            
-$ echo $my_variable      # 在父shell里全局变量依然是Hello               
+$ exit                   # 退出档期啊子shell
+$ echo $my_variable      # 在父shell里全局变量依然是Hello
 Hello
-$ zsh                    # 进入另一个子shell                  
-$ my_variable="No Hello" # 将my_variable的值修改为"No Hello"                  
-$ echo $my_variable      # 查看一下my_variable的值，确实已经被修改为"No Hello"                  
+$ zsh                    # 进入另一个子shell
+$ my_variable="No Hello" # 将my_variable的值修改为"No Hello"
+$ echo $my_variable      # 查看一下my_variable的值，确实已经被修改为"No Hello"
 No Hello
-$ export my_variable     # 使这个修改变成全局变量（注意：仅在子shell有效）                   
-$ exit                   # 退出子shell                 
-$ echo $my_variable      # 在父shell里面全局变量依然是Hello                 
+$ export my_variable     # 使这个修改变成全局变量（注意：仅在子shell有效）
+$ exit                   # 退出子shell
+$ echo $my_variable      # 在父shell里面全局变量依然是Hello
 Hello
 ```
 
@@ -569,9 +569,9 @@ $
 PATH中的目录使用冒号分隔
 
 ```shell
-$ echo  $PATH                          
+$ echo  $PATH
 /Users/joseph/miniconda3/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public
- 
+
 # 如果希望临时添加新目录，以便在bash里直接唤起程序，可以如下修改PATH
 $ PATH=$PATH:/Users/joseph/my_program
 
@@ -598,9 +598,9 @@ $ export PATH
 登录shell会从5个不同的启动文件里读取命令：
 
 - /etc/profile
-- $HOME/.bash_profile  
-- $HOME/.bash_login    
-- $HOME/.profile       
+- $HOME/.bash_profile
+- $HOME/.bash_login
+- $HOME/.profile
 - $HOME/.bashrc
 
 ### 交互式shell
@@ -626,7 +626,7 @@ $ mytest=(one two three four five)
 $ echo ${mytest[*]}
 one two three four five
 $ echo ${mytest[2]}  # In Mac, count from 1; in Linux, count from 0
-two 
+two
 $ unset mytest
 ```
 
@@ -638,8 +638,8 @@ $ unset mytest
 *  登录用户名
 *  用户密码
 *  用户账户的UID(数字形式)
-*  用户账户的组ID(GID)(数字形式) 
-*  用户账户的文本描述(称为备注字段) 
+*  用户账户的组ID(GID)(数字形式)
+*  用户账户的文本描述(称为备注字段)
 *  用户HOME目录的位置
 *  用户的默认shell
 
@@ -705,7 +705,7 @@ root:x:0:root
 $ groupadd shared # 添加一个新的组shared
 $ usermod -G shared testuser # 添加一个用户testuser进shared用户组
 $ groupmod -n sharing shared # 把组名shared改为sharing
-$ 
+$
 ```
 
 ## 理解文件权限
@@ -759,7 +759,7 @@ $ umask 026    # 修改默认的掩码至026
 $ touch newfile & ls -l newfile
 -rw-r----- ... # 文件默认权限666，减掉026等于640
 
-$ mkdir newdir & ls -l 
+$ mkdir newdir & ls -l
 drwxr-x--x     # 目录默认权限777，减掉026等于751
 ```
 
@@ -836,14 +836,14 @@ Linux中广泛使用的两种主要的基础工具是dpkg和rpm，分别是Debia
 $ yum list installed                    # 列出所有安装的包
 $ yum list xterm                        # 查看xterm是否已经安装
 $ yum provides file_name                # 查看系统上某个文件属于哪个包
-$ yum install package_name              # 安装包package_name   
+$ yum install package_name              # 安装包package_name
 $ yum localinstall package_name.rpm     # 本地通过rpm安装包package_name
 $ yum list updates                      # 显示所有有更新的包
 $ yum update package_name               # 更新包package_name
 $ yum update                            # 一次过更新所有的包
 $ yum remove package_name               # 删除包
 $ yum erase package_name                # 删除包及清除关联文件
-$ yum clean all                         # 清除broken dependency 
+$ yum clean all                         # 清除broken dependency
 $ yum deplist package_name              # 列出包package_name的所有依赖关系
 $ yum update --skip-broken              # 忽略掉broken的包，继续更新其他所有包
 $ yum repolist                          # 查看正从哪些仓库获取软件。yum的仓库定义文件位于 /etc/yum.repos.d
@@ -857,9 +857,9 @@ $ yum repolist                          # 查看正从哪些仓库获取软件�
 $ tar -zxvf sysstat-11.1.1.tar.gz  # tar解压文件至同名文件夹
 $ cd sysstat-11.1.1                # 进入sysstat-11.1.1文件夹
 $ ls                               # 显示当前文件夹的所有文件和文件夹
-README                            
-configure                          
-INSTALL                          
+README
+configure
+INSTALL
 ...
 $ ./configure                      # 检查依赖
 $ make                             # 编译成可执行文件
@@ -877,9 +877,9 @@ $ make install                     # 将运行文件安装到系统的常用位�
 ```shell
 $ date;who
 Mon Oct 19 19:03:56 HKT 2020
-joseph   console  Oct 19 09:17 
-joseph   ttys004  Oct 19 09:17 
-joseph   ttys005  Oct 19 09:17 
+joseph   console  Oct 19 09:17
+joseph   ttys004  Oct 19 09:17
+joseph   ttys005  Oct 19 09:17
 ```
 
 ### 创建shell脚本文件
@@ -896,7 +896,7 @@ who
 第一行`#!/bin/bash`是必须的，指定要使用的shell. shell通过寻找$PATH里的路径去寻找可执行脚本，
 
 ```shell
-echo $PATH 
+echo $PATH
 /Users/joseph/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin
 ```
 
@@ -917,10 +917,10 @@ $ ./test          # 告诉shell将当前目录作为引用路径
 以下是一些常用的shell用法：
 
 
-#!/bin/bash 
+#!/bin/bash
 echo start a script
 var1=10
 var2=testing
 echo "var1=$var1, var2=$var2, var3=\$var2"
 date > test.txt
-who >> test.txt 
+who >> test.txt

@@ -15,7 +15,7 @@ C代码的第一行，必须为如下语句：
 
 以上代码隐含包括了如下C头文件：<stdio.h>, <string.h>, <errno.h>, <limits.h>, <assert.h> and <stdlib.h> (if available).
 
-在 Python.h 中所有用户可见的变量，均以 **Py** 或 **_Py** 作为前缀。因此，用户自定义的变量，不应该使用这两种前缀。在MAC OS中，Python.h 的位置在 /System/Library/Frameworks/Python.framework/Versions/Current/include/python2.7/Python.h  
+在 Python.h 中所有用户可见的变量，均以 **Py** 或 **_Py** 作为前缀。因此，用户自定义的变量，不应该使用这两种前缀。在MAC OS中，Python.h 的位置在 /System/Library/Frameworks/Python.framework/Versions/Current/include/python2.7/Python.h
 
 使用 extern "C"{} 指定让大括号中的内容 以 C 语言的方式进行编译 ; 这样才能在 C++ 中找到对应的 C 语言中的函数。
 
@@ -157,7 +157,7 @@ For example, a sub-type of PyObject (PyLongObject):
 typedef struct {
      Py_ssize_t ob_refcnt;   /* object reference count */
      PyTypeObject* ob_type;  /* object type */
-     
+
      XXX                     /* some values */
 }PyLongObject;
 ```
@@ -559,7 +559,7 @@ typedef struct {
 其实，我们除了`PyTypeObject.tp_new`之外，可以用如下两个更灵活的方法去操控内存的分配：
 
 ```
-PyTypeObject.tp_alloc 
+PyTypeObject.tp_alloc
 PyTypeObject.tp_free
 ```
 

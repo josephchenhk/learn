@@ -32,4 +32,3 @@ print([s.endswith((".txt", ".png")) for s in sample_list])             # [True, 
 """
 import re
 print([True if re.match("mystart_1|mystart_2", s) else False for s in sample_list]) # [True, True, True, True, False]
-

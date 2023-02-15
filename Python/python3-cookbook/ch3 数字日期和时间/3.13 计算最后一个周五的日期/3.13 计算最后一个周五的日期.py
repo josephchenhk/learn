@@ -33,7 +33,7 @@ print(get_previous_byday('Wednesday')) # Previous week, not today
 print(get_previous_byday('Friday'))    # Previous week, not today
 
 """
-如果你要像这样执行大量的日期计算的话，你最好安装第三方包 python-dateutil 来代替。 比如，下面是是使用 dateutil 模块中的 relativedelta() 
+如果你要像这样执行大量的日期计算的话，你最好安装第三方包 python-dateutil 来代替。 比如，下面是是使用 dateutil 模块中的 relativedelta()
 函数执行同样的计算：
 """
 

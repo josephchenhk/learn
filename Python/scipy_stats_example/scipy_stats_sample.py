@@ -50,4 +50,3 @@ for dist_name in dist_names:
     plt.xlim(0,47)
 plt.legend(loc='upper left')
 plt.show()
-

@@ -6,7 +6,7 @@
 
 """
 Copyright (C) 2020 Joseph Chen - All Rights Reserved
-You may use, distribute and modify this code under the 
+You may use, distribute and modify this code under the
 terms of the JXW license, which unfortunately won't be
 written for another century.
 

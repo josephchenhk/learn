@@ -43,5 +43,3 @@ print(sum(nums)) # 0.0 (注意这里的1不见了)
 
 import math
 print(math.fsum(nums)) # 1.0
-
-

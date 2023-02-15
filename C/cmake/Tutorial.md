@@ -25,7 +25,7 @@ cmake .
 同时生成了三个文件CMakeCache.txt、Makefile、cmake_install.cmake和一个文件夹CmakeFiles,然后执行
 
 ```
-make 
+make
 ```
 
 复制代码

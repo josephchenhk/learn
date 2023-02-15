@@ -60,4 +60,3 @@ def add(x, y):
 
 print(add(2,3))
 print(add(2, 'hello'))
-

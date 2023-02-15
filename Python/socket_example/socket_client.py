@@ -213,4 +213,3 @@ if __name__ == "__main__":
                      order_callback=lambda x: print(f"I receive order: {x}"),
                      execution_callback=lambda x: print(f"I receive execution: {x}"), )
     time.sleep(60)
-

@@ -57,4 +57,3 @@ Look into my eyes, look into my eyes,
 # # Sadly this part doesn't work in windows
 # import os
 # print(os.get_terminal_size())
-

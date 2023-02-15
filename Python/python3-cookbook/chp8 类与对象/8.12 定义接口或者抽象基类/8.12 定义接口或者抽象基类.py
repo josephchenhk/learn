@@ -47,12 +47,12 @@ class Foo(metaclass=PrefixMetaclass):
 在python 2，则需在 Foo 中加一个 __metaclass__ 的属性：
 class Foo(object):
     __metaclass__ = PrefixMetaclass
-  
+
 __new__(cls, name, bases, attrs) 是在 __init__ 之前被调用的特殊方法，它用来创建对象并返回创建后的对象，对它的参数解释如下：
 cls：当前准备创建的类
 name：类的名字
 bases：类的父类集合
-attrs：类的属性和方法，是一个字典 
+attrs：类的属性和方法，是一个字典
 """
 
 class PrefixMetaclass(type):

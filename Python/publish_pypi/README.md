@@ -18,4 +18,3 @@
 >>> twine upload dist/*
 >>> pip install your-package
 ```
-

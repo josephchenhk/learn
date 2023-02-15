@@ -8,8 +8,8 @@
 from fib import fib, fib_pyobj, fib_parsearg, fib_optionalarg
 
 """
-When n is not an integer object, PyLong_AsUnsignedLong() raises an exception and returns (unsigned long) -1 which is 
-UNSIGNED_LONG_MAX. We ignore the error and enter the Fibonacci function’s loop which tries computing the 
+When n is not an integer object, PyLong_AsUnsignedLong() raises an exception and returns (unsigned long) -1 which is
+UNSIGNED_LONG_MAX. We ignore the error and enter the Fibonacci function’s loop which tries computing the
 18446744073709551615th Fibonacci number which will take a very long time.
 """
 # print(fib("a"))

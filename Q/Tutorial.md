@@ -504,7 +504,7 @@ date      | px
 
 `\p (port)`表示打開某個port
 
-在server端： 
+在server端：
 
 ```shell
 # 打开一个端口4242

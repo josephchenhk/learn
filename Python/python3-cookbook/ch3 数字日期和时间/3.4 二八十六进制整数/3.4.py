@@ -63,6 +63,3 @@ SyntaxError: invalid token
 >>> os.chmod('script.py', 0o755)
 
 """
-
-
-

@@ -20,7 +20,7 @@ b = ['w', 'x', 'y', 'z']
 """
 for i in zip(a,b):
     print(i)
-    
+
 from itertools import zip_longest
 """
 (1, 'w')

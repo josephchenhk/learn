@@ -1,5 +1,5 @@
 x = 10
-	
+
 def foo(x):
 	y = x * 2
 	return bar(y)

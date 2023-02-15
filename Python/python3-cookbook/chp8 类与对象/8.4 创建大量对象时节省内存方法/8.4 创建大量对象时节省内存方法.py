@@ -49,4 +49,3 @@ try:
 except AttributeError as e:
     print(e)
 print(date_with_slots)
-

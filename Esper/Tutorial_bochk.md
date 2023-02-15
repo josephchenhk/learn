@@ -1,4 +1,4 @@
-# Complex Event Processing (CEP) 
+# Complex Event Processing (CEP)
 
 ### 内部培训
 ###  Joseph Chen， 2021-01-19
@@ -12,45 +12,45 @@
 3. [Esper支持的事件（Event）表现形式](#esper-event)
 
     3.1 [POJO](#pojo)
-    
+
     3.2 [Map](#map)
 
 4. [Esper事件处理模型](#esper-model)
 
     4.1 [statement](#statement)
-    
+
     4.2 [listener](#listener)
 
 5. [EPL基本语法](#epl)
 
     5.1 [insert](#insert)
-    
+
     5.2 [window](#window)
-    
+
     5.3 [pattern](#pattern)
-    
+
 6. [Java Esper接口](#java-esper)
 
     6.1 [Compiler](#compiler)
-    
+
     6.2 [Runtime](#runtime)
-    
+
     6.3 [sendEvent](#sendevent)
-    
+
 7. [一些例子](#esper-sample)
 
 8. [CEP in Q](#q-introduction)
 
     8.1 [Q数据类型](#q-console-types-and-lists)
-    
+
     8.2 [标量和矢量](#scalar-and-vector)
-    
+
     8.3 [运算顺序](#precedence)
-    
+
     8.4 [til函数](#til)
-    
+
     8.5 [在kdb/Q里面创建一个表](#table)
-    
+
     8.6 [应用Q处理复杂事件](#cep-in-q)
 
 
@@ -95,12 +95,12 @@ public class Person
 {
 	String name;
 	int age;
- 
+
 	public String getName()
 	{
 		return name;
 	}
- 
+
 	public int getAge()
 	{
 		return age;
@@ -121,17 +121,17 @@ public class Person
 {
 	String name;
 	int age;
- 
+
 	public String getName()
 	{
 		return name;
 	}
-	
+
 	public int getAge()
 	{
 		return age;
 	}
-	
+
 	public void setAge(int ageValue)
 	{
 		age = ageValue;
@@ -161,7 +161,7 @@ person.put("phones", Map.class);
 
 Esper事件处理模型主要包含两部分：
 
-### statement 
+### statement
 
 利用Esper的事件处理语言EPL声明对事件进行的操作，Esper中提供了多种类型的事件操作，包括过滤、加窗、事件聚合等等。EPL是一种类似于SQL的语言，从这一点上来看，Esper恰好与数据库相反，数据库时保存数据，并在数据上运行查询语句，而Esper是保存查询语句，在这些查询上运行数据，只要事件与查询条件匹配，Esper就会实时进行处理，而不是只有在查询提交的时候才处理。
 
@@ -293,8 +293,8 @@ EPCompiler compiler = EPCompilerProvider.getCompiler();
 Configuration configuration = new Configuration();
 configuration.getCommon().addEventType(PersonEvent.class);
 CompilerArguments args = new CompilerArguments(configuration);
-	
-# 进行编译			
+
+# 进行编译
 EPCompiled epCompiled;
 try {
   epCompiled = compiler.compile("@name('my-statement') select name, age from PersonEvent", args);
@@ -334,7 +334,7 @@ catch (EPDeployException ex) {
 # 编写Listener
 
 EPStatement statement = runtime.getDeploymentService().getStatement(deployment.getDeploymentId(), "my-statement");
-			
+
 statement.addListener( (newData, oldData, statement, runtime) -> {
   String name = (String) newData[0].get("name");
   int age = (int) newData[0].get("age");

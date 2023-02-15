@@ -22,4 +22,3 @@ b = ('x', 'y', 'z')
 """
 for x in chain(a,b):
     print(x)
-

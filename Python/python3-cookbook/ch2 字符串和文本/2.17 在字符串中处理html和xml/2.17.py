@@ -19,7 +19,7 @@ import html
 print(html.escape(s)) # Elements are written as &quot;&lt;tag&gt;text&lt;/tag&gt;&quot;.
 print(html.escape(s, quote=False)) # Elements are written as "&lt;tag&gt;text&lt;/tag&gt;".
 
-"""如果你正在处理的是ASCII文本，并且想将非ASCII文本对应的编码实体嵌入进去， 可以给某些I/O函数传递参数 
+"""如果你正在处理的是ASCII文本，并且想将非ASCII文本对应的编码实体嵌入进去， 可以给某些I/O函数传递参数
 errors='xmlcharrefreplace' 来达到这个目。比如："""
 s = 'Spicy Jalapeño'
 print(s.encode('ascii', errors='xmlcharrefreplace')) # b'Spicy Jalape&#241;o'

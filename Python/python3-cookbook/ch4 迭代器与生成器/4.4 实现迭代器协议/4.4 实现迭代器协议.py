@@ -46,7 +46,7 @@ child2.add_child(Node(5))
       1   2
      / \   \
     3   4   5
-     
+
 Node(0)
 Node(1)
 Node(3)

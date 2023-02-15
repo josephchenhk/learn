@@ -13,7 +13,7 @@ To reset the jenkins admin password, You can simply disable the security in the 
 vi /var/lib/jenkins/config.xml file.
 
 2. Search for the word <useSecurity>true</useSecurity>
-and change the word true to false. 
+and change the word true to false.
 
 3. Restart the Jenkins server.
 service jenkins restart

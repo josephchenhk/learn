@@ -21,7 +21,7 @@ print(m.I)  # inverse
 """
 Create a vector and multiply
 
-m*v = 
+m*v =
     _           _   _   _   _   _
     | 1  -2   3 |   | 2 |   | 8 |
     | 0   4   5 | * | 3 | = |32 |

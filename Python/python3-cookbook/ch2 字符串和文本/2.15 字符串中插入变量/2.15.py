@@ -40,4 +40,3 @@ try:
     print(s.format_map(cumstomized_dict(vars())))  # Guido has {n} messages.
 except KeyError as e:
     print(e)
-

@@ -37,7 +37,7 @@ git branch
 git branch -d <branchname>
 git branch -D <branchname>
 ```
-Note: 
+Note:
 
 1. The -d option is an alias for --delete, which only deletes the branch if it has already been fully merged in its upstream branch.
 
@@ -269,5 +269,3 @@ $ git reset --hard staging
 ```shell
 > git remote prune origin
 ```
-
-

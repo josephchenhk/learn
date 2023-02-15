@@ -67,7 +67,7 @@ if __name__ == '__main__':
 """
 解释：
 test() = inlined_async(test)() --> wrapper(): f = func(*args) -->test() --> Async(add, (2, 3))
-         --> 执行到yield之前一句，暂停，返回生成器给f --> result_queue = Queue(), result_queue.put(None) 
+         --> 执行到yield之前一句，暂停，返回生成器给f --> result_queue = Queue(), result_queue.put(None)
          --> result = result_queue.get() --> result=None --> a = f.send(result) --> 把None发送给generator f
          --> f从上一次yield停止那里开始resume，将Async(add, (2, 3))作为return返回给a --> a=Async(add, (2, 3))
          --> apply_async(a.func, a.args, callback=result_queue.put) --> 执行2+3=5，然后将5放入result_queue

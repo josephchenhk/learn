@@ -46,4 +46,3 @@ for code in codes:
         date = code_file[9:]
         shutil.move(f"{DATA_PATH}/k_line/K_1M/{code_file}", f"{DATA_PATH}/k_line/K_1M/{code}/{date}")
 print("Done.")
-

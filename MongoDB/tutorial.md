@@ -27,7 +27,7 @@ $ docker exec -it mongo mongo admin
 ```
 
 ## MongoDB 概念解释
-	
+
 |   SQL术语/概念 |   MongoDB术语/概念   |  解释/说明                        |
 |:------------:|:-------------------:|:-------------------------------:|
 | database     |  database           | 数据库                           |
@@ -46,7 +46,7 @@ $ docker exec -it mongo mongo admin
 admin   0.000GB
 config  0.000GB
 local   0.000GB
-> 
+>
 
 # 查看所有用户（及其权限）
 > use admin
@@ -85,7 +85,7 @@ runoob  0.000GB
 ```
 > use admin
 switched to db admin
-> 
+>
 > db.grantRolesToUser("admin",[{role:"dbAdmin",db:"runoob"}])
 > use runoob
 switched to db runoob
@@ -97,7 +97,7 @@ switched to db runoob
 ```
 > use runoob
 switched to db runoob
-> db.createCollection("runoob_table") 
+> db.createCollection("runoob_table")
 { "ok" : 1 }
 > show tables
 runoob_table
@@ -105,7 +105,7 @@ runoob_table
 
 ### 创建文档
 ```
-> db.runoob_table.insert({title: 'MongoDB 教程', 
+> db.runoob_table.insert({title: 'MongoDB 教程',
      description: 'MongoDB 是一个 Nosql 数据库',
      by: '菜鸟教程',
      url: 'http://www.runoob.com',
@@ -155,10 +155,10 @@ db.collection.update(
    {$set:{title: 'MongoDB 教程标题修改一次了'}}
 )
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
-> 
+>
 > db.runoob_table.find()
 { "_id" : ObjectId("5e829a6adeaa3694d37f9e2e"), "title" : "MongoDB 教程标题修改一次了", "description" : "MongoDB 是一个 Nosql 数据库", "by" : "菜鸟教程", "url" : "http://www.runoob.com", "tags" : [ "mongodb", "database", "NoSQL" ], "likes" : 100 }
-> 
+>
 ```
 
 ### 更新文档方法2：save
@@ -183,7 +183,7 @@ save() 方法通过传入的文档来替换已有文档。语法格式如下：
       }
   )
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
-> 
+>
 > db.runoob_table.find()
 { "_id" : ObjectId("5e829a6adeaa3694d37f9e2e"), "title" : "MongoDB 教程标题修改第二次了" }
 
@@ -217,12 +217,5 @@ db.collection.remove(
 > db.runoob_table.remove({"title" : "MongoDB 教程标题修改第二次了"})
 WriteResult({ "nRemoved" : 1 })
 > db.runoob_table.find()
-> 
+>
 ```
-
-
-
-
-
-
-

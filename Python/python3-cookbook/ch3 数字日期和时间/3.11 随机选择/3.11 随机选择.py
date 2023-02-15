@@ -40,6 +40,6 @@ random.seed(12345)       # Seed based on integer given
 random.seed(b'bytedata') # Seed based on byte data
 
 """
-最后，注意在 random 模块中的函数不应该用在和密码学相关的程序中。 如果你确实需要类似的功能，可以使用ssl模块中相应的函数。 比如， 
+最后，注意在 random 模块中的函数不应该用在和密码学相关的程序中。 如果你确实需要类似的功能，可以使用ssl模块中相应的函数。 比如，
 ssl.RAND_bytes() 可以用来生成一个安全的随机字节序列。
 """

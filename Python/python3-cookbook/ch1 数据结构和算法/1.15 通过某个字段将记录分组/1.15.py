@@ -40,7 +40,7 @@ for date, items in groupby(rows, key=itemgetter('date')):
 一个非常重要的准备步骤是要根据指定的字段将数据排序。 因为 groupby() 仅仅检查连续的元素，如果事先并没有排序完成的话，分组函数将
 得不到想要的结果。
 
-当然，由于要先进行排序，这个方法其实运行速度比较慢。如果想提升效率，可以牺牲一点内存，用defaultdict去记录同一个日期 
+当然，由于要先进行排序，这个方法其实运行速度比较慢。如果想提升效率，可以牺牲一点内存，用defaultdict去记录同一个日期
 """
 print("- "*30)
 from collections import defaultdict

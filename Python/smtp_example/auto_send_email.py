@@ -105,5 +105,3 @@ def auto_send_email():
 if __name__=="__main__":
     # send_mail("hello", "I am zdj.")
     auto_send_email()
-
-
