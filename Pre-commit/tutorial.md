@@ -1,5 +1,9 @@
 # Pre-commit
 
+`pre-commit` is a framework for managing and maintaining multi-language
+pre-commit hooks. You may refer to its website [pre-commit](www.pre-commit.com)
+for detailed info.
+
 ## Introduction
 
 **Git hooks** are *shell scripts found in the hidden .git/hooks directory* of a
@@ -13,7 +17,7 @@ By pointing these issues out before code review, this allows a code reviewer to
 focus on the architecture of a change while not wasting time with trivial style
 nitpicks.
 
-# Installation
+## Installation
 
 ```shell
 $ pip install pre-commit
@@ -21,7 +25,7 @@ $ pre-commit --version
 pre-commit 3.0.4
 ```
 
-# Quick Start
+## Quick Start
 
 1. Add a pre-commit configuration
 
@@ -58,4 +62,27 @@ new hooks:
 
 ```shell
 $ pre-commit run --all-files
+```
+
+## Adding pre-commit plugins to your project
+
+The `.pre-commit-config.yaml` file describes what repositories and hooks are
+installed.
+
+### .pre-commit-config.yaml - top level
+
+|keywords       |    Description       |
+|:-------------:|:--------------------:|
+|repos          |A list of repository mappings|
+|files          |(optional:default`''`) global file include pattern|
+|exclude        |(optional:default`^$`) global file exclude pattern|
+|fail_fast      |(optional:default`false`) set to `true` to have pre-commit stop running hooks after the first failure.|
+|minimum_pre_commit_version|(optional:default`'0'`) require a minimu version of pre-commit.|
+
+A sample top-level:
+```shell
+exclude: '^$'
+fail_fast: false
+repos:
+  - ...
 ```
