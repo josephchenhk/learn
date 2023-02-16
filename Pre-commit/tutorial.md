@@ -86,3 +86,20 @@ fail_fast: false
 repos:
   - ...
 ```
+
+### .pre-commit-config.yaml - repos
+
+|keywords       |    Description       |
+|:-------------:|:--------------------:|
+|repo           | the repository url to `git clone` from|
+|rev            | the revision to tag to clone at|
+|hooks          | A list of hook mappings|
+
+A sample repository:
+```shell
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+      - ...
+```
