@@ -52,7 +52,9 @@ $ pre-commit install
 pre-commit installed at .git/hooks/pre-commit
 ```
 
-now `pre-commit` will run automatically on `git commit`!
+now `pre-commit` will run automatically on `git commit`! Every time you clone a
+project using pre-commit, **running `pre-commit install` should always be the
+first thing you do**.
 
 3. (optional) Run against all the files
 
