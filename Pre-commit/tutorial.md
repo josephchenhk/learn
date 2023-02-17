@@ -66,6 +66,12 @@ new hooks:
 $ pre-commit run --all-files
 ```
 
+4. (optional) Run against individual hooks
+
+```shell
+$ pre-commit run <hook-id>
+```
+
 ## Adding pre-commit plugins to your project
 
 The `.pre-commit-config.yaml` file describes what repositories and hooks are
