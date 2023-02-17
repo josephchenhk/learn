@@ -138,3 +138,8 @@ repos:
           - pyproject.toml
         files: ^pyproject\.toml$
 ```
+
+## Update hooks automatically
+
+run `pre-commit autoupdate`, and this will bring the hooks to the latest tag on
+default branch.
