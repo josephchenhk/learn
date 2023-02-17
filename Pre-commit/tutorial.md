@@ -103,3 +103,38 @@ repos:
     hooks:
       - ...
 ```
+
+### .pre-commit-config.yaml - hooks
+
+|keywords       |    Description       |
+|:-------------:|:--------------------:|
+|id             |which hook from the repository to use.|
+|alias          |(optional) allows to be referenced when using `pre-commit run <hookid>`|
+|name           |(optional) name during hook execution|
+|files          |(optional) override the default pattern for files to run on.|
+|types          |(optional) override the default file types to run on (AND).|
+|types_or       |(optional) override the default file types to run on (OR).|
+|args           |(optional) list of additional parameters to pass to the hook.|\
+|stages         |(optional) confines the hook to the `commit`, `merge-commit`, `push`, `prepare-commit-msg`, `commit-msg`, `post-checkout`, `post-commit`, `post-merge`, `post-rewrite`, or `manual` stage.|
+|additional_dependencies|(optional) list of dependencies that need to be installed.|
+|always_run     |(optional) if `true`, hook will run even if there are no matching files.|
+|verbose        |(optional) if `true`, forces to print output of the hook even if the hook passes.|
+|log_file       |(optional) hook output will be written to a file when the hook fails or verbose is `true`.|
+
+an example of a complete configuration:
+
+```shell
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+      - id: pip-compile
+        args:
+          - --allow-insafe
+          - --extra=dev
+          - --output-file=requirements-dev.txt
+          - --quiet
+          - --upgrade
+          - pyproject.toml
+        files: ^pyproject\.toml$
+```
