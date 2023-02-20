@@ -52,8 +52,8 @@ df = bql.combined_df(response)
 Here is the result of `df`:
 
 |  	          |DATE	       |CURRENCY	|CLOSE	|HIGH	|LOW |
-|ID	          |		         |          |       |          |
 |-------------|------------|----------|-------|----------|
+|ID	          |		         |          |       |          |
 |AAPL US Equity|2017-06-05|USD|38.482500|38.612500|38.365000|
 |AAPL US Equity|2017-06-06|USD|38.612500|38.952500|38.445000|
 |AAPL US Equity|2017-06-07|USD|38.842500|38.995000|38.620000|
