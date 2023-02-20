@@ -3,8 +3,20 @@
 There are two ways to execute BQL queries via PyBQLL:
 
 ## The String Model
-## The Object Model
+
+The very basic string interface query in BQL include a `get` and a `for` clause:
+
 ```python
+request = """
+get(PX_HIGH - PX_LOW)
+for(['AAPL US Equity'])
+"""
+
+response = bq.execute(request)
+```
+
+## The Object Model
+````python
 import bql
 
 bq = bql.Service()
@@ -24,4 +36,4 @@ response = bq.execute(request)
 
 # get data in DataFrame
 df = response[0].df()
-```
+````
