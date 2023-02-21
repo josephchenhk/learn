@@ -37,3 +37,12 @@ response = bq.execute(request)
 # get data in DataFrame
 df = response[0].df()
 ````
+
+## All BQL Functions and Universes
+
+* Statistical
+
+```shell
+sum, count, avg, wavg, min, max, median, product, corr, rsq, std, var, skew,
+kurt, zscore, compoundgrowthrate, cut, quantile, bins, rank
+```
