@@ -152,3 +152,44 @@ data
 ```shell
 abs, ceil, exp, floor, ln, log, round, sign, sqrt, square, mod, -, ^
 ```
+
+* Time Series
+```shell
+cumavg, cummax, cummin, cumprod, cumsum, diff, net_chg, pct_chg, pct_diff, rolling
+```
+
+* Grouping
+```shell
+group, ungroup, groupavg, groupcount, groupmax, groupmedian, groupmin, grouprank, groupsort, groupstd, groupsum, groupwavg, groupzscore
+```
+
+* Conditional
+```shell
+if_, and_, in_, not_, or_, xor, all, any, between, mathematical operators
+```
+
+-- `mathematical operators`: include `==, >, >=, <. <=, !=`
+
+* Data and Error Handling
+```shell
+avail, dropna, znav, replacenonnumeric, replacena, first, last, sort, matches
+```
+
+-- `avail`: the first non-null value
+
+For members of the UKX, give EBITDA if available. Otherwise return Operating Income:
+
+```python
+index = bq.univ.members('UKX Index')
+
+ebitda = bq.data.ebitda(fpt='a', fpo='3Y') 
+eps_a = bq.data.is_oper_inc(fpt='a', fpo='3Y')
+data = bq.func.avail(ebitda, eps_a) / 10**6
+
+req = bql.Request(index, {'Ebitda or Operating Income':data})
+res = bq.execute(req)
+dataset = res[0].df()
+dataset.head(5)
+```
+
+-- `znav`: replaces missing values (NA) with 0
