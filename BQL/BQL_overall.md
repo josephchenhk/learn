@@ -195,3 +195,8 @@ df = response[0].df()
     ```
 
     - `znav`: replaces missing values (NA) with 0
+    - `replacenonnumeric`: replaces missing values (NA) with specific number
+    - `first`: return first `n` elements from the whole data set, e.g., `first(10)`
+    - `last`: return last `n` elements from the whole data set, e.g., `last(7)`
+    - `sort`: sort the elements in either descending/ascending order, `sort(order='desc')`
+    - `match`: match specified criteria, e.g., `bq.func.matches(my_return, bq.data.px_volume() > '150M')`
