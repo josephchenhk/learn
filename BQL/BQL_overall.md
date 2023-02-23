@@ -200,3 +200,15 @@ df = response[0].df()
     - `last`: return last `n` elements from the whole data set, e.g., `last(7)`
     - `sort`: sort the elements in either descending/ascending order, `sort(order='desc')`
     - `match`: match specified criteria, e.g., `bq.func.matches(my_return, bq.data.px_volume() > '150M')`
+
+* Date and Time
+
+  ```shell
+  today, dayofweek, dayofmonth, week, month, year
+  ```
+  
+    - `today`: today's date, e.g., `bq.func.today()`
+    - `dayofweek`: the day of the week (1-7)
+    - `dayofmonth`: the day of month (1-31)
+    - `week`: the week of the year (1-53)
+    - `month`: the month of the year (1-12)
