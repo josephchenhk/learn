@@ -208,7 +208,90 @@ df = response[0].df()
   ```
   
     - `today`: today's date, e.g., `bq.func.today()`
-    - `dayofweek`: the day of the week (1-7)
-    - `dayofmonth`: the day of month (1-31)
-    - `week`: the week of the year (1-53)
-    - `month`: the month of the year (1-12)
+    - `dayofweek`: the day of the week (1-7), `bq.data.px_last(dates=bq.func.range('-1m', '0d'))['DATE'].dayofweek()`
+    - `dayofmonth`: the day of month (1-31), `bq.data.px_last(dates=bq.func.range('-1m', '0d'))['DATE'].dayofmonth()`
+    - `week`: the week of the year (1-53), `bq.data.px_last(dates=bq.func.range('-1m', '0d'))['DATE'].week()`
+    - `month`: the month of the year (1-12), `bq.data.px_last(dates=bq.func.range('-1m', '0d'))['DATE'].month()`
+    - `year`: the month of the year (e.g., 2021, 2022...), `bq.data.px_last(dates=bq.func.range('-2y', '0d'))['DATE'].year()`
+
+* String
+
+  ```shell
+  concat, left, len, replace, right, startswith, tolower, toupper
+  ```
+  
+    - `concat`: `concat()` or simply `+` to merge two strings
+
+      ```python
+      apple = ['AAPL US Equity']
+      name = bq.data.name()
+      sector = bq.data.classification_name()
+      
+      # use concat():
+      name_and_sector = name.concat("-" + sector) 
+      # use "+":
+      # name_and_sector = name + "-" + sector 
+
+      req = bql.Request(apple, {'Name and Sector':name_and_sector})
+      res = bq.execute(req)
+      data = res[0].df()
+      data
+      ```
+    
+    - `right`: get n characters from the right
+    - `left`: get n characters from the left
+
+      ```python
+      vod_bonds = bq.univ.bonds('VOD LN Equity')
+      name = bq.data.name()
+      name_from_left = name.left(18)
+
+      req = bql.Request(vod_bonds, {'From the Left':name_from_left})
+      res = bq.execute(req)
+      data = res[0].df()
+      data.head()
+      ```
+      
+    - `len`: get length of a string
+      
+      ```python
+      apple = ['AAPL US Equity']
+      name = bq.data.name()
+      start = name.len()-2
+      new_text = "Corporation"
+      characters = 3
+      new_name = name.replace(start.toscalar(), characters, new_text)
+
+      request = bql.Request(apple, {'New Name':new_name, 'Original Name':name})
+      response = bq.execute(request)
+      pd.concat([x.df() for x in response], axis=1)
+      
+      -->
+                      New Name	        Original Name
+      ID		
+      AAPL US Equity	Apple Corporation	Apple Inc
+      ```
+      
+    - `startwith`: bool to indicate whether a string starts with something
+
+      ```python
+      tpx = bq.univ.members('TPX Index')
+      sector = bq.data.classification_name('GICS','1')
+      consumer_sector = sector.matches(sector.startswith('Consumer')).dropna('true')
+
+      req = bql.Request(tpx, {'Consumer stocks':consumer_sector})
+      res = bq.execute(req)
+      data = res[0].df()
+      data.head()
+      
+      -->
+                      Consumer stocks
+      ID	
+      2812 JT Equity	Consumer Staples
+      2767 JT Equity	Consumer Discretionary
+      8860 JT Equity	Consumer Discretionary
+      3186 JT Equity	Consumer Discretionary
+      3116 JT Equity	Consumer Discretionary
+      ```
+
+
