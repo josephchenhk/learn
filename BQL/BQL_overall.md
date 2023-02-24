@@ -293,5 +293,14 @@ df = response[0].df()
       3186 JT Equity	Consumer Discretionary
       3116 JT Equity	Consumer Discretionary
       ```
+     
+* Universe
+
+  ```shell
+  filter, members, bond, loans, mortgages, municipals, preferreds, cds, futures, options, bondsuniv, loansuniv, 
+  mortgagesuniv, debtuniv, issuerof, parent, equitiesuniv, fundsuniv, relativeindex, value, translateSymbols, 
+  setdiff*, intersect*, union*, peers*
+  ```
+  `*` = New for 2021
 
 
