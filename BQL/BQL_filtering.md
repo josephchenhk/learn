@@ -60,3 +60,17 @@ The result `df` could be something like this:
 |101 HK Equity |7.27e+10 |Hang Lung Properties Ltd |
 |992 HK Equity |8.62e+10 |Lenovo Group Ltd|
 |...           |...      |...|
+
+## Multiple Criteria
+
+Use `reduce` to aggregate multiple criteria:
+
+```python
+from functools import reducce
+
+filters = []
+filters.append(criteria_1)
+filters.append(criteria_2)
+filters.append(criteria_3)
+agg_filter = reduce(bq.func.and_, filters)
+```
