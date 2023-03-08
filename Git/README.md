@@ -338,6 +338,10 @@ $ git config https.proxy https://proxy.tdmz1.abc.com:80
 
 ### ssl 证书
 
+参考：
+
+https://stackoverflow.com/questions/11621768/how-can-i-make-git-accept-a-self-signed-certificate
+
 1. 临时方案
 
 Disable SSL verification while running the git clone(This is safer once it only disables SSL for this particular command execution):
