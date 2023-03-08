@@ -335,3 +335,60 @@ $ git config --global https.proxy https://proxyap-hk2.abc.com:81
 $ git config http.proxy http://proxy.tdmz1.abc.com:80
 $ git config https.proxy https://proxy.tdmz1.abc.com:80
 ```
+
+### ssl 证书
+
+1. 临时方案
+
+Disable SSL verification while running the git clone(This is safer once it only disables SSL for this particular command execution):
+
+```shell
+$ git -c http.sslVerify=false clone https://github.com/factorpricingmodel/factor-pricing-model-risk-model.git
+```
+
+2. 永久解决方案（不安全，不推荐）
+
+Alternatively, disable Git SSL verification in the server hosting Fisheye/Crucible with the following commands(riskier):
+```shell
+$ git config --global http.sslVerify false
+```
+
+3. 永久解决方案（安全，推荐）
+
+1和2是忽略ssl证书的验证，更安全的做法是让self-signed的证书加入白名单：
+
+首先找到git的目录
+```shell
+$ where git
+C:\Users\joseph\AppData\Local\Programs\Git\cmd\git.exe
+```
+
+然后打开chrome浏览器，去到需要访问的git页面，点击url栏左边的小锁标志，点击找到Certificate，点进去找到details，然后点击`export`，将证书保存到
+本地。打开这个文件会看到类似如下的证书文本：
+
+```shell
+-----BEGIN CERTIFICATE-----
+MIIEyjCCA7KgAwIBAgIIQCQGRAAAAAAwDQYJKoZIhvcNAQEMBQAwgYYxCzAJBgNV
+BAYTAlVTMREwDwYDVQQIEwhORVcgWU9SSzERMA8GA1UEBxMITkVXIFlPUksxFTAT
+BgNVBAoTDEJsb29tYmVyZyBMUDENMAsGA1UECxMETkRJUzErMCkGA1UEAxMiQmxv
+b21iZXJnIExQIENPUlAgQ0xBU1MgMSBTdWJDQSBWNDAeFw0yMzAyMTQwMDAwMDBa
+Fw0yNDAzMTQyMzU5NTlaMGYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y
+bmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRUwEwYDVQQKEwxHaXRIdWIsIElu
+-----END CERTIFICATE-----
+```
+
+将整个内容复制，然后去到目录 `C:\Users\joseph\AppData\Local\Programs\Git\mingw64\ssl`，用文本编辑器打开`cert.pem`，将刚刚复制的内容
+append到最后面。
+
+接着，去到目录 `C:\Users\joseph\AppData\Local\Programs\Git\mingw64\ssl\certs`，用文本编辑器打开`ca-bundle.crt`，同样将刚刚复制的
+内容粘贴到最后面。
+
+最后，在命令行中指定 Git 的证书信息 `sslcainfo` 和 `sslcapath`:
+
+```shell
+$ git config --global http.sslcainfo "C:\Users\joseph\AppData\Local\Programs\Git\mingw64\ssl\certs\ca-bundle.crt"
+$ git config --global http.sslcapath "C:\Users\joseph\AppData\Local\Programs\Git\mingw64\ssl"
+```
+
+Now you are all set. 如果有需要，就重启一下cmd prompt，或者电脑。
+
