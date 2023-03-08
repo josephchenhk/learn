@@ -317,3 +317,21 @@ Password for 'https://username@github.com': your_access_token (注意这里是PA
 Ensure you provide your access token rather than password when prompted.
 
 ```
+
+
+### 配置Git代理 (Proxy)
+
+参考：
+
+1. https://stackoverflow.com/questions/18356502/github-failed-to-connect-to-github-443-windows-failed-to-connect-to-github
+2. https://confluence.atlassian.com/fishkb/unable-to-clone-git-repository-due-to-self-signed-certificate-376838977.html
+
+```shell
+# Set global proxy
+$ git config --global http.proxy http://proxyap-hk2.abc.com:81
+$ git config --global https.proxy https://proxyap-hk2.abc.com:81
+
+# Set local proxy
+$ git config http.proxy http://proxy.tdmz1.abc.com:80
+$ git config https.proxy https://proxy.tdmz1.abc.com:80
+```
