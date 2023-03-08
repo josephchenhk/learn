@@ -392,3 +392,49 @@ $ git config --global http.sslcapath "C:\Users\joseph\AppData\Local\Programs\Git
 
 Now you are all set. 如果有需要，就重启一下cmd prompt，或者电脑。
 
+### 本地和远端（Remote）的设置
+
+* Git add remote url
+```shell
+$ git remote add origin https://github.com/joseph/my_project.git
+```
+
+* Git check remote url
+```shell
+$ git remote -v
+origin  git://github.com/joseph/my_project.git (fetch)
+origin  git://github.com/joseph/my_project.git (push)
+```
+
+* Git update (fetch) remote url
+```shell
+$ git remote set-url origin https://github.com/joseph/my_project.git
+$ git remote -v
+origin  https://github.com/joseph/my_project.git (fetch)
+origin  git://github.com/joseph/my_project.git (push)
+```
+
+* Git update (push) remote url
+```shell
+$ git remote set-url --push origin https://github.com/joseph/my_project.git
+$ git remote -v
+origin  https://github.com/joseph/my_project.git (fetch)
+origin  https://github.com/joseph/my_project.git (push)
+```
+
+* Git: specify a branch to track
+
+Firstly you see there is a local branch called "master", and there is a remote branch called "origin/main":
+```shell
+$ git branch -a
+* master
+  remotes/origin/main
+```
+
+Now we link them:
+```shell
+$ git branch --set-upstream-to=origin/main master
+branch 'master' set up to track 'origin/main'.
+```
+
+Now you can go to "git pull" stuffs.
