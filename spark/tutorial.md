@@ -1,5 +1,6 @@
 # Spark/PySpark
 
+* Ref: [Spark 2.2.x 中文文档](https://spark-reference-doc-cn.readthedocs.io/zh_CN/latest/programming-guide/quick-start.html)
 ## How in install pyspark
 
 Refer to official website [Spark](https://spark.apache.org/downloads.html).
@@ -8,6 +9,51 @@ You can also simply install from `pip`:
 
 ```shell
 $ pip install pyspark
+```
+
+## Spark Shell
+Enter the spark shell
+```shell
+$ conda activate pyspark
+$ pyspark
+...
+SparkSession available as 'spark'.
+```
+
+### Create a dataset (analogy to pandas `DataFrame`)
+
+```python
+# we have a README.md file with 3 lines (the last 0 just means end of file)
+(pyspark)$ import os
+(pyspark)$ os.system('cat README.md')
+hello
+BB
+123
+0
+
+# we create a spark `DataFrame` from the above file
+(pyspark)$ textFile = spark.read.text('README.md')
+
+# we count the number of rows in this `DataFrame`
+(pyspark)$ textFile.count()
+3
+
+# get the first row
+(pyspark)$ textFile.first()
+Row(value='hello')
+```
+
+### Filter a dataset
+
+We could use `dataset.filter()` to obtain the desired
+<t style="color:blue">rows</t>:
+
+```python
+(pyspark)$ lineWithB = textFile.filter(textFile.value.contains("B"))
+(pyspark)$ lineWithB.count()
+1
+(pyspark)$ lineWithB.first()
+Row(value='BB')
 ```
 
 ## What is Spark?
