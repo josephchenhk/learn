@@ -930,17 +930,17 @@ who >> test.txt
    ```
    free -h
    ```
-3. create a swap file
+2. create a swap file
    ```
    sudo fallocate -l 2G /swapfile
    sudo chmod 600 /swapfile
    sudo mkswap /swapfile
    ```
-4. enable the swap file
+3. enable the swap file
    ```
    sudo swapon /swapfile
    ```
-5. make the swap file permanent
+4. make the swap file permanent
    to make the swap file persistent across reboots, add an entry for it in the `/etc/fstab` file. Open the file using a text editor:
    ```
    sudo vi /etc/fstab
@@ -949,7 +949,7 @@ who >> test.txt
    ```
    /swapfile none swap sw 0 0
    ```
-6. adjust swap settings (optional)
+5. adjust swap settings (optional)
     By default, Linux swaps data to and from the swap space frequently. However, you can adjust the swappiness value to control the frequency of swapping. The swappiness value ranges from 0 to 100. A lower value reduces swapping, while a higher value increases it. To check the current swappiness value:
    ```
    cat /proc/sys/vm/swappiness
@@ -962,7 +962,32 @@ who >> test.txt
    ```
    vm.swappiness=10
    ```
-7. verify the changes:
+6. verify the changes:
+   ```
+   free -h
+   ```
+7. <p style='color:blue'>change the size of an existing swap</p>
+   
+   * 1. disable the swap
+   ```
+   sudo swapoff /swapfile
+   ```
+   * 2. resize the swap file
+   ```
+   sudo fallocate -l 4G /swapfile
+   ```
+
+   * 3. update the swap file
+   ```
+   sudo mkswap /swapfile
+   ```
+
+   * 4. enable the swap
+   ```
+   sudo swapon /swapfile
+   ```
+
+   * 5. verify the changes
    ```
    free -h
    ```
