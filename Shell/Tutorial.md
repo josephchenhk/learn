@@ -966,7 +966,7 @@ who >> test.txt
    ```
    free -h
    ```
-7. <p style='color:blue'>change the size of an existing swap</p>
+7. **change the size of an existing swap**
    
    * 1. disable the swap
    ```
@@ -975,6 +975,11 @@ who >> test.txt
    * 2. resize the swap file
    ```
    sudo fallocate -l 4G /swapfile
+   ```
+
+   If the above doesn't work, alternatively, you can **use the `dd` command** to resize the swap file:
+   ```shell
+   sudo dd if=/dev/zero of=/swapfile bs=1G count=4
    ```
 
    * 3. update the swap file
