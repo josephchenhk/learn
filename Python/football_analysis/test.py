@@ -91,7 +91,7 @@ def format_sheet(
         worksheet.set_column(col_idx, col_idx, 16, formats[format_name])
 
 df = None
-year = 2022
+year = 2023
 for month in range(3, 12+1):
     sheet_name = f"{year}.{month:02d}"
     print(sheet_name)
@@ -112,7 +112,8 @@ df["玩法分类"] = df["玩法"].apply(bet_type)
 df["投入"] = df["投入"].astype(float)
 df["水位"] = df["水位"].astype(float)
 df["信心指数"] = df["信心指数"].astype(float)
-df["期望回报"] = df["水位"] * df["信心指数"]
+df["期望回报"] = df["水位"] * df["信心指数"] + (-1) * (1-df["信心指数"])
+df["期望回报调整盈利"] = (df["期望回报"] > 0) * df["盈利"]
 
 path = f"{year}年微博比赛结果分析.xlsx"
 writer = pd.ExcelWriter(path, engine='xlsxwriter')
