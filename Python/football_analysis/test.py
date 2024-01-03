@@ -13,7 +13,7 @@ def bet_type(type_:str):
         print(type_)
         return "未知"
     if "进球" in type_:
-        type_ = type_.replace("进球数", "进球")
+        type_ = type_.replace("进球数", "进球").replace("进球的", "进球")
         if "进球大" in type_ and "进球大于" not in type_:
             type_ = type_.replace("进球大", "进球大于")
         if "进球小" in type_ and "进球小于" not in type_:
@@ -92,7 +92,7 @@ def format_sheet(
 
 df = None
 year = 2023
-for month in range(3, 12+1):
+for month in range(1, 12+1):
     sheet_name = f"{year}.{month:02d}"
     print(sheet_name)
 
