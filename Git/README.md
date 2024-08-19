@@ -234,6 +234,47 @@ Ref：https://stackoverflow.com/questions/448919/how-can-i-remove-a-commit-on-gi
 >> git push origin +master --force
 ```
 
+### 用 git-filter-repo 修改 git history
+
+安装`git-filter-repo`:
+
+```shell
+$ pip install git-filter-repo
+
+# or
+
+$ conda install conda-forge::git-filter-repo
+```
+
+用以下命令去查看最近的commits:
+
+```shell
+$ git log --pretty=format:"%h %ad %an %s" --date=short
+186d9d5 2024-08-19 josephchenhk recent update               
+08c8651 2024-08-18 josephchenhk add a big file     
+2a47a56 2024-08-18 josephchenhk last update
+```
+
+**[注意]** 操作之前，要对repo进行备份！
+
+删除big files
+
+```shell
+$ git filter-repo --path <path-to-file> --invert-paths
+```
+
+强制push
+
+```shell
+$ git push origin --force --all
+```
+
+更新tags
+
+```shell
+$ git push origin --force --tags
+```
+
 ### 用一个branch覆盖另外一个branch
 
 这里用staging branch去覆盖master branch（顺便将原来master branch打一个标签）

@@ -167,3 +167,12 @@ int c;
 
 demo_t var1,var2;
 ```
+
+## gcc/gxx安装
+
+### 通过conda安装
+
+参考[How to install g++ on Conda under Linux?](https://stackoverflow.com/questions/69485181/how-to-install-g-on-conda-under-linux)
+```shell
+$ conda install -c conda-forge cxx-compiler
+```
